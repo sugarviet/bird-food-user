@@ -3,7 +3,6 @@ import { Fragment } from "react"
 // import Footer from "./Footer";
 import Routers from "../../routes/Routers";
 
-
 const Layout = () => {
   return (
     <Fragment>

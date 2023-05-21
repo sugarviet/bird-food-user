@@ -1,11 +1,14 @@
 import { useGetAllUsers } from "../../../../../services/Example/services";
 
-function useExampleList(){
-  const {data} = useGetAllUsers();
+function useExampleList() {
+  const { data, isLoading } = useGetAllUsers();
+
+
 
   return {
-    data
-  }
+    data,
+    isLoading
+  };
 }
 
 export default useExampleList;

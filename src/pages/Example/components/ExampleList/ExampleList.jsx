@@ -2,7 +2,11 @@ import ExampleItem from "../ExampleItem/ExampleItem";
 import useExampleList from "./hooks/useExampleList";
 
 const ExampleList = () => {
-  const {data} = useExampleList();
+  const {data, isLoading} = useExampleList();
+
+  if(isLoading){
+    return <h1>Loading...</h1>
+  }
   
   return (
     <div>
