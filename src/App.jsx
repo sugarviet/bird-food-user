@@ -1,12 +1,21 @@
 import { Fragment } from 'react'
-// import './App.css'
+import './App.css'
+
+import {ConfigProvider } from 'antd';
+
 import Layout from './components/Layout'
 
 function App() {
   return (
-    <Fragment>
-      <Layout />
-    </Fragment>
+    <ConfigProvider theme={{
+      token: {
+        colorPrimary: '#3cb815'
+      }
+    }}>
+      <Fragment>
+        <Layout />
+      </Fragment>
+    </ConfigProvider>
   )
 }
 

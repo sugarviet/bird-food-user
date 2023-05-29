@@ -1,0 +1,27 @@
+
+.listStyleNone{
+    list-style: none;
+}
+
+.footerAddress{
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spacing{
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+}
+
+.copyRight{
+    text-align: center;
+}
+
+.copyRight span{
+   margin-inline: 4px;
+}
+

@@ -1,16 +1,16 @@
 import { Fragment } from "react"
-// import Header from "./Header";
-// import Footer from "./Footer";
+import Navbar from "../Navbar";
 import Routers from "../../routes/Routers";
+import Footer from "../Footer";
 
 const Layout = () => {
   return (
     <Fragment>
-        {/* <Header/> */}
+      <Navbar/>
         <div>
             <Routers />
         </div>
-        {/* <Footer/> */}
+        <Footer/>
     </Fragment>
   )
 }
