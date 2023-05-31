@@ -1,5 +1,5 @@
 import styles from "./LastestBlog.module.css";
-import { Grid} from '@mui/material' ;
+import { Row, Col} from 'antd' ;
 const BlogsData = [
   {
     id: 1,
@@ -33,9 +33,9 @@ function LatestBlog() {
                 <span className={styles.lastestBlog_mainTitle}>Latest Blog</span>
                 <span className={styles.lastestBlog_subTitle}>Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</span>
             </div>
-            <Grid container spacing={2}  >
+            <Row gutter={[16, 16]}>
                 {BlogsData.map((blog) => (
-                    <Grid item xs={4} >    
+                    <Col span={8} >    
                         <div className={styles.blogItems}>
                             <div className={styles.imageBlog}>
                                 <img src={blog.image} />
@@ -52,10 +52,10 @@ function LatestBlog() {
                                 </span>
                             </div>
                         </div>
-                    </Grid> 
+                    </Col> 
                 
                 ))}
-             </Grid>
+             </Row>
             
         </div>
     )
