@@ -42,7 +42,7 @@ const Navbar = () => {
                 <Link to={"/"} className={styles.whiteText}>About us</Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Products</Link>
+                <Link to={"/products"} className={styles.whiteText}>Products</Link>
               </li>
               <li>
                 <Link to={"/"} className={styles.whiteText}>Page</Link>
