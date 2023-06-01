@@ -8,8 +8,8 @@ import { Pagination } from 'antd';
 
 const Product = () => {
 
-    const {activeButton, handleButtonClick, data, isLoading } = useProductList();
-    const [size, setSize] = useState('large');
+    const {activeButton, handleButtonClick, data} = useProductList();
+    const [size ] = useState('large');
     const { Meta } = Card;
 
     return (
@@ -67,7 +67,7 @@ const Product = () => {
                                             />
                                         }
                                         actions={[
-                                            <div className={styles.actionProduct}>
+                                            <div className={styles.actionProduct} key={"keyId"}>
                                                 <div className={styles.actionDetailProduct}>
                                                     <EyeTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
                                                     <p className={styles.actionTextProduct}>View detail</p>
