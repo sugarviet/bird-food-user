@@ -69,6 +69,11 @@ const Navbar = () => {
                   <Button icon={<ShoppingCartOutlined />} shape="circle" />
                 </Tooltip>
               </li>
+              <li>
+                <Link to={'/login'}>
+                  <Button>Login</Button>
+                </Link>
+              </li>
             </ul>
             <Button
               icon={<MenuOutlined />}
