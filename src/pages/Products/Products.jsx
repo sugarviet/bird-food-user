@@ -1,23 +1,17 @@
 import styles from './Products.module.css'
-import Banner from './Components/Banner';
+import Banner from './components/Banner';
 import { Button, Space, Card, Col, Row } from 'antd';
 import { useState } from 'react';
-import useProductList from './Hooks/useProductList'
+import useProductList from './hooks/useProductList'
 import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
 import { Pagination } from 'antd';
 
 const Product = () => {
 
-    const { data, isLoading } = useProductList();
+    const {activeButton, handleButtonClick, data, isLoading } = useProductList();
     const [size, setSize] = useState('large');
-
-    const [activeButton, setActiveButton] = useState(1);
-
     const { Meta } = Card;
 
-    const handleButtonClick = (buttonId) => {
-        setActiveButton(buttonId);
-    }
     return (
         <div>
             <div><Banner /></div>
