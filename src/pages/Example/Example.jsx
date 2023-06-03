@@ -2,7 +2,7 @@ import ExampleList from "./components/ExampleList";
 
 const Example = () => {
   return (
-    <div>
+    <div style={{paddingTop: '60px'}}>
       <ExampleList/>
     </div>
   )
