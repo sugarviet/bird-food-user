@@ -1,4 +1,4 @@
-import { Carousel, Button, Breadcrumb } from "antd";
+import { Carousel, Breadcrumb } from "antd";
 
 import styles from "./Banner.module.css";
 import { Link } from "react-router-dom";
