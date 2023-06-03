@@ -42,7 +42,7 @@ const Navbar = () => {
                 <Link to={"/"} className={styles.whiteText}>About us</Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Products</Link>
+                <Link to={"/products"} className={styles.whiteText}>Products</Link>
               </li>
               <li>
                 <Link to={"/"} className={styles.whiteText}>Page</Link>
@@ -68,6 +68,11 @@ const Navbar = () => {
                 <Tooltip placement="bottom" title={"Cart"}>
                   <Button icon={<ShoppingCartOutlined />} shape="circle" />
                 </Tooltip>
+              </li>
+              <li>
+                <Link to={'/login'}>
+                  <Button>Login</Button>
+                </Link>
               </li>
             </ul>
             <Button

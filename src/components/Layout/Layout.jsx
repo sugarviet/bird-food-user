@@ -3,14 +3,18 @@ import Navbar from "../Navbar";
 import Routers from "../../routes/Routers";
 import Footer from "../Footer";
 
+import useLayout from "./hooks/useLayout";
+
 const Layout = () => {
+  const {isSignInAndSignUpPath} = useLayout();
+
   return (
     <Fragment>
-      <Navbar/>
+      {isSignInAndSignUpPath && <Navbar/>}
         <div>
             <Routers />
         </div>
-        <Footer/>
+      {isSignInAndSignUpPath && <Footer/>}
     </Fragment>
   )
 }
