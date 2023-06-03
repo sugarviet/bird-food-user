@@ -35,7 +35,7 @@ function LatestBlog() {
             </div>
             <Row gutter={[16, 16]}>
                 {BlogsData.map((blog) => (
-                    <Col span={8} >    
+                    <Col span={8} key={blog.id}>    
                         <div className={styles.blogItems}>
                             <div className={styles.imageBlog}>
                                 <img src={blog.image} />
