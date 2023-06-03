@@ -2,11 +2,10 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
 
 import style from "./SignInForm.module.css";
+import { onFinish } from "../../hooks/useSignInForm";
 
 const SignInForm = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+  onFinish;
   return (
     <div className={style.container}>
       <Card

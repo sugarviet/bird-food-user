@@ -1,5 +1,6 @@
 import { Button, Card, Checkbox, Form, Input } from "antd";
 import style from "./SignUpForm.module.css";
+import { onFinish } from "../../hooks/useSignUpForm";
 
 const formItemLayout = {
   labelCol: {
@@ -34,10 +35,7 @@ const tailFormItemLayout = {
 
 const SignUpForm = () => {
   const [form] = Form.useForm();
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
-
+  onFinish;
   return (
     <div className={style.container}>
       <Card
@@ -47,11 +45,11 @@ const SignUpForm = () => {
           width: 700,
         }}
         cover={
-            <img
-              alt="signup"
-              src="https://images.unsplash.com/photo-1600982459727-58f0cf5de042?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80"
-            />
-          }
+          <img
+            alt="signup"
+            src="https://images.unsplash.com/photo-1600982459727-58f0cf5de042?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80"
+          />
+        }
       >
         <Form
           {...formItemLayout}
