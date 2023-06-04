@@ -36,22 +36,74 @@
     margin-top: 22px;
     margin-left: 45px;
 }
+
 .textDescription1 {
     color: #555555;
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
     margin-left: 15px;
 }
-.coverButton{
+
+.coverButton {
     margin-top: 30px;
     margin-left: 45px;
 }
-.button{
+
+.button {
     border-radius: 100px;
     width: 180px;
     height: 57px;
 }
-.textButton{
+
+.textButton {
     font-size: 17px;
     font-weight: 500;
+}
+
+.bannerBottom {
+    background-color: #3cb815;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-image: url(/src/assets/background_aboutus.png);
+    background-size: cover;
+    margin-bottom: 50px;
+}
+
+.bannerItem {
+    padding: 95px 120px 95px 0;
+}
+.bannerItemButton{
+    padding-top: 120px;
+}
+
+.buttonBanner {
+    background-color: #F65005;
+    color: #ffffff;
+    border-radius: 100px;
+    width: 186px;
+    height: 63px;
+}
+
+.buttonBanner:hover {
+    background-color: #f76a2b;
+}
+
+.textButtonBanner {
+    font-weight: 600;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    padding: 15px 42px;
+}
+
+.textBanner {
+    color: #ffffff;
+    font-size: 43px;
+    font-family: "Lora", serif;
+}
+
+.textDescriptionBanner {
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
 }

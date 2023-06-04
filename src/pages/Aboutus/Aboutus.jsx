@@ -37,6 +37,20 @@ const Aboutus = () => {
           </div>
         </div>
       </div>
+      <div className={styles.bannerBottom}>
+        <div className={styles.bannerItem}>
+          <h1 className={styles.textBanner}>Visit Our  Firm</h1>
+          <p className={styles.textDescriptionBanner}>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat <br />  ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet. Diam dolor <br />  diam ipsum sit. Aliqu diam amet diam et eos.</p>
+        </div>
+        <div className={styles.bannerItemButton}>
+          <Button
+            className={styles.buttonBanner}
+            type="danger"
+          >
+            <p className={styles.textButtonBanner}>Visit Now</p>
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
