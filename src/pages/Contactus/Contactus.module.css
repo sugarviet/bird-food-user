@@ -1,0 +1,135 @@
+.hrContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hrTop {
+    margin-top: 100px;
+    width: 4%;
+    height: 2px;
+    border: #3bcc15;
+    border-radius: 10px;
+    background-color: #3bcc15;
+}
+
+.hrBot {
+    margin-top: 8px;
+    width: 6%;
+    border: #f65005;
+    height: 1.8px;
+    border-radius: 10px;
+    background-color: #f65005;
+}
+
+.textProducts {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: Lora, serif;
+}
+
+.textDevide {
+    margin-left: 120px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.textDescription {
+    margin-top: 10px;
+    text-align: center;
+    color: #555555;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+    margin: 70px 50px 70px 122px;
+}
+
+.bodyContact {
+    background-color: #3CB815;
+}
+
+.bodyContact1 {
+    margin: 50px 280px 40px 50px;
+    
+}
+
+.bodyText {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Lora, serif;
+}
+
+.iconText {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.bodyDescription {
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    margin-left: 14px;
+}
+
+.icon {
+    width: 17px;
+    height: 17px;
+}
+
+.icon1 {
+    padding-top: 5px;
+    width: 17px;
+    height: 17px;
+}
+.icon2{
+    margin-left: 5px;
+    width: 40px;
+    height: 40px;
+}
+.icon3 {
+    padding-top: 7px;
+    padding-left: 8px;
+    width: 20px;
+   
+}
+.bodyContactContent {
+    margin-top: 50px;
+}
+
+.circleIcon {
+    margin-left: 5px;
+    width: 35px;
+    height: 35px;
+    border: 2.4px solid #ffffff;
+    border-radius: 50%;
+}
+.bodyContactRight{
+    margin-left: 45px;
+}
+.textContactRight{
+    color: #555555;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+}
+.bodyContactButton{
+    margin-top: 18px;
+    border: 2px solid #3bcc15;
+    border-radius: 25px;
+    width: 200px;
+    height: 55px;
+}
+.bodyContactButtonText{
+    font-weight: 400;
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+}
