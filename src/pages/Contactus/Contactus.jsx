@@ -58,23 +58,28 @@ const Contactus = () => {
                 </div>
 
                 <div className={styles.bodyContactRight}>
-                    <div>              <p className={styles.textContactRight}>The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP <br /> in a few minutes. Just copy and paste the files, add a little code and you're done. Download Now.</p>
-                        <Input style={{ width: '350px', height: '58px', borderRadius: '0', marginTop: '25px' }} placeholder="large size" />
-                        <Input style={{ width: '350px', height: '58px', borderRadius: '0', marginLeft: '15px' }} placeholder="large size" />
-                        <Input style={{ width: '715px', height: '58px', borderRadius: '0', marginTop: '15px' }} placeholder="large size" />
-                        <TextArea style={{ width: '715px', borderRadius: '0', marginTop: '15px' }} rows={10} placeholder="maxLength is 6" maxLength={6} />
+                    <div>
+                        <p className={styles.textContactRight}>The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP <br /> in a few minutes. Just copy and paste the files, add a little code and you're done. Download Now.</p>
+                        <Input className={styles.textContactInput} style={{ width: '350px', height: '58px', border: '2px solid #ced4da', borderRadius: '0', marginTop: '25px' }} placeholder="Your Name" />
+                        <Input className={styles.textContactInput} style={{ width: '350px', height: '58px', border: '2px solid #ced4da', borderRadius: '0', marginLeft: '15px' }} placeholder="Your Email" />
+                        <Input className={styles.textContactInput} style={{ width: '715px', height: '58px', border: '2px solid #ced4da', borderRadius: '0', marginTop: '15px' }} placeholder="Subject" />
+                        <TextArea className={styles.textContactInput} style={{ width: '715px', border: '2px solid #ced4da', borderRadius: '0', marginTop: '15px' }} rows={10} placeholder="Message" maxLength={6} />
                     </div>
                     <Button
                         type='primary'
                         className={styles.bodyContactButton}
                     >
-                      <p className={styles.bodyContactButtonText}>Send Message</p>
+                        <p className={styles.bodyContactButtonText}>Send Message</p>
                     </Button>
                 </div>
 
             </div>
 
-
+            <div className={styles.googlemap}>
+                <iframe style={{ height: '450px', width: '1320px' }}
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3918.6099415304902!2d106.80730807476709!3d10.84113285799739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1685946889313!5m2!1sen!2s"
+                    frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
         </div>
     )
 }
