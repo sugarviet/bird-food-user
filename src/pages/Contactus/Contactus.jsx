@@ -58,7 +58,7 @@ const Contactus = () => {
                 </div>
 
                 <div className={styles.bodyContactRight}>
-                    <div>              <p className={styles.textContactRight}>The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP <br /> in a few minutes. Just copy and paste the files, add a little code and you're done. Download Now.</p>
+                    <div>              <p className={styles.textContactRight}>The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP <br /> in a few minutes. Just copy and paste the files, add a little code and you &apos;re done. Download Now.</p>
                         <Input style={{ width: '350px', height: '58px', borderRadius: '0', marginTop: '25px' }} placeholder="large size" />
                         <Input style={{ width: '350px', height: '58px', borderRadius: '0', marginLeft: '15px' }} placeholder="large size" />
                         <Input style={{ width: '715px', height: '58px', borderRadius: '0', marginTop: '15px' }} placeholder="large size" />
