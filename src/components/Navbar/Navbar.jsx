@@ -48,7 +48,7 @@ const Navbar = () => {
                 <Link to={"/"} className={styles.whiteText}>Page</Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Contact us</Link>
+                <Link to={"/contactus"} className={styles.whiteText}>Contact us</Link>
               </li>
               <li>
                 <Tooltip placement="bottom" title={"Search"}>

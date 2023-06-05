@@ -33,7 +33,7 @@ const Banner = () => {
             <img src={slide.image} alt="" />
           </div>
           <div className={styles.sliderTextWrapper}>
-            <h1>About Us</h1>
+            <h1>Contact Us</h1>
             <div className={styles.breadcrumb}>
               <Breadcrumb
                 separator="/" style={{ fontSize: '20px' }}
@@ -42,7 +42,7 @@ const Banner = () => {
                     title: <Link to="/" className={styles.breadcumbText}>Home</Link>,
                   },
                   {
-                    title: <span className={styles.breadcumbSpan}>About Us</span>,
+                    title: <span className={styles.breadcumbSpan}>Contact Us</span>,
                   }
                 ]}
               />
