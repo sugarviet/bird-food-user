@@ -6,6 +6,7 @@ import Aboutus from "../pages/Aboutus";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Cart from "../pages/Cart";
+import  Contactus  from "../pages/Contactus";
 
 const Routers = () => {
   return (
@@ -17,6 +18,7 @@ const Routers = () => {
         <Route path="/login" element={<SignIn />}/>
         <Route path="/signup" element={<SignUp />}/>
         <Route path="/cart" element={<Cart />}/>
+        <Route path="/contactus" element={<Contactus />}/>
 
     </Routes>
   )
