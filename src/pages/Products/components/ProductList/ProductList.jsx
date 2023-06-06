@@ -1,5 +1,5 @@
 import styles from './ProductList.module.css'
-import { Button, Space, Card, Col, Row, Pagination } from 'antd';
+import { Button, Space, Col, Row, Pagination } from 'antd';
 import { useState } from 'react';
 import useProductList from '../../hooks/useProductList'
 import ProductCard from '../ProductCard/ProductCard';
