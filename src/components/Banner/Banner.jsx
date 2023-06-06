@@ -1,7 +1,7 @@
 import { Carousel, Breadcrumb } from "antd";
-
 import styles from "./Banner.module.css";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const carouselData = [
   {
@@ -24,7 +24,12 @@ const carouselData = [
   },
 ];
 
-const Banner = () => {
+Banner.propTypes = {
+  title: PropTypes.isRequired,
+};
+function Banner({
+  title
+}) {
   return (
     <Carousel autoplay className={styles.sliderWrapper}>
       {carouselData.map((slide) => (
@@ -33,7 +38,7 @@ const Banner = () => {
             <img src={slide.image} alt="" />
           </div>
           <div className={styles.sliderTextWrapper}>
-            <h1>About Us</h1>
+            <h1>{title}</h1>
             <div className={styles.breadcrumb}>
               <Breadcrumb
                 separator="/" style={{ fontSize: '20px' }}
@@ -42,7 +47,7 @@ const Banner = () => {
                     title: <Link to="/" className={styles.breadcumbText}>Home</Link>,
                   },
                   {
-                    title: <span className={styles.breadcumbSpan}>About Us</span>,
+                    title: <span className={styles.breadcumbSpan}>{title}</span>,
                   }
                 ]}
               />
@@ -52,6 +57,6 @@ const Banner = () => {
       ))}
     </Carousel>
   );
-};
+}
 
 export default Banner;
