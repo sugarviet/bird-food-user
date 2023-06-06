@@ -7,18 +7,20 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Cart from "../pages/Cart";
 import  Contactus  from "../pages/Contactus";
+import Blogs from "../pages/Blogs"
 
 const Routers = () => {
   return (
     <Routes>
         <Route path="/example" element={<Example />}/>
-        <Route path="/" element={<Home />}/>
         <Route path="/products" element={<Product />}/>
-         <Route path="/aboutus" element={<Aboutus />} />
+        <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/login" element={<SignIn />}/>
         <Route path="/signup" element={<SignUp />}/>
         <Route path="/cart" element={<Cart />}/>
         <Route path="/contactus" element={<Contactus />}/>
+        <Route path="/blogs" element={<Blogs />}/>
+        <Route path="/" element={<Home />}/>
 
     </Routes>
   )
