@@ -1,0 +1,158 @@
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+    line-height: 1.5;
+    font-weight: 400;
+    color: #000000;
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+.productSingleWrapper
+{
+    padding: 6em 10rem;
+    position: relative;
+}
+
+.productSingle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.productSingleImage {
+    opacity: 0;
+    visibility: hidden;
+    margin-bottom: 3rem !important;
+    animation: fadeInUp .5s both;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.productSingleImage img 
+{
+    max-width: 100%;
+    height: auto;
+}
+
+.productSingleRating
+{
+    display: flex;
+}
+
+.productSingleRatingStar > a
+{
+    color: #82ae46;
+}
+
+.productSinglePrice
+{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 30px;
+    color: #000000;
+}
+
+.addToCartButton
+{
+    background: #000000;
+    border: 1px solid #000000;
+    color: #fff;
+    border-radius: 30px;
+    border-radius: 30px;
+    padding: .75rem 2rem;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    font-size: x-large;
+    line-height: 1.5;
+    box-shadow: 0px 24px 36px -11px rgba(0, 0, 0, 0.09);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.addToCartButton:hover
+{
+    background: #82ae46;
+    border: 1px solid #82ae46;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: translate3d(0, 40px, 0);
+        transform: translate3d(0, 40px, 0);
+    }
+    
+    100% {
+        visibility: visible;
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+/* shared style */
+.inputBox
+{
+    padding: 0.5rem;
+    font-size: x-large;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #000000;
+    background: transparent !important;
+    /* height: 40px !important; */
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.fontSizeL
+{
+    font-size: large;
+}
+
+.fontSizeXL
+{
+    font-size: x-large;
+}
+
+.fontSizeXXL
+{
+    font-size: xxx-large;
+}
+
+.marginRight2
+{
+    margin-right: 0.5rem !important;
+}
+
+.marginRight4
+{
+    margin-right: 1rem !important;
+}
+
+.clickable
+{
+    cursor: pointer;
+}
+
+.marginTop4
+{
+    margin-top: 1rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

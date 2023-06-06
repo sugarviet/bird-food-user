@@ -1,6 +1,8 @@
 import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
 import {Card} from 'antd'
 import styles from './ProductCard.module.css'
+import PropTypes from 'prop-types';
+
 
 function ProductCard({bird}) {
     const { Meta } = Card;
@@ -42,5 +44,13 @@ function ProductCard({bird}) {
         </Card>
     );
 }
+
+ProductCard.propTypes = {
+    bird: PropTypes.shape({
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+    }).isRequired,
+};
 
 export default ProductCard;

@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <Fragment>
       {isSignInAndSignUpPath && <Navbar/>}
-        <div>
+        <div style={{marginTop: '64px'}}>
             <Routers />
         </div>
       {isSignInAndSignUpPath && <Footer/>}
