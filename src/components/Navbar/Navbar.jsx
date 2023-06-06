@@ -45,7 +45,7 @@ const Navbar = () => {
                 <Link to={"/products"} className={styles.whiteText}>Products</Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Page</Link>
+                <Link to={"/blogs"} className={styles.whiteText}>Blogs</Link>
               </li>
               <li>
                 <Link to={"/contactus"} className={styles.whiteText}>Contact us</Link>
