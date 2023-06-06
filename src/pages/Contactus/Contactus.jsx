@@ -1,4 +1,3 @@
-import styles from './Contactus.module.css';
 import Banner from '../../components/Banner';
 import ContactUsContent from '../Contactus/components/ContactUsContent';
 

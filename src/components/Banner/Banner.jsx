@@ -1,7 +1,7 @@
 import { Carousel, Breadcrumb } from "antd";
-
 import styles from "./Banner.module.css";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const carouselData = [
   {
@@ -24,6 +24,9 @@ const carouselData = [
   },
 ];
 
+Banner.propTypes = {
+  title: PropTypes.isRequired,
+};
 function Banner({
   title
 }) {
@@ -54,6 +57,6 @@ function Banner({
       ))}
     </Carousel>
   );
-};
+}
 
 export default Banner;
