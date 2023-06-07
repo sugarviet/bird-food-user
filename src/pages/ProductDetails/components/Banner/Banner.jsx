@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import styles from './Banner.module.css'
 
-const bannerImage = 'https://themewagon.github.io/vegefoods/images/bg_1.jpg';
+const bannerImage = 'https://jimmybazaar.com/images/home5/panchee%20pick%20budgies%20and%20pride%20banner.jpg';
 
 function Banner() {
     return ( 

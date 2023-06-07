@@ -1,36 +1,20 @@
 import { Col, Row } from 'antd';
 import styles from './ProductSingle.module.css'
 import { StarOutlined, PlusOutlined, MinusOutlined } from '@ant-design/icons'
-import { useState } from 'react';
-
-const product = {
-    name: 'Bell Pepper',
-    rating: '5.0',
-    image: 'https://themewagon.github.io/vegefoods/images/product-1.jpg',
-    price: '100',
-    description: 'A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until.',
-}
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useGetBirdFoodById } from '../../../../services/Product/services';
+import useProductSingle from './hooks/useProductSingle';
 
 
 const handleSizeSelectionChange = () => {
-
+    
 }
 
-
-
 function ProductSingle() {
+    const {productId} = useParams();
 
-    const [quantity, setQuantity] = useState(1);
-
-    const handlePlusButtonClick = () => {
-        setQuantity(quantity + 1);
-    }
-
-    const handleMinusButtonClick = () => {
-        if(quantity <= 1) return;
-
-        setQuantity(quantity - 1);
-    }
+    const {handleMinusButtonClick, handlePlusButtonClick, handleSizeSelectionChange, product, quantity} = useProductSingle(productId);
 
     return (
         <div className={styles.productSingleWrapper}>
@@ -38,18 +22,18 @@ function ProductSingle() {
                 <Row gutter={[16, 16]}>
                     <Col span={12}>
                         <div className={styles.productSingleImage}>
-                            <a href={product.image}>
-                                <img src={product.image} />
+                            <a href={product?.image}>
+                                <img src={product?.image} />
                             </a>
                         </div>
                     </Col>
 
                     <Col span={12}>
                         <div className={styles.productSingleInfo}>
-                            <h3 className={`${styles.fontSizeXXL}`}>{product.name}</h3>
+                            <h3 className={`${styles.fontSizeXXL}`}>{product?.name}</h3>
                             <div className={`${styles.productSingleRating} ${styles.fontSizeXL}`}>
                                 <p className={`${styles.productSingleRatingStar} ${styles.marginRight4}`}>
-                                    <a className={styles.marginRight4}>{product.rating}</a>
+                                    <a className={styles.marginRight4}>{product?.rating}</a>
                                     <a href=""><StarOutlined /></a>
                                     <a href=""><StarOutlined /></a>
                                     <a href=""><StarOutlined /></a>
@@ -70,10 +54,10 @@ function ProductSingle() {
                                 </p>
                             </div>
                             <p className={`${styles.productSinglePrice} ${styles.fontSizeXXL}`}>
-                                <span>{`$ ${product.price}`}</span>
+                                <span>{`$ ${product?.price}`}</span>
                             </p>
                             <p style={{ color: '#808080', fontWeight: '400' }} className={`${styles.fontSizeXL}`}>
-                                {product.description}
+                                {product?.description}
                             </p>
                             <div>
                                 <div className={`${styles.marginTop4}`}>

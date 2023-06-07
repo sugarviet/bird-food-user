@@ -2,6 +2,7 @@ import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
 import {Card} from 'antd'
 import styles from './ProductCard.module.css'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 
 function ProductCard({bird}) {
@@ -19,10 +20,10 @@ function ProductCard({bird}) {
             }
             actions={[
                 <div className={styles.actionProduct} key={"keyId"}>
-                    <div className={styles.actionDetailProduct}>
+                    <Link to={`/products/${bird.id}`} className={styles.actionDetailProduct}>
                         <EyeTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
                         <p className={styles.actionTextProduct}>View detail</p>
-                    </div>
+                    </Link>
                     <hr />
                     <div className={styles.actionDetailProduct}>
                         <ShoppingTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
