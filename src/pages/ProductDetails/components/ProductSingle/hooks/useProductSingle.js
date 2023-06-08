@@ -3,7 +3,7 @@ import { useGetBirdFoodById } from '../../../../../services/Product/services';
 
 function useProductSingle(id)
 {
-    const {data: product} = useGetBirdFoodById(id);
+    const {data: product, isLoading} = useGetBirdFoodById(id);
 
     const [quantity, setQuantity] = useState(1);
 
@@ -26,7 +26,8 @@ function useProductSingle(id)
         quantity,
         handlePlusButtonClick,
         handleMinusButtonClick,
-        handleSizeSelectionChange
+        handleSizeSelectionChange,
+        isLoading
     }
 }
 

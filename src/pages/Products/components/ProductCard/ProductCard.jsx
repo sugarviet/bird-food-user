@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
 import {Card} from 'antd'
 import styles from './ProductCard.module.css'
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 
@@ -57,6 +56,7 @@ function ProductCard({bird}) {
 
 ProductCard.propTypes = {
     bird: PropTypes.shape({
+        id: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,

@@ -1,11 +1,10 @@
-import { Layout, Button, Input, Drawer, Menu, Tooltip } from "antd";
+import { Layout, Button, Input, Tooltip } from "antd";
 import { Link } from "react-router-dom";
 
 import {
   SearchOutlined,
   UserOutlined,
   ShoppingCartOutlined,
-  HomeOutlined,
   MenuOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
@@ -13,6 +12,7 @@ import {
 import styles from "./Navbar.module.css";
 
 import useNavbar from "./hooks/useNavbar";
+import Drawer from "./components/Drawer";
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -65,9 +65,11 @@ const Navbar = () => {
                 </Tooltip>
               </li>
               <li>
-                <Tooltip placement="bottom" title={"Cart"}>
-                  <Button icon={<ShoppingCartOutlined />} shape="circle" />
-                </Tooltip>
+                <Link to={'/cart'}>
+                  <Tooltip placement="bottom" title={"Cart"}>
+                    <Button icon={<ShoppingCartOutlined />} shape="circle" />
+                  </Tooltip>
+                </Link>
               </li>
               <li>
                 <Link to={'/login'}>
@@ -100,34 +102,7 @@ const Navbar = () => {
       </div>
 
       {/* Show menu when on mobile's screen */}
-      <div>
-        <Drawer
-          title="Menu"
-          placement="right"
-          closable={false}
-          onClose={hideDrawer}
-          visible={isDrawerVisible}
-          bodyStyle={{ padding: 0 }}
-        >
-          <Menu mode="vertical">
-            <Menu.Item key="1" icon={<HomeOutlined />}>
-              <Link to={"/"}>Home</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<UserOutlined />}>
-              <Link to={"/"}>About us</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UserOutlined />}>
-              <Link to={"/"}>Products</Link>
-            </Menu.Item>
-            <Menu.Item key="4" icon={<UserOutlined />}>
-              <Link to={"/"}>Page</Link>
-            </Menu.Item>
-            <Menu.Item key="5" icon={<UserOutlined />}>
-              <Link to={"/"}>Contact us</Link>
-            </Menu.Item>
-          </Menu>
-        </Drawer>
-      </div>
+        <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer}/>
     </Layout>
   );
 };
