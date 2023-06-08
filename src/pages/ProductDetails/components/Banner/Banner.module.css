@@ -1,0 +1,22 @@
+.bannerWrapper
+{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100vw;
+    height: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.bannerTitle
+{
+    font-weight: 800;
+    color: #fff;
+    font-size: 30px;
+    font-family: "Poppins", Arial, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
