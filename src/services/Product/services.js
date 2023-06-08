@@ -12,7 +12,7 @@ export const useGetAllBirdFood = () => {
 
 export const useGetBirdFoodById = (id) => {
     return useQuery({
-        queryKey: ['test', id],
+        queryKey: ['bird_food_by_id', id],
         queryFn: () => getBirdFoodById(id)
     })
 }

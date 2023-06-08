@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 .productSingleImage {
     opacity: 0;
     visibility: hidden;
-    margin-bottom: 3rem !important;
+    margin-bottom: 3rem;
     animation: fadeInUp .5s both;
     position: relative;
     width: 100%;
@@ -104,10 +104,9 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #000000;
-    background: transparent !important;
-    /* height: 40px !important; */
+    background: transparent;
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .fontSizeL
@@ -127,12 +126,12 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 .marginRight2
 {
-    margin-right: 0.5rem !important;
+    margin-right: 0.5rem;
 }
 
 .marginRight4
 {
-    margin-right: 1rem !important;
+    margin-right: 1rem;
 }
 
 .clickable
