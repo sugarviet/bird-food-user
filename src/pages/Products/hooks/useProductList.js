@@ -13,7 +13,7 @@ function useProductList() {
     activeButton,
     handleButtonClick,
     data,
-    isLoading
+    isLoading,
   };
 }
 
