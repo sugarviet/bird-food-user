@@ -9,10 +9,12 @@ import SignUp from "../pages/SignUp";
 import Cart from "../pages/Cart";
 import  Contactus  from "../pages/Contactus";
 import Blogs from "../pages/Blogs"
+import CheckOut from "../pages/CheckOut/CheckOut";
 
 const Routers = () => {
   return (
     <Routes>
+        <Route path="/" element={<Home />}/>
         <Route path="/example" element={<Example />}/>
         <Route path="/products" element={<Product />}/>
         <Route path="/products/:productId" element={<ProductDetails/>}/>
@@ -22,7 +24,7 @@ const Routers = () => {
         <Route path="/cart" element={<Cart />}/>
         <Route path="/contactus" element={<Contactus />}/>
         <Route path="/blogs" element={<Blogs />}/>
-        <Route path="/" element={<Home />}/>
+        <Route path="/cart/checkout" element={<CheckOut/>}/>
     </Routes>
   )
 }
