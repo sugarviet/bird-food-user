@@ -6,7 +6,7 @@ function useProductList() {
 
   return {
     data,
-    isLoading
+    isLoading,
   };
 }
 

@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
 import {Card} from 'antd'
 import styles from './ProductCard.module.css'
+import { Link } from 'react-router-dom';
+
 
 ProductCard.propTypes = {
     bird: PropTypes.shape({
@@ -26,10 +28,10 @@ function ProductCard({bird}) {
             }
             actions={[
                 <div className={styles.actionProduct} key={"keyId"}>
-                    <div className={styles.actionDetailProduct}>
+                    <Link to={`/products/${bird.id}`} className={styles.actionDetailProduct}>
                         <EyeTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
                         <p className={styles.actionTextProduct}>View detail</p>
-                    </div>
+                    </Link>
                     <hr />
                     <div className={styles.actionDetailProduct}>
                         <ShoppingTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
@@ -51,5 +53,14 @@ function ProductCard({bird}) {
         </Card>
     );
 }
+
+ProductCard.propTypes = {
+    bird: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+    }).isRequired,
+};
 
 export default ProductCard;
