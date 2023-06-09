@@ -40,7 +40,7 @@ const ProductCategory = () => {
                         ))}
                     </div>
                 </Carousel>)}
-            <style scoped>
+            <style>
                 {`
                     .ant-carousel .slick-dots li button {
                         margin-top: 50px;
