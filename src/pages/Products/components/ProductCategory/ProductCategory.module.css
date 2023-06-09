@@ -1,0 +1,40 @@
+.mealCategory {
+    margin-left: 130px;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+
+.mealWrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    margin-left: 55px;
+}
+
+.mealImg {
+    border: 2px solid transparent;
+    border-radius: 20px;
+    width: 120px;
+    margin-left: 15px;
+}
+
+.active {
+    border: 2px solid #3cb815;
+    color: #3cb815;
+}
+
+.mealName.activeText {
+    color: #3cb815;
+}
+
+.mealImg:hover {
+    transition: transform .3s ease;
+    transform: scale(1.05);
+}
+
+.mealName {
+    text-align: center;
+    margin-left: 15px;
+    color: #555555;
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+}

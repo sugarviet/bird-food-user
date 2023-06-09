@@ -1,17 +1,10 @@
 import { useGetAllBirdFood } from "../../../services/Product/services";
-import { useState } from "react";
 
 function useProductList() {
-  const { data, isLoading } = useGetAllBirdFood();
-  const [activeButton, setActiveButton] = useState(1);
 
-  const handleButtonClick = (buttonId) => {
-    setActiveButton(buttonId);
-  };
+  const { data, isLoading } = useGetAllBirdFood();
 
   return {
-    activeButton,
-    handleButtonClick,
     data,
     isLoading,
   };
