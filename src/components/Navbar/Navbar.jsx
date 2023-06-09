@@ -1,5 +1,6 @@
 import { Layout, Button, Input, Tooltip } from "antd";
 import { Link } from "react-router-dom";
+import logo from '../../assets/logo1.png';
 
 import {
   SearchOutlined,
@@ -31,7 +32,7 @@ const Navbar = () => {
       <Header className={styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarLogo}>
-            <Link to={"/"} className={styles.whiteText}>Logo</Link>
+            <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo}/></Link>
           </div>
           <div className={styles.navbarAction}>
             <ul className={styles.navbarActionList}>
