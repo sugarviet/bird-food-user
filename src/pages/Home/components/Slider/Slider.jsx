@@ -12,7 +12,7 @@ const slidesData = [
   {
     id: 2,
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Eopsaltria_australis_-_Mogo_Campground.jpg/640px-Eopsaltria_australis_-_Mogo_Campground.jpg",
+      "https://cdn.download.ams.birds.cornell.edu/api/v1/asset/202984001/1200",
     caption: "Slide 2",
   },
   {

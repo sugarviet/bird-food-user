@@ -2,9 +2,18 @@
   position: fixed;
   z-index: 100;
   width: 100%;
-  /* background-color: #48d41d; */
+  background-color: transparent;
+  transition: 0.25s ease-in-out;
+}
+
+.navbarOnScroll {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
   background-color: rgba(34, 34, 34, 0.5);
   backdrop-filter: blur(6px);
+  transition: 0.5s ease-in-out;
+
 }
 
 .navbarContainer {
