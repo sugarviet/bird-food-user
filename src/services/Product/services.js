@@ -6,6 +6,6 @@ import {
 export const useGetAllBirdFood = () => {
     return useQuery({
         queryKey: ['birds'],
-        queryFn: () => getAllBirdFood()
+        queryFn: () => getAllBirdFood(),
     })
 }
