@@ -16,7 +16,7 @@ const ProductCategory = () => {
     return (
         <div className={styles.mealCategory}>
             {isLoading ? (<img style={{ marginLeft: '550px', width: '200px' }} src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTU3Mjg2ZmQzYzlmOTA5ZmRiNjkzMjQxMDI1NDI1N2UzZWUwZWMzZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PXM/Ra1QMzCD9V6VqxIVV6/giphy.gif'></img>) : (
-                <Carousel {...settings}>
+                <Carousel {...settings} >
                     <div className={styles.mealWrapper}>
                         {firstCarouselData?.map(data => (
                             <div key={data.id}>
@@ -40,7 +40,7 @@ const ProductCategory = () => {
                         ))}
                     </div>
                 </Carousel>)}
-            <style scoped>
+            <style>
                 {`
                     .ant-carousel .slick-dots li button {
                         margin-top: 50px;
