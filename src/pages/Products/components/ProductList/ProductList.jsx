@@ -6,7 +6,8 @@ import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 
 function ProductList() {
-  const [size] = useState("large");
+  const [size] = useState("large"); // review why useState here???
+
   const { activeButton, handleButtonClick, data, isLoading } = useProductList();
 
   if (isLoading) {
