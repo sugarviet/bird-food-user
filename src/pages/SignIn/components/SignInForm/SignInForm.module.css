@@ -1,3 +1,9 @@
+@import "/src/App.css";
+
+.daddyContainer {
+  background-color: var(--primary-green-color);
+}
+
 .container {
   padding: 5rem;
   display: flex;
