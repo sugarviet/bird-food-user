@@ -40,7 +40,9 @@ const SignUpForm = () => {
   return (
     <Row className={style.daddyContainer}>
       <Col span={12}>
+        <Link to="/">
         <img src="/background_logo.jpg" alt="Background Logo" />
+        </Link>
       </Col>
       <Col span={12}>
         <div className={style.container}>
@@ -68,12 +70,12 @@ const SignUpForm = () => {
               scrollToFirstError
             >
               <Form.Item
-                name="username"
-                label="Username"
+                name={["user", "email"]}
+                label="Email"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your username!",
+                    type: "email"
                   },
                 ]}
               >
