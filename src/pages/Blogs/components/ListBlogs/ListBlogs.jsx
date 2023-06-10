@@ -7,7 +7,7 @@ import useListBlogs from '../../hooks/useListBlogs'
 
 function ListBlogs() {
 
-  const { data, isLoading } = useListBlogs();
+  const { data } = useListBlogs();
 
   return (
     <div>
