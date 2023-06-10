@@ -53,7 +53,7 @@ const SignInForm = () => {
               },
             ]}
           >
-            <Input
+            <Input.Password
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
@@ -66,10 +66,6 @@ const SignInForm = () => {
                 <Form.Item name="remember" valuePropName="checked" noStyle>
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
-
-                <a className={style.loginForgot} href="">
-                  Forgot password
-                </a>
               </Form.Item>
             </Col>
           </Row>
@@ -82,8 +78,20 @@ const SignInForm = () => {
             >
               Log in
             </Button>
-            {/* Or <a href="">register now!</a> */}
           </Form.Item>
+          <Row>
+            <Col span={24}>
+              <Form.Item>
+                <a href="" className={style.loginRegisterTagLink}>
+                  Register now!
+                </a>
+
+                <a className={style.loginForgot} href="">
+                  Forgot password
+                </a>
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </Card>
     </div>

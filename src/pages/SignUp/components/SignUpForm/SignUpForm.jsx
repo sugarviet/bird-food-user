@@ -46,8 +46,9 @@ const SignUpForm = () => {
         }}
         cover={
           <img
+            
             alt="signup"
-            src="https://images.unsplash.com/photo-1600982459727-58f0cf5de042?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80"
+            src="https://miro.medium.com/freeze/fit/c/80/56/1*BJHpzKGCqf7TrVQb96656Q.gif"
           />
         }
       >
@@ -149,7 +150,7 @@ const SignUpForm = () => {
               I have read the <a href="">agreement</a>
             </Checkbox>
           </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
+          <Form.Item className={style.buttonSubmit}  {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
               Register
             </Button>
