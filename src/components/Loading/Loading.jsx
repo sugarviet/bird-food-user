@@ -1,8 +1,11 @@
-import { Spin } from "antd"
+import styles from './Loading.module.css'
+import loading from '../../assets/loading.gif'
 
 const Loading = () => {
   return (
-    <Spin size="large" style={{position: 'absolute', top: '50%', left: '50%', zIndex: '100'}}/>
+    <div className={styles.centeredGif}>
+      <img className={styles.loading} src={loading}></img>
+    </div>
   )
 }
 
