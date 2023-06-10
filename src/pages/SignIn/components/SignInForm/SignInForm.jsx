@@ -3,6 +3,7 @@ import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
 
 import style from "./SignInForm.module.css";
 import { onFinish } from "../../hooks/useSignInForm";
+import { Link } from "react-router-dom";
 
 const SignInForm = () => {
   onFinish;
@@ -82,10 +83,7 @@ const SignInForm = () => {
           <Row>
             <Col span={24}>
               <Form.Item>
-                <a href="" className={style.loginRegisterTagLink}>
-                  Register now!
-                </a>
-
+                <Link className={style.loginRegisterTagLink} to="/signup">Register now!</Link>
                 <a className={style.loginForgot} href="">
                   Forgot password
                 </a>

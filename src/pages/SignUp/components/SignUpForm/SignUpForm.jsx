@@ -1,6 +1,7 @@
 import { Button, Card, Checkbox, Form, Input } from "antd";
-import style from "./SignUpForm.module.css";
+import { Link } from "react-router-dom";
 import { onFinish } from "../../hooks/useSignUpForm";
+import style from "./SignUpForm.module.css";
 
 const formItemLayout = {
   labelCol: {
@@ -46,7 +47,6 @@ const SignUpForm = () => {
         }}
         cover={
           <img
-            
             alt="signup"
             src="https://miro.medium.com/freeze/fit/c/80/56/1*BJHpzKGCqf7TrVQb96656Q.gif"
           />
@@ -150,11 +150,17 @@ const SignUpForm = () => {
               I have read the <a href="">agreement</a>
             </Checkbox>
           </Form.Item>
-          <Form.Item className={style.buttonSubmit}  {...tailFormItemLayout}>
+          <Form.Item className={style.buttonSubmit} {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">
               Register
             </Button>
           </Form.Item>
+          <div className={style.loginNowTagLink}>
+            <span>Alredy have account!</span>
+            <Link to="/login">
+              &nbsp;Login Now!
+            </Link>
+          </div>
         </Form>
       </Card>
     </div>
