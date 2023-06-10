@@ -1,5 +1,5 @@
 import Slider from "../Home/components/Slider/index"
-import ListBlogs from "./ListBlogs/ListBlogs"
+import ListBlogs from "../Blogs/components/ListBlogs/ListBlogs"
 
 const Blogs = () => {
   return (

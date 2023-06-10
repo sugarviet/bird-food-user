@@ -6,7 +6,7 @@ import {
 export const useGetAllBirdFood = () => {
     return useQuery({
         queryKey: ['birds'],
-        queryFn: () => getAllBirdFood(),
+        queryFn: () => sleep(1000).then(() => getAllBirdFood()),
     })
 }
 
@@ -16,3 +16,12 @@ export const useGetBirdFoodById = (id) => {
         queryFn: () => getBirdFoodById(id)
     })
 }
+const sleep = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+
+
+
+
+

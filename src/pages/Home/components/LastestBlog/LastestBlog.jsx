@@ -1,5 +1,5 @@
 import styles from "./LastestBlog.module.css";
-import BlogItem from "../../../Blogs/BlogItem/BlogItem";
+import BlogItem from "../../../Blogs/components/BlogItem/BlogItem";
 import { Row, Col } from "antd";
 const BlogsData = [
   {
