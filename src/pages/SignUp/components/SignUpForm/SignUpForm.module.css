@@ -1,5 +1,23 @@
+@import "/src/App.css";
+
+.daddyContainer {
+  background-color: var(--primary-green-color);
+}
+
 .container {
-    padding: 10rem;
+    margin: 6rem;
     display: flex;
+    justify-content: center;
+}
+
+.buttonSubmit {
+    display: flex;
+    justify-content: center;
+}
+
+.loginNowTagLink{
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
 }
