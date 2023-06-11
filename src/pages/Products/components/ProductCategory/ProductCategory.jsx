@@ -4,7 +4,7 @@ import useCategoryList from '../../hooks/useCategoryList'
 
 
 const ProductCategory = () => {
-    const { firstCarouselData, secondCarouselData, active, handleActive,isLoading } = useCategoryList();
+    const { firstCarouselData, secondCarouselData, active, handleActive } = useCategoryList();
 
     const settings = {
         infinite: true,
