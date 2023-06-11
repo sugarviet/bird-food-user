@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 BlogItem.propTypes = {
   blog: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -17,7 +17,7 @@ function BlogItem({ blog }) {
     <div className={styles.blogItems}>
       <div>
         <div className={styles.imageBlog}>
-          <img src={blog.image} />
+          <img src={blog.image[0]} />
         </div>
         <div className={styles.titleBlog}>
           <Link to={`/blogs/${blog.id}`} className={styles.titleBlogLink}>
