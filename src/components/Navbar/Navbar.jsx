@@ -1,5 +1,6 @@
 import { Layout, Button, Input, Tooltip } from "antd";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import logo from '../../assets/logo1.png';
 
 import {
@@ -27,9 +28,27 @@ const Navbar = () => {
     handleShowSearchBar,
   } = useNavbar();
 
+  const [isScroll, setIsScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition >= 75) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isScroll]);
+
   return (
     <Layout>
-      <Header className={styles.navbar}>
+      <Header className={isScroll ? styles.navbarOnScroll : styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarLogo}>
             <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo}/></Link>
