@@ -1,21 +1,21 @@
 import { Carousel } from 'antd';
+import useCategoryList from '../../hooks/useCategoryList';
 import styles from './ProductCategory.module.css';
-import useCategoryList from '../../hooks/useCategoryList'
 
 
 const ProductCategory = () => {
-    const { firstCarouselData, secondCarouselData, active, handleActive,isLoading } = useCategoryList();
+    const { firstCarouselData, secondCarouselData, active, handleActive } = useCategoryList();
 
     const settings = {
         infinite: true,
         speed: 800,
         dots: true,
-        draggable: true, // Cho phép kéo qua bằng chuột
+        draggable: true,
     };
 
     return (
         <div className={styles.mealCategory}>
-            {isLoading ? (<img style={{ marginLeft: '550px', width: '200px' }} src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTU3Mjg2ZmQzYzlmOTA5ZmRiNjkzMjQxMDI1NDI1N2UzZWUwZWMzZSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PXM/Ra1QMzCD9V6VqxIVV6/giphy.gif'></img>) : (
+            
                 <Carousel {...settings}>
                     <div className={styles.mealWrapper}>
                         {firstCarouselData?.map(data => (
@@ -39,7 +39,7 @@ const ProductCategory = () => {
                             </div>
                         ))}
                     </div>
-                </Carousel>)}
+                </Carousel>
             <style>
                 {`
                     .ant-carousel .slick-dots li button {
