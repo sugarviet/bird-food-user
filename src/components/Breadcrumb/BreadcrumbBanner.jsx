@@ -1,7 +1,14 @@
+import PropTypes from 'prop-types';
 import styles from './BreadcrumbBanner.module.css'
 import { Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+
+BreadcrumbBanner.propTypes = {
+    backgroundImage: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    pathName: PropTypes.string.isRequired
+};
 
 function BreadcrumbBanner({ backgroundImage, title, pathName }) {
     const [breadcrumbItems, setBreadcrumbItems] = useState([]) 

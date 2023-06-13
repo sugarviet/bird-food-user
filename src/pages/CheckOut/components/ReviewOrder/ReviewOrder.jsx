@@ -8,26 +8,9 @@ import { useEffect, useState } from "react";
 
 const { Panel } = Collapse
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        width: 150,
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        width: 150,
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-    },
-];
-
 function ReviewOrder({ shippingInputList, selectedProducts }) {
     const [total, setTotal] = useState(0)
-    
+
     useEffect(() => {
         var result = selectedProducts.reduce((total, current) => {
             return total + current.quantity * current.price;
