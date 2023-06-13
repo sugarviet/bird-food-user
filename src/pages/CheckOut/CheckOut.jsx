@@ -1,29 +1,64 @@
 import { useLocation } from "react-router";
 import BreadcrumbBanner from "../../components/Breadcrumb";
-import { Collapse } from "antd";
-import { CaretRightOutlined } from "@ant-design/icons";
+import ReviewOder from "./components/ReviewOrder";
+import {UserOutlined, AimOutlined, PhoneOutlined, MailOutlined} from '@ant-design/icons'
+
 
 const backgroundImage = 'https://static.vecteezy.com/system/resources/previews/002/662/018/large_2x/easter-eggs-in-a-natural-nest-with-bird-eggs-on-a-pink-background-view-from-above-banner-photo.jpg'
 
+const shippingInputList = [
+    {
+        name: 'Name',
+        type: 'string',
+        prefix: <UserOutlined />
+    },
+    {
+        name: 'Email',
+        type: 'email',
+        prefix: <MailOutlined />
+    },
+    {
+        name: 'Address',
+        type: 'string',
+        prefix: <AimOutlined />
+    },
+    {
+        name: 'Phone',
+        type: 'phone',
+        prefix: <PhoneOutlined />
+    },
+]
+
+const selectedProducts = [
+    {
+        name: "Straight Bird Foods",
+        price: 25,
+        image: 'https://i.ibb.co/SVhGw6v/Straight-Bird-Foods.png',
+        quantity: 2,
+    },
+    {
+        name: "Straight Bird Foods",
+        price: 25,
+        image: 'https://i.ibb.co/SVhGw6v/Straight-Bird-Foods.png',
+        quantity: 2,
+    },
+]
+
 function CheckOut() {
-    const path = useLocation();
-    const onChange = (key) => {
-        console.log(key);
-    };
+    const location = useLocation();
 
     return (
         <>
             <BreadcrumbBanner
                 backgroundImage={backgroundImage}
                 title='Check Out Product'
-                pathName={path.pathname}
+                pathName={location.pathname}
             />
-            <Collapse
-                bordered={false}
-                defaultActiveKey={['1']}
-                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-            >
-            </Collapse>
+
+            <ReviewOder 
+                shippingInputList={shippingInputList}
+                selectedProducts={selectedProducts}
+            />
         </>
     );
 }
