@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Avatar, List, Space, Tag, Button } from 'antd';
+import { Avatar, List, Space, Tag } from 'antd';
 import {
     StarOutlined, LikeOutlined, MessageOutlined,
     FacebookOutlined, LinkedinOutlined, TwitterOutlined,
@@ -7,16 +7,15 @@ import {
 } from "@ant-design/icons";
 import React from 'react';
 import styles from './CommentBlog.module.css'
-import { Input } from 'antd';
 
-CommentBlog.propTypes = {
-    icon: PropTypes.shape([
-        PropTypes.object,
-        PropTypes.string,
-    ]).isRequired,
-    text: PropTypes.string.isRequired,
-}
+
 const CommentBlog = () => {
+
+    CommentBlog.propTypes = {
+        icon: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+    };
+
     const data = Array.from({
         length: 3,
     }).map((_, i) => ({
@@ -34,7 +33,7 @@ const CommentBlog = () => {
             {text}
         </Space>
     );
-    const { TextArea } = Input;
+
     return (
         <div className={styles.blogComment}>
             <Space size={[0, 8]} wrap>
@@ -77,18 +76,7 @@ const CommentBlog = () => {
                     )}
                 />
             </div>
-            <h1 className={styles.blogFooter}>Leave a comment</h1>
-            <div className={styles.blogCommentFooter}>
-                <TextArea style={{ border: '2px solid #ced4da' }} rows={4} placeholder="Enter your comment..." maxLength={6} />
-            </div>
-            <div className={styles.coverButton}>
-                <Button
-                    className={styles.button}
-                    type="primary"
-                >
-                    <p className={styles.textButton}>Post</p>
-                </Button>
-            </div>
+
         </div>
     )
 }

@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import useSingleBlog from "../../hooks/useSingleBlog";
 import styles from './BlogDetail.module.css'
 import Banner from '../../../../components/Banner'
-import { Row, Col, Skeleton } from "antd";
+import { Row, Col } from "antd";
 import { Input } from 'antd';
 import { CalendarOutlined, CommentOutlined } from "@ant-design/icons";
-import CommentBlog from "../CommentBlog/CommentBlog";
+import CommentBlog from "../CommentBlog";
+import Comment from "../Comment";
+import LoadingBlog from "../../../../components/Loading/LoadingBlog";
 
 const BlogDetail = () => {
   const { blogId } = useParams();
@@ -22,11 +24,7 @@ const BlogDetail = () => {
             <div>
               <h1 className={styles.blogTitle}>{blog?.name}</h1>
               {isLoading &&
-                <Skeleton
-                  active
-                  paragraph={{
-                    rows: 10,
-                  }} />}
+                <LoadingBlog/>}
               {blog?.content.split('\n').map((paragraph, index) => (
                 <div key={index}>
                   <p className={styles.blogContent}>{paragraph}</p>
@@ -36,6 +34,7 @@ const BlogDetail = () => {
               ))}
             </div>
             <CommentBlog />
+            <Comment />
           </Col>
           <Col span={8}>
             <div className={styles.blogRight}>
@@ -94,7 +93,6 @@ const BlogDetail = () => {
             </div>
           </Col>
         </Row>
-     
       </div>
     </div>
   )

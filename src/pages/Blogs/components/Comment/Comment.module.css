@@ -1,0 +1,23 @@
+.blogFooter {
+    margin-top: 40px;
+}
+
+.blogCommentFooter {
+    margin-top: 20px;
+}
+
+.coverButton {
+    margin-top: 15px;
+    float: right;
+}
+
+.button {
+    border-radius: 100px;
+    width: 90px;
+    height: 50px;
+}
+
+.textButton {
+    font-size: 17px;
+    font-weight: 500;
+}

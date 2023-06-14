@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 BlogItem.propTypes = {
   blog: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
