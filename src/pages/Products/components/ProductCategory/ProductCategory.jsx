@@ -15,7 +15,6 @@ const ProductCategory = () => {
 
     return (
         <div className={styles.mealCategory}>
-            
                 <Carousel {...settings}>
                     <div className={styles.mealWrapper}>
                         {firstCarouselData?.map(data => (
