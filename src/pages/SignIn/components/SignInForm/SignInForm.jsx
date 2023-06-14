@@ -1,17 +1,38 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
+import axios from "axios";
 
 import style from "./SignInForm.module.css";
 import { onFinish } from "../../hooks/useSignInForm";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SignInForm = () => {
   onFinish;
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:8080/login", {
+        username,
+        password,
+      });
+
+      // Handle successful login here, such as storing tokens in local storage or Redux state
+      console.log(response.data);
+    } catch (error) {
+      // Handle error, such as displaying an error message to the user
+      console.error(error);
+    }
+  };
   return (
     <Row className={style.daddyContainer}>
       <Col span={12}>
         <Link to="/">
-        <img src="/background_logo.jpg" alt="Background Logo" />
+          <img src="/background_logo.jpg" alt="Background Logo" />
         </Link>
       </Col>
       <Col span={12}>
@@ -30,6 +51,7 @@ const SignInForm = () => {
             }
           >
             <Form
+              onSubmit={handleFormSubmit}
               name="normal_login"
               className={style.signInForm}
               initialValues={{
@@ -49,6 +71,8 @@ const SignInForm = () => {
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Item>
 
@@ -65,6 +89,8 @@ const SignInForm = () => {
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Item>
 
