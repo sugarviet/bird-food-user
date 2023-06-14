@@ -17,7 +17,7 @@ function ReviewOrder({ shippingInputList, selectedProducts }) {
         }, 0)
 
         setTotal(result)
-    }, [])
+    }, [selectedProducts])
 
     return (
         <Row style={{ margin: '2rem 0', padding: '0 4rem' }} gutter={16}>
