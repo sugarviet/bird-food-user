@@ -12,22 +12,23 @@ const SignInForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  const API_URL = "http://localhost:8080";
 
+  const api = axios.create({
+    baseURL: API_URL,
+    withCredentials: true,
+  });
+  async function handleFormSubmit() {
     try {
-      const response = await axios.post("http://localhost:8080/login", {
-        username,
-        password,
-      });
+      const response = await api.post("/login", { username, password });
+      console.log(response);
 
       // Handle successful login here, such as storing tokens in local storage or Redux state
-      console.log(response.data);
     } catch (error) {
       // Handle error, such as displaying an error message to the user
       console.error(error);
     }
-  };
+  }
   return (
     <Row className={style.daddyContainer}>
       <Col span={12}>
@@ -51,13 +52,12 @@ const SignInForm = () => {
             }
           >
             <Form
-              onSubmit={handleFormSubmit}
               name="normal_login"
               className={style.signInForm}
               initialValues={{
                 remember: true,
               }}
-              onFinish={onFinish}
+              onFinish={handleFormSubmit}
             >
               <Form.Item
                 name="username"
