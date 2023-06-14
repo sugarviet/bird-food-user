@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Input } from "antd";
 import styles from './Form.module.css'
+import { Fragment } from 'react';
 
 Form.propTypes = {
     inputList: PropTypes.arrayOf(
@@ -14,7 +15,7 @@ Form.propTypes = {
 
 function Form({ inputList }) {
     return (
-        <>
+        <Fragment>
             {inputList.map(input =>
                 <div key={input.name}>
                     <Input
@@ -27,7 +28,7 @@ function Form({ inputList }) {
                 </div>
 
             )}
-        </>
+        </Fragment>
     );
 }
 

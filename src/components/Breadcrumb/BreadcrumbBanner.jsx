@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './BreadcrumbBanner.module.css'
 import { Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 BreadcrumbBanner.propTypes = {
     backgroundImage: PropTypes.string.isRequired,
@@ -22,14 +22,14 @@ function BreadcrumbBanner({ backgroundImage, title, pathName }) {
                                         return paths
                                     }, [])
         
-        var items = paths.reduce((items, item, index) => [...items, {title: <Link to={item}>{pathNames[index]}</Link>}]
+        const items = paths.reduce((items, item, index) => [...items, {title: <Link to={item}>{pathNames[index]}</Link>}]
                                 , [{title: <Link to='/'>Home</Link>}])   
                                 
         setBreadcrumbItems(items)
-    }, [pathName])
+    }, [breadcrumbItems])
 
     return (
-        <>
+        <Fragment>
             <div style={{ backgroundImage: `url(${backgroundImage})` }} className={styles.breadcrumbWrapper}>
                 <div className={styles.breadcrumbTitle}>
                     <span style={{ textTransform: 'uppercase' }}>{title}</span>
@@ -38,7 +38,7 @@ function BreadcrumbBanner({ backgroundImage, title, pathName }) {
                     />
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 }
 

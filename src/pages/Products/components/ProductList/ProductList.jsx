@@ -1,13 +1,10 @@
 import styles from "./ProductList.module.css";
 import { Button, Space, Col, Row, Pagination } from "antd";
-import { useState } from "react";
 import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 
 function ProductList() {
-  const [size] = useState("large"); // review why useState here???
-
   const { activeButton, handleButtonClick, data, isLoading } = useProductList();
 
   if (isLoading) {
@@ -31,15 +28,15 @@ function ProductList() {
         <div className={styles.categoryContent}>
           <Space wrap>
             <Button
-              size={size}
+              size="large"
               className={styles.textCategory}
               type={activeButton === 1 && "primary"}
-              onClick={() => handleButtonClick(1)}
+              onClick={() => handleButtonClick(1)}  
             >
               Seed
             </Button>
             <Button
-              size={size}
+              size="large"
               className={styles.textCategory}
               type={activeButton === 2 ? "primary" : "default"}
               onClick={() => handleButtonClick(2)}
@@ -47,7 +44,7 @@ function ProductList() {
               Mealworms
             </Button>
             <Button
-              size={size}
+              size="large"
               className={styles.textCategory}
               type={activeButton === 3 ? "primary" : "default"}
               onClick={() => handleButtonClick(3)}
