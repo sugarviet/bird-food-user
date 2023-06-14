@@ -17,7 +17,7 @@ function BlogItem({ blog }) {
     <div className={styles.blogItems}>
       <div>
         <div className={styles.imageBlog}>
-          <img src={blog.image} />
+          <img src={blog.image[0]} />
         </div>
         <div className={styles.titleBlog}>
           <Link to={`/blogs/${blog.id}`} className={styles.titleBlogLink}>
