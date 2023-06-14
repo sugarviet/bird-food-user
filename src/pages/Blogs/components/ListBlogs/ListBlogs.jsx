@@ -3,11 +3,16 @@ import { Row, Col } from "antd";
 import { Pagination } from "antd";
 import BlogItem from "../BlogItem/BlogItem";
 import useListBlogs from '../../hooks/useListBlogs'
-
+import Loading from "../../../../components/Loading";
 
 function ListBlogs() {
 
-  const { data } = useListBlogs();
+  const { data,isLoading } = useListBlogs();
+
+  
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>

@@ -1,0 +1,72 @@
+.blogDetail {
+    margin: 100px 200px;
+}
+
+.blogTitle {
+    font-family: Poppins, Arial, sans-serif;
+    color: #000000;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.blogImage {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.blogContent {
+    font-family: Poppins, Arial, sans-serif;
+    color: #808080;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.blogRight {
+    margin-left: 60px;
+}
+
+.blogSearch {
+    margin-top: 30px;
+}
+
+.blogRightContainer {
+    margin-top: 40px;
+}
+
+.blogRightRecent {
+    font-size: 20px;
+    font-family: Poppins, Arial, sans-serif;
+    color: #000000;
+    font-weight: 500;
+}
+
+.blogRightImage {
+    width: 100px;
+    height: 80px;
+    margin-top: 7px;
+}
+
+.blogRightTitle {
+    font-size: 18px;
+    font-family: "Poppins", Arial, sans-serif;
+    color: #000000;
+    padding-left: 20px;
+
+}
+
+.blogRightDate {
+    font-size: 12px;
+    font-family: "Poppins", Arial, sans-serif;
+    color: #000000;
+    padding-left: 20px;
+}
+
+.blogIcon {
+    margin-right: 5px;
+}
+
+.blogRightImageDes {
+    display: flex;
+    flex-direction: row;
+    margin-top: 35px;
+}
