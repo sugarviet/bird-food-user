@@ -1,6 +1,6 @@
 :root {
-  --primary-green-color: #3cb815;
-  --primary-orange-color: #f65005;
+  --primary-color: #3cb815;
+  --secondary-color: #f65005;
   --header-height: 64px;
 }
 
