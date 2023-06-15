@@ -10,6 +10,7 @@ import Cart from "../pages/Cart";
 import  Contactus  from "../pages/Contactus";
 import Blogs from "../pages/Blogs"
 import BlogDetail from "../pages/Blogs/components/BlogDetail"
+import UserProfile from "../pages/UserProfile";
 
 const Routers = () => {
   return (
@@ -24,6 +25,7 @@ const Routers = () => {
         <Route path="/contactus" element={<Contactus />}/>
         <Route path="/blogs" element={<Blogs />}/>
         <Route path="/blogs/:blogId" element={<BlogDetail/>}/>
+        <Route path="/profile" element={<UserProfile/>}/>
         <Route path="/" element={<Home />}/>
     </Routes>
   )
