@@ -9,7 +9,9 @@ function UsernameSetting() {
                     <img className={`${styles.image}`} src="/src/assets/siuu.jpg" alt="" />
                 </Col>
                 <Col span={20}>
-                    <img className={`${styles.image}`} src="/src/assets/siuu.jpg" alt="" />
+                    <div className={`${styles.title}`}>
+                        <span>Username</span>
+                    </div>
                 </Col>
             </Row>
         </div>

@@ -23,6 +23,7 @@
     border: none;
     font-weight: 700;
     background-color: #3cb815;
+    margin: .4rem 0;
 }
 
 .updateBtn:hover

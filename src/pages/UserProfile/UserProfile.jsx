@@ -34,7 +34,7 @@ function UserProfile() {
 
     return ( 
         <Fragment>
-            <Banner/>
+            <Banner title="User Profile"/>
 
             <div style={{padding: '2rem 10rem'}}>
                 <Row gutter={16}>
