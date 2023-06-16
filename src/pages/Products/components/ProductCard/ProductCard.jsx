@@ -15,6 +15,7 @@ ProductCard.propTypes = {
 
 function ProductCard({bird}) {
     const { Meta } = Card;
+
     return (
         <Card
             hoverable
@@ -33,10 +34,10 @@ function ProductCard({bird}) {
                         <p className={styles.actionTextProduct}>View detail</p>
                     </Link>
                     <hr />
-                    <div className={styles.actionDetailProduct}>
+                    <a className={styles.actionDetailProduct}>
                         <ShoppingTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
                         <p className={styles.actionTextProduct}>Add to cart</p>
-                    </div>
+                    </a>
                 </div>
             ]}
         >

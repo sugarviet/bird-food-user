@@ -57,6 +57,13 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     color: #000000;
 }
 
+.productInputQuantity
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
 .addToCartButton
 {
     background: #000000;
@@ -68,7 +75,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     font-weight: 400;
     text-align: center;
     vertical-align: middle;
-    font-size: x-large;
+    font-size: 16px;
     line-height: 1.5;
     box-shadow: 0px 24px 36px -11px rgba(0, 0, 0, 0.09);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -100,7 +107,6 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 .inputBox
 {
     padding: 0.5rem;
-    font-size: x-large;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #000000;
@@ -111,12 +117,12 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 
 .fontSizeL
 {
-    font-size: large;
+    font-size: 16px;
 }
 
 .fontSizeXL
 {
-    font-size: x-large;
+    font-size: 32px;
 }
 
 .fontSizeXXL

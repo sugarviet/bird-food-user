@@ -1,0 +1,26 @@
+.wrapper
+{
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow:  2px 2px 4px rgba(0, 0, 0, 0.2);
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.image
+{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.title
+{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: 700;
+    font-size: large;
+}
