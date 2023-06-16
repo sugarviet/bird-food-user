@@ -80,9 +80,11 @@ const Navbar = () => {
                 </Tooltip>
               </li>
               <li>
-                <Tooltip placement="bottom" title={"User's account"}>
-                  <Button icon={<UserOutlined />} shape="circle" />
-                </Tooltip>
+                <Link to={'/profile'}>
+                  <Tooltip placement="bottom" title={"User's account"}>
+                    <Button icon={<UserOutlined />} shape="circle" />
+                  </Tooltip>
+                </Link>
               </li>
               <li>
                 <Link to={'/cart'}>
