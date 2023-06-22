@@ -7,6 +7,5 @@ export const useGetAllCategory = () => {
     return useQuery({
         queryKey: ['categories'],
         queryFn: () => getAllCategory(),
-      
     })
 }

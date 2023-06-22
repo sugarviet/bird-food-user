@@ -1,9 +1,9 @@
 import axios from "axios";
 
-import { API_GET_CATEGORY } from "./api_path";
+import { CATEGORY_API } from "./api_path";
 
 export const getAllCategory = async () => {
-  const res =  await axios.get(API_GET_CATEGORY);
+  const res =  await axios.get(CATEGORY_API);
 
-  return res.data;
+  return res.data.listCategory;
 };

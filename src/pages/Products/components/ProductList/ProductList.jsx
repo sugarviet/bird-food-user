@@ -5,9 +5,14 @@ import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 
 function ProductList() {
-  const { activeButton, handleButtonClick, products, isProductsLoading } = useProductList();
+  const {
+    products,
+    isProductsLoading,
+    categories,
+    isCategoriesLoading,
+  } = useProductList();
 
-  if (isProductsLoading) {
+  if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
   }
 
@@ -27,30 +32,14 @@ function ProductList() {
         </div>
         <div className={styles.categoryContent}>
           <Space wrap>
-            <Button
-              size="large"
-              className={styles.textCategory}
-              type={activeButton === 1 && "primary"}
-              onClick={() => handleButtonClick(1)}  
-            >
-              Seed
-            </Button>
-            <Button
-              size="large"
-              className={styles.textCategory}
-              type={activeButton === 2 ? "primary" : "default"}
-              onClick={() => handleButtonClick(2)}
-            >
-              Mealworms
-            </Button>
-            <Button
-              size="large"
-              className={styles.textCategory}
-              type={activeButton === 3 ? "primary" : "default"}
-              onClick={() => handleButtonClick(3)}
-            >
-              Peanuts
-            </Button>
+            {categories.map((category, index) => (
+              <Button
+                size="large"
+                className={styles.textCategory}
+              >
+                {category.categoryName}
+              </Button>
+            ))}
           </Space>
         </div>
       </div>
