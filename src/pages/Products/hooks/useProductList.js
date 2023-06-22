@@ -2,11 +2,11 @@ import { useGetAllBirdFood } from "../../../services/Product/services";
 
 function useProductList() {
 
-  const { data, isLoading } = useGetAllBirdFood();
+  const { data: products, isLoading: isProductsLoading } = useGetAllBirdFood();
 
   return {
-    data,
-    isLoading,
+    products,
+    isProductsLoading,
   };
 }
 

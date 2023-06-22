@@ -5,7 +5,7 @@ import {
 
 export const useGetAllBirdFood = () => {
     return useQuery({
-        queryKey: ['birds'],
+        queryKey: ['bird-foods'],
         queryFn: () => sleep(1000).then(() => getAllBirdFood()),
     })
 }

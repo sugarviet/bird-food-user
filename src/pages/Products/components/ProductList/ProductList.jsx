@@ -5,9 +5,9 @@ import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 
 function ProductList() {
-  const { activeButton, handleButtonClick, data, isLoading } = useProductList();
+  const { activeButton, handleButtonClick, products, isProductsLoading } = useProductList();
 
-  if (isLoading) {
+  if (isProductsLoading) {
     return <Loading />;
   }
 
@@ -56,8 +56,8 @@ function ProductList() {
       </div>
       <div className={styles.cardContent}>
         <Row gutter={16}>
-          {data?.map((bird) => (
-            <div className={styles.cardDetail} key={bird.id}>
+          {products?.map((bird) => (
+            <div className={styles.cardDetail} key={bird._id}>
               <Col span={8}>
                 <ProductCard bird={bird} />
               </Col>
