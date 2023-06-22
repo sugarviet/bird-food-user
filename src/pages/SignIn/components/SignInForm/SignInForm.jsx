@@ -1,17 +1,52 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
 
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./SignInForm.module.css";
-import { onFinish } from "../../hooks/useSignInForm";
-import { Link } from "react-router-dom";
 
 const SignInForm = () => {
-  onFinish;
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const API_URL = "http://localhost:8080";
+
+  const api = axios.create({
+    baseURL: API_URL,
+    withCredentials: true,
+  });
+  const handleFormSubmit = async () => {
+    try {
+      const response = await api.post("/login", {
+        username,
+        password,
+      });
+      navigate("/");
+      console.log(response);
+      // Handle successful login here, such as storing tokens in local storage or Redux state
+    } catch (error) {
+      // Handle error, such as displaying an error message to the user
+      console.error(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        const errorMessage = error.response.data.error.message;
+        form.setFields([
+          {
+            name: ["user", "email"],
+            errors: [errorMessage],
+          },
+        ]);
+      }
+    }
+  };
+
   return (
     <Row className={style.daddyContainer}>
       <Col span={12}>
         <Link to="/">
-        <img src="/background_logo.jpg" alt="Background Logo" />
+          <img src="/background_logo.jpg" alt="Background Logo" />
         </Link>
       </Col>
       <Col span={12}>
@@ -35,7 +70,7 @@ const SignInForm = () => {
               initialValues={{
                 remember: true,
               }}
-              onFinish={onFinish}
+              onFinish={handleFormSubmit}
             >
               <Form.Item
                 name="username"
@@ -49,6 +84,8 @@ const SignInForm = () => {
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Item>
 
@@ -65,6 +102,8 @@ const SignInForm = () => {
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Item>
 

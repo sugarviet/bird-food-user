@@ -1,6 +1,7 @@
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
-import { Link } from "react-router-dom";
-import { onFinish } from "../../hooks/useSignUpForm";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./SignUpForm.module.css";
 
 const formItemLayout = {
@@ -35,13 +36,54 @@ const tailFormItemLayout = {
 };
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [form] = Form.useForm();
-  onFinish;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+
+  const API_URL = "http://localhost:8080";
+
+  const api = axios.create({
+    baseURL: API_URL,
+    withCredentials: true,
+  });
+  const handleFormSubmit = async () => {
+    try {
+      const response = await api.post("/register", {
+        username,
+        fullName,
+        email,
+        phone,
+        password,
+        confirmPassword,
+      });
+      navigate("/login");
+      console.log(response);
+      // Handle successful login here, such as storing tokens in local storage or Redux state
+    } catch (error) {
+      // Handle error, such as displaying an error message to the user
+      console.error(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        const errorMessage = error.response.data.error.message;
+        form.setFields([
+          {
+            name: ["user", "email"],
+            errors: [errorMessage],
+          },
+        ]);
+      }
+    }
+  };
+
   return (
     <Row className={style.daddyContainer}>
       <Col span={12}>
         <Link to="/">
-        <img src="/background_logo.jpg" alt="Background Logo" />
+          <img src="/background_logo.jpg" alt="Background Logo" />
         </Link>
       </Col>
       <Col span={12}>
@@ -63,23 +105,41 @@ const SignUpForm = () => {
               {...formItemLayout}
               form={form}
               name="register"
-              onFinish={onFinish}
               style={{
                 maxWidth: 600,
               }}
               scrollToFirstError
+              onFinish={handleFormSubmit}
             >
               <Form.Item
-                name={["user", "email"]}
+                name={"username"}
+                label="Username"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name={"email"}
                 label="Email"
                 rules={[
                   {
                     required: true,
-                    type: "email"
+                    type: "email",
                   },
                 ]}
               >
-                <Input />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </Form.Item>
 
               <Form.Item
@@ -93,7 +153,10 @@ const SignUpForm = () => {
                 ]}
                 hasFeedback
               >
-                <Input.Password />
+                <Input.Password
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </Form.Item>
 
               <Form.Item
@@ -120,7 +183,25 @@ const SignUpForm = () => {
                   }),
                 ]}
               >
-                <Input.Password />
+                <Input.Password
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Form.Item>
+
+              <Form.Item
+                name={"fullName"}
+                label="Full Name"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input
+                  value={email}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
               </Form.Item>
 
               <Form.Item
@@ -137,6 +218,8 @@ const SignUpForm = () => {
                   style={{
                     width: "100%",
                   }}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </Form.Item>
 
