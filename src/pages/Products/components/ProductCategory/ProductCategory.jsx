@@ -1,10 +1,10 @@
 import { Carousel } from 'antd';
-import useCategoryList from '../../hooks/useCategoryList';
 import styles from './ProductCategory.module.css';
+import useComboList from '../../hooks/useComboList';
 
 
 const ProductCategory = () => {
-    const { firstCarouselData, secondCarouselData, active, handleActive } = useCategoryList();
+    const { firstCarouselData, secondCarouselData, active, handleActive } = useComboList();
 
     const settings = {
         infinite: true,

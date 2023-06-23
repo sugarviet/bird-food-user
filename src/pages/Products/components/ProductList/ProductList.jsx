@@ -3,17 +3,26 @@ import { Button, Space, Col, Row, Pagination } from "antd";
 import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
+import useCategories from "../../hooks/useCategories";
+import { useGetAllCategory } from "../../../../services/Category/services";
+import { useState } from "react";
 
 function ProductList() {
-  const {
-    products,
-    isProductsLoading,
-    categories,
-    isCategoriesLoading,
-  } = useProductList();
-
+  const [selectedCategory, setSelectedCategory] = useState(0)
+  
+  const { products, isProductsLoading, setType, setParam } = useProductList();
+  const { data: categories, isLoading: isCategoriesLoading } = useGetAllCategory();
+  
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
+  }
+
+  const handleSelectCategory = (categoryId) => {
+    const categoryName = categories.find(category => category._id == categoryId).categoryName
+    
+    setType('products-by-category')
+    setParam({categoryName: categoryName, page: 1})
+    setSelectedCategory(categoryId)
   }
 
   return (
@@ -32,10 +41,13 @@ function ProductList() {
         </div>
         <div className={styles.categoryContent}>
           <Space wrap>
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <Button
+                type={selectedCategory == category._id ? "primary" : "default"}
+                key={category._id}
                 size="large"
                 className={styles.textCategory}
+                onClick={() => handleSelectCategory(category._id)}
               >
                 {category.categoryName}
               </Button>

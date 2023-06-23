@@ -1,15 +1,24 @@
-import { useGetAllCategory } from "../../../services/Category/services";
-import { useGetAllBirdFood } from "../../../services/Product/services";
+import { useState } from "react";
+import { useGetAllBirdFood, useGetAllBirdFoodByCategory } from "../../../services/Product/services";
 
 function useProductList() {
+  const [type, setType] = useState('products')
+  const [param, setParam] = useState({})
 
-  const { data: products, isLoading: isProductsLoading } = useGetAllBirdFood();
-  const { data: categories, isCategoriesLoading} = useGetAllCategory()
+  const responseHandlers = {
+    'products': useGetAllBirdFood,
+    'products-by-category': useGetAllBirdFoodByCategory
+  }
+
+  const responseHandler = responseHandlers[type];
+
+  const { data: products, isLoading: isProductsLoading } = responseHandler(param);
+
   return {
     products,
     isProductsLoading,
-    categories,
-    isCategoriesLoading
+    setType,
+    setParam,
   };
 }
 
