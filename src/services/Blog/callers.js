@@ -1,14 +1,14 @@
 import axios from "axios";
 
-import { API_GET_BLOG, API_GET_SINGLE_BLOG} from "./api_path";
+import { BLOG_API} from "./api_path";
 
 export const getAllBlog = async () => {
-  const res =  await axios.get(API_GET_BLOG);
+  const res =  await axios.get(BLOG_API);
 
-  return res.data;
+  return res.data.listBlog;
 };
 export const getSingleBlogById = async (id) => {
-  const res =  await axios.get(`${API_GET_SINGLE_BLOG}/${id}`);
+  const res =  await axios.get(`${BLOG_API}/${id}`);
 
-  return res.data;
+  return res.data.blog;
 };

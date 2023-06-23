@@ -8,7 +8,6 @@ export const useGetAllBlog = () => {
     return useQuery({
         queryKey: ['blogs'],
         queryFn: () => getAllBlog(),
-
     })
 }
 export const useGetSingleBlog = (id) => {

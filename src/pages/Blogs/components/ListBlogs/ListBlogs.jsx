@@ -32,7 +32,7 @@ function ListBlogs() {
         </div>
         <Row gutter={[16, 16]}>
           {data?.map((blog) => (
-            <Col span={8} key={blog.id}>
+            <Col span={8} key={blog._id}>
               <BlogItem blog={blog} />
             </Col>
           ))}
