@@ -2,7 +2,6 @@ import { Col, Row } from "antd";
 import styles from "./ProductSingle.module.css";
 import { StarOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
-// import { useGetBirdFoodById } from '../../../../services/Product/services';
 import useProductSingle from "./hooks/useProductSingle";
 import Loading from "../../../../components/Loading";
 
@@ -36,9 +35,9 @@ function ProductSingle() {
 
           <Col span={12}>
             <div className={styles.productSingleInfo}>
-              <h3 className={`${styles.fontSizeXXL}`}>{product.name}</h3>
+              <h3 className={`${styles.fontSizeXL}`}>{product.name}</h3>
               <div
-                className={`${styles.productSingleRating} ${styles.fontSizeXL}`}
+                className={`${styles.productSingleRating} ${styles.fontSizeL}`}
               >
                 <p
                   className={`${styles.productSingleRatingStar} ${styles.marginRight4}`}
@@ -74,17 +73,17 @@ function ProductSingle() {
                 </p>
               </div>
               <p
-                className={`${styles.productSinglePrice} ${styles.fontSizeXXL}`}
+                className={`${styles.productSinglePrice} ${styles.fontSizeXL}`}
               >
                 <span>{`$ ${product.price}`}</span>
               </p>
               <p
                 style={{ color: "#808080", fontWeight: "400" }}
-                className={`${styles.fontSizeXL}`}
+                className={`${styles.fontSizeL}`}
               >
                 {product.description}
               </p>
-              <div>
+              <div className={`${styles.fontSizeL}`}>
                 <div className={`${styles.marginTop4}`}>
                   <select
                     className={`${styles.inputBox} ${styles.clickable}`}
@@ -96,7 +95,7 @@ function ProductSingle() {
                     <option value="extra large">EXTRA LARGE</option>
                   </select>
                 </div>
-                <div className={`${styles.marginTop4}`}>
+                <div className={`${styles.marginTop4} ${styles.productInputQuantity}`}>
                   <button
                     className={`${styles.inputBox} ${styles.clickable}`}
                     onClick={handleMinusButtonClick}

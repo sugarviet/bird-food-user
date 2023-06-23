@@ -2,13 +2,14 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
 import axios from "axios";
 
-import style from "./SignInForm.module.css";
-import { onFinish } from "../../hooks/useSignInForm";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import style from "./SignInForm.module.css";
+
 
 const SignInForm = () => {
-  onFinish;
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,17 +19,30 @@ const SignInForm = () => {
     baseURL: API_URL,
     withCredentials: true,
   });
-  async function handleFormSubmit() {
+  const handleFormSubmit = async () => {
     try {
-      const response = await api.post("/login", { username, password });
+      const response = await api.post("/login", {
+        username,
+        password,
+      });
+      navigate("/");
       console.log(response);
-
       // Handle successful login here, such as storing tokens in local storage or Redux state
     } catch (error) {
       // Handle error, such as displaying an error message to the user
       console.error(error);
+      if (error.response && error.response.data && error.response.data.error) {
+        const errorMessage = error.response.data.error.message;
+        form.setFields([
+          {
+            name: ["user", "email"],
+            errors: [errorMessage],
+          },
+        ]);
+      }
     }
-  }
+  };
+
   return (
     <Row className={style.daddyContainer}>
       <Col span={12}>

@@ -25,7 +25,7 @@ const carouselData = [
 ];
 
 Banner.propTypes = {
-  title: PropTypes.isRequired,
+  title: PropTypes.string.isRequired,
 };
 function Banner({
   title
