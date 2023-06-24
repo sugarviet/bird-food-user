@@ -1,5 +1,5 @@
-import { Layout, Button, Input, Tooltip } from "antd";
-import { Link } from "react-router-dom";
+import { Layout, Button, Input, Tooltip, Dropdown } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from '../../assets/logo1.png';
 
@@ -15,11 +15,44 @@ import styles from "./Navbar.module.css";
 
 import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
+import { useToken } from '../../services/Login/services'
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
+
+  const decodedToken = useToken();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (decodedToken) {
+      setLoggedIn(true);
+    }
+  }, [decodedToken]);
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    navigate('/');
+  };
+
+  const items = [
+    {
+      label: <Link to='/profile'>My Profile</Link>,
+      key: '0',
+    },
+
+    {
+      type: 'divider',
+    },
+    {
+      label: <div onClick={logout}>Log Out</div>,
+      key: '2',
+    },
+  ];
+
   const {
     isDrawerVisible,
     handleShowDrawable,
@@ -51,7 +84,7 @@ const Navbar = () => {
       <Header className={isScroll ? styles.navbarOnScroll : styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarLogo}>
-            <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo}/></Link>
+            <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo} /></Link>
           </div>
           <div className={styles.navbarAction}>
             <ul className={styles.navbarActionList}>
@@ -80,13 +113,6 @@ const Navbar = () => {
                 </Tooltip>
               </li>
               <li>
-                <Link to={'/profile'}>
-                  <Tooltip placement="bottom" title={"User's account"}>
-                    <Button icon={<UserOutlined />} shape="circle" />
-                  </Tooltip>
-                </Link>
-              </li>
-              <li>
                 <Link to={'/cart'}>
                   <Tooltip placement="bottom" title={"Cart"}>
                     <Button icon={<ShoppingCartOutlined />} shape="circle" />
@@ -94,9 +120,27 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to={'/login'}>
-                  <Button>Login</Button>
-                </Link>
+                {loggedIn ? (
+                  <Dropdown
+                    placement="bottom"
+                    menu={{
+                      items,
+                    }}
+                    trigger={['click']}
+                    overlayStyle={{
+                      top: '50.2px',
+                    }}
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Button icon={<UserOutlined />} shape="circle" />
+                    </a>
+                  </Dropdown>
+
+                ) : (
+                  <Link to={'/login'}>
+                    <Button>Login</Button>
+                  </Link>
+                )}
               </li>
             </ul>
             <Button
@@ -124,7 +168,7 @@ const Navbar = () => {
       </div>
 
       {/* Show menu when on mobile's screen */}
-        <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer}/>
+      <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer} />
     </Layout>
   );
 };
