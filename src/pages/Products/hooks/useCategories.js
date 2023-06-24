@@ -9,12 +9,12 @@ function useCategories() {
         setSelectedCategory(categoryId)
     }
 
-    return (
+    return {
         categories,
         isCategoriesLoading,
         selectedCategory,
         handleSelectCategory
-    );
+    };
 }
 
 export default useCategories;

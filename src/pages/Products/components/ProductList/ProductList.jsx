@@ -9,9 +9,10 @@ import { useState } from "react";
 
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState(0)
+  const [foods, setFoods] = useState()
   
   const { products, isProductsLoading, setType, setParam } = useProductList();
-  const { data: categories, isLoading: isCategoriesLoading } = useGetAllCategory();
+  const { data: categories, isLoading: isCategoriesLoading } = useCategories();
   
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
