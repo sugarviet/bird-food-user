@@ -4,6 +4,7 @@ import './App.css'
 import {ConfigProvider } from 'antd';
 
 import Layout from './components/Layout'
+import { UserProvider } from './store/User';
 
 function App() {
   return (
@@ -12,9 +13,11 @@ function App() {
         colorPrimary: '#3cb815'
       }
     }}>
-      <Fragment>
-        <Layout />
-      </Fragment>
+      <UserProvider>
+        <Fragment>
+          <Layout />
+        </Fragment>
+      </UserProvider>
     </ConfigProvider>
   )
 }

@@ -1,24 +1,25 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Input } from "antd";
 import { WarningOutlined } from "@ant-design/icons";
 import styles from './ValidationInput.module.css'
 
-function ValidationInput({ validateTypes, title, type }) {
-    const [value, setValue] = useState('');
+function ValidationInput({ validateTypes, title, type, value, onChange, comparator }) {
     const [isValid, setIsValid] = useState(true);
     const [message, setMessage] = useState('');
 
     const handleChange = (event) => {
-        setValue(event.target.value)
+        const newValue = event.target.value
+        onChange(newValue)
 
-        handleBlur()
+        handleBlur(newValue)
     }
 
-    const handleBlur = () => {
+    const handleBlur = (value) => {
         const validators = {
             email: validateEmail,
             phone: validatePhone,
             required: validateRequired,
+            similar: validateSimilar
         }
 
         let isValidInput = true;
@@ -26,7 +27,7 @@ function ValidationInput({ validateTypes, title, type }) {
 
         validateTypes.some(type => {
             const validator = validators[type]
-            isValidInput = validator(value)
+            isValidInput = validator(value, comparator)
 
             errorMessage = isValidInput ? '' : errorMessages[type];
             setMessage(errorMessage)
@@ -50,10 +51,15 @@ function ValidationInput({ validateTypes, title, type }) {
         return phonePattern.test(phone);
     };
 
+    const validateSimilar = (value, comparator) => {
+        return value == comparator
+    }
+
     const errorMessages = {
         required: 'Please fill in the blank, it is required',
         email: 'Please enter a valid email address (ex: birdy@gmail.com)',
         phone: 'Please enter a valid phone number (ex: 0834002706)',
+        similar: 'Do not match value'
     };
 
     return (
@@ -61,8 +67,8 @@ function ValidationInput({ validateTypes, title, type }) {
             <span className={`${styles.title}`}>{title}</span>
 
             <Input
-                onChange={handleChange}
-                onBlur={handleBlur}
+                onChange={e => handleChange(e)}
+                onBlur={e => handleBlur(e.target.value)}
                 type={type}
                 value={value}
                 className={`${styles.input}`}
