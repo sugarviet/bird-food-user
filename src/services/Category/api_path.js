@@ -1,1 +1,1 @@
-export const API_GET_CATEGORY = 'https://63609d88af66cc87dc172e0f.mockapi.io/categories';
+export const CATEGORY_API = 'http://localhost:8080/category';
