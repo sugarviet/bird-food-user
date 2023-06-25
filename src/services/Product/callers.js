@@ -16,5 +16,5 @@ export const getAllBirdFoodByCategory = async (categoryName, page) => {
 export const getBirdFoodById = async (id) => {
   const res =  await axios.get(`${PRODUCT_API}/${id}`);
   
-  return res.data;
+  return res.data.product;
 };

@@ -9,7 +9,6 @@ import { useState } from "react";
 
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState(0)
-  const [foods, setFoods] = useState()
   
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
@@ -58,7 +57,7 @@ function ProductList() {
       </div>
       <div className={styles.cardContent}>
         <Row gutter={16}>
-          {products?.map((bird) => (
+          {products.map((bird) => (
             <div className={styles.cardDetail} key={bird._id}>
               <Col span={8}>
                 <ProductCard bird={bird} />
