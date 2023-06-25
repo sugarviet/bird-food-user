@@ -1,7 +1,6 @@
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
-import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./SignUpForm.module.css";
 import { useSignUp } from "../../../../services/SignUp/services";
 

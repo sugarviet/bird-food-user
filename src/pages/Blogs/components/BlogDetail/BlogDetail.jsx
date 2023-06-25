@@ -14,6 +14,7 @@ const BlogDetail = () => {
 
   const { blog, isLoading } = useSingleBlog(blogId);
 
+
   const { Search } = Input;
   return (
     <div>
@@ -21,17 +22,19 @@ const BlogDetail = () => {
       <div className={styles.blogDetail}>
         <Row>
           <Col span={16}>
-            <div>
-              <h1 className={styles.blogTitle}>{blog?.name}</h1>
+            {/* <div>
+              <h1 className={styles.blogTitle}>{blog?.title}</h1>
               {isLoading &&
-                <LoadingBlog/>}
-              {blog?.content.split('\n').map((paragraph, index) => (
-                <div key={index}>
-                  <p className={styles.blogContent}>{paragraph}</p>
-                  {index === 0 && <img className={styles.blogImage} src={blog?.image[0]} />}
-                  {index === blog?.content.split('\n').length - 2 && <img className={styles.blogImage} src={blog?.image[1]} />}
-                </div>
-              ))}
+                <LoadingBlog />}
+              <div>
+                <p className={styles.blogContent}>{blog?.content}</p>
+                <img className={styles.blogImage} src={blog?.thumbnail} />
+              </div>
+            </div> */}
+            {isLoading &&
+              <LoadingBlog />}
+            <div className={styles.preview}>
+              <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
             </div>
             <CommentBlog />
             <Comment />
@@ -48,12 +51,15 @@ const BlogDetail = () => {
               <div className={styles.blogRightContainer}>
                 <h1 className={styles.blogRightRecent}>Recent Blog</h1>
                 <div className={styles.blogRightImageDes}>
-                  <img className={styles.blogRightImage} src={blog?.image[0]}></img>
+                  <img className={styles.blogRightImage} src={blog?.thumbnail}></img>
                   <div className={styles.blogRightTextDate}>
-                    <h3 className={styles.blogRightTitle}>{blog?.name}</h3>
+                    <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog?.date}
+                      {blog?.createdAt?.slice(0, 10)
+                        .split("-")
+                        .reverse()
+                        .join("/")}
                     </span>
                     <span className={styles.blogRightDate}>
                       <CommentOutlined className={styles.blogIcon} />
@@ -62,12 +68,15 @@ const BlogDetail = () => {
                   </div>
                 </div>
                 <div className={styles.blogRightImageDes}>
-                  <img className={styles.blogRightImage} src={blog?.image[0]}></img>
+                  <img className={styles.blogRightImage} src={blog?.thumbnail}></img>
                   <div className={styles.blogRightTextDate}>
-                    <h3 className={styles.blogRightTitle}>{blog?.name}</h3>
+                    <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog?.date}
+                      {blog?.createdAt?.slice(0, 10)
+                        .split("-")
+                        .reverse()
+                        .join("/")}
                     </span>
                     <span className={styles.blogRightDate}>
                       <CommentOutlined className={styles.blogIcon} />
@@ -76,12 +85,15 @@ const BlogDetail = () => {
                   </div>
                 </div>
                 <div className={styles.blogRightImageDes}>
-                  <img className={styles.blogRightImage} src={blog?.image[0]}></img>
+                  <img className={styles.blogRightImage} src={blog?.thumbnail}></img>
                   <div className={styles.blogRightTextDate}>
-                    <h3 className={styles.blogRightTitle}>{blog?.name}</h3>
+                    <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog?.date}
+                      {blog?.createdAt?.slice(0, 10)
+                        .split("-")
+                        .reverse()
+                        .join("/")}
                     </span>
                     <span className={styles.blogRightDate}>
                       <CommentOutlined className={styles.blogIcon} />
