@@ -12,7 +12,7 @@ function ProductList() {
   const [foods, setFoods] = useState()
   
   const { products, isProductsLoading, setType, setParam } = useProductList();
-  const { data: categories, isLoading: isCategoriesLoading } = useCategories();
+  const { categories, isCategoriesLoading } = useCategories();
   
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
