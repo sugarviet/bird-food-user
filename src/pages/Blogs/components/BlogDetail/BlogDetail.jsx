@@ -13,7 +13,7 @@ const BlogDetail = () => {
   const { blogId } = useParams();
 
   const { blog, isLoading } = useSingleBlog(blogId);
-  console.log(blog.title);
+
 
   const { Search } = Input;
   return (
@@ -22,7 +22,7 @@ const BlogDetail = () => {
       <div className={styles.blogDetail}>
         <Row>
           <Col span={16}>
-            <div>
+            {/* <div>
               <h1 className={styles.blogTitle}>{blog?.title}</h1>
               {isLoading &&
                 <LoadingBlog />}
@@ -30,6 +30,11 @@ const BlogDetail = () => {
                 <p className={styles.blogContent}>{blog?.content}</p>
                 <img className={styles.blogImage} src={blog?.thumbnail} />
               </div>
+            </div> */}
+            {isLoading &&
+              <LoadingBlog />}
+            <div className={styles.preview}>
+              <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
             </div>
             <CommentBlog />
             <Comment />
@@ -51,7 +56,7 @@ const BlogDetail = () => {
                     <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog.createdAt?.slice(0, 10)
+                      {blog?.createdAt?.slice(0, 10)
                         .split("-")
                         .reverse()
                         .join("/")}
@@ -68,7 +73,7 @@ const BlogDetail = () => {
                     <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog.createdAt?.slice(0, 10)
+                      {blog?.createdAt?.slice(0, 10)
                         .split("-")
                         .reverse()
                         .join("/")}
@@ -85,7 +90,7 @@ const BlogDetail = () => {
                     <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog.createdAt?.slice(0, 10)
+                      {blog?.createdAt?.slice(0, 10)
                         .split("-")
                         .reverse()
                         .join("/")}

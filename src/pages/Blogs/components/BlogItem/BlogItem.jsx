@@ -7,7 +7,7 @@ BlogItem.propTypes = {
   blog: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   }).isRequired,
