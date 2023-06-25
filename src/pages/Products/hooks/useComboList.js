@@ -1,8 +1,8 @@
-import { useGetAllCategory } from "../../../services/Category/services";
 import { useState } from 'react';
+import { useGetAllCombos } from '../../../services/Combo/services';
 
-function useCategoryList() {
-  const { data, isLoading } = useGetAllCategory();
+function useComboList() {
+  const { data, isLoading } = useGetAllCombos();
   
   const firstCarouselData = data?.slice(0, 8);
 
@@ -27,4 +27,4 @@ function useCategoryList() {
   };
 }
 
-export default useCategoryList;
+export default useComboList;

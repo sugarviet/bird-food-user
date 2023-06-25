@@ -17,23 +17,23 @@ function BlogItem({ blog }) {
     <div className={styles.blogItems}>
       <div>
         <div className={styles.imageBlog}>
-          <img src={blog.image[0]} />
+          <img src={blog.image} />
         </div>
         <div className={styles.titleBlog}>
-          <Link to={`/blogs/${blog.id}`} className={styles.titleBlogLink}>
-            <span>{blog.name}</span>
+          <Link to={`/blogs/${blog._id}`} className={styles.titleBlogLink}>
+            <span>{blog.title}</span>
           </Link>
         </div>
         <span className={styles.descriptionBlog_des}>
-          {blog.description}
+          {blog.content}
         </span>
       </div>
       <div className={styles.descriptionBlog}>
         <span className={styles.descriptionBlog_date}>
           <CalendarOutlined className={styles.actionIconProduct} />
-          {blog.date}
+          {blog.createAt}
         </span>
-        <Link to={`/blogs/${blog.id}`} className={styles.descriptionBlog_view}>
+        <Link to={`/blogs/${blog._id}`} className={styles.descriptionBlog_view}>
           View detail...
         </Link>
       </div>

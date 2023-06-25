@@ -1,14 +1,21 @@
 import { useQuery } from '@tanstack/react-query'
 import {
-    getAllBirdFood, getBirdFoodById
+    getAllBirdFood, getBirdFoodById, getAllBirdFoodByCategory
 } from './callers';
 
 export const useGetAllBirdFood = () => {
     return useQuery({
-        queryKey: ['birds'],
+        queryKey: ['bird-foods'],
         queryFn: () => sleep(1000).then(() => getAllBirdFood()),
     })
 }
+
+export const useGetAllBirdFoodByCategory = ({categoryName, page}) => {
+    return useQuery({
+        queryKey: ['bird-foods-by-category'],
+        queryFn: () => sleep(1000).then(() => getAllBirdFoodByCategory(categoryName, page)),
+    })
+} 
 
 export const useGetBirdFoodById = (id) => {
     return useQuery({

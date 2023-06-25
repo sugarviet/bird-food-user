@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 ProductCard.propTypes = {
     bird: PropTypes.shape({
         image: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
+        productName: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
     }).isRequired,
 };
@@ -29,7 +29,7 @@ function ProductCard({bird}) {
             }
             actions={[
                 <div className={styles.actionProduct} key={"keyId"}>
-                    <Link to={`/products/${bird.id}`} className={styles.actionDetailProduct}>
+                    <Link to={`/products/${bird._id}`} className={styles.actionDetailProduct}>
                         <EyeTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
                         <p className={styles.actionTextProduct}>View detail</p>
                     </Link>
@@ -43,7 +43,7 @@ function ProductCard({bird}) {
         >
 
             <Meta
-                title={<p className={styles.titleProduct}>{bird?.name}</p>}
+                title={<p className={styles.titleProduct}>{bird?.productName}</p>}
                 description={
                     <div className={styles.titlePrice}>
                         <p className={styles.priceProduct}>${bird?.price}</p>
