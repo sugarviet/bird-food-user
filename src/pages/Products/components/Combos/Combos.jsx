@@ -1,9 +1,8 @@
 import { Carousel } from 'antd';
-import styles from './ProductCategory.module.css';
+import styles from './Combos.module.css';
 import useComboList from '../../hooks/useComboList';
 
-
-const ProductCategory = () => {
+const Combos = () => {
     const { firstCarouselData, secondCarouselData, active, handleActive } = useComboList();
 
     const settings = {
@@ -12,7 +11,7 @@ const ProductCategory = () => {
         dots: true,
         draggable: true,
     };
-
+    
     return (
         <div className={styles.mealCategory}>
                 <Carousel {...settings}>
@@ -54,4 +53,4 @@ const ProductCategory = () => {
 
     )
 }
-export default ProductCategory;
+export default Combos;
