@@ -1,43 +1,26 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Card, Checkbox, Col, Form, Input, Row } from "antd";
-
-import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import style from "./SignInForm.module.css";
+import { useLogin } from "../../../../services/Login/services";
 
 const SignInForm = () => {
-  const navigate = useNavigate();
+
+  const { mutate } = useLogin();
   const [form] = Form.useForm();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const API_URL = "http://localhost:8080";
-
-  const api = axios.create({
-    baseURL: API_URL,
-    withCredentials: true,
-  });
   const handleFormSubmit = async () => {
     try {
-      const response = await api.post("/login", {
-        username,
-        password,
-      });
-      navigate("/");
-      console.log(response);
-      // Handle successful login here, such as storing tokens in local storage or Redux state
+      mutate({ username, password });
     } catch (error) {
-      // Handle error, such as displaying an error message to the user
       console.error(error);
-      if (error.response && error.response.data && error.response.data.error) {
-        const errorMessage = error.response.data.error.message;
-        form.setFields([
-          {
-            name: ["user", "email"],
-            errors: [errorMessage],
-          },
-        ]);
+      if (error.isAxiosError && error.response && error.response.status === 404) {
+        const errorMessage = error.response.statusText;
+        // Xử lý lỗi, ví dụ: hiển thị thông báo lỗi cho người dùng
+        console.log(errorMessage);
       }
     }
   };
