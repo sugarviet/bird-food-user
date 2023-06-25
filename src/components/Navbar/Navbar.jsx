@@ -127,10 +127,7 @@ const Navbar = () => {
                       items,
                     }}
                     trigger={['click']}
-                    overlayStyle={{
-                      top: '50.2px',
-                    }}
-                  >
+                    >
                     <a onClick={(e) => e.preventDefault()}>
                       <Button icon={<UserOutlined />} shape="circle" />
                     </a>

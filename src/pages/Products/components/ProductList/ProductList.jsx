@@ -42,7 +42,7 @@ function ProductList() {
         </div>
         <div className={styles.categoryContent}>
           <Space wrap>
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <Button
                 type={selectedCategory == category._id ? "primary" : "default"}
                 key={category._id}
