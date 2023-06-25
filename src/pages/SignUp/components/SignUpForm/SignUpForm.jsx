@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./SignUpForm.module.css";
+import { useSignUp } from "../../../../services/SignUp/services";
 
 const formItemLayout = {
   labelCol: {
@@ -36,7 +37,8 @@ const tailFormItemLayout = {
 };
 
 const SignUpForm = () => {
-  const navigate = useNavigate();
+
+  const { mutate } = useSignUp();
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,38 +47,33 @@ const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
 
-  const API_URL = "http://localhost:8080";
 
-  const api = axios.create({
-    baseURL: API_URL,
-    withCredentials: true,
-  });
   const handleFormSubmit = async () => {
     try {
-      const response = await api.post("/register", {
-        username,
-        fullName,
-        email,
-        phone,
-        password,
-        confirmPassword,
-      });
-      navigate("/login");
-      console.log(response);
-      // Handle successful login here, such as storing tokens in local storage or Redux state
+      mutate({ username, fullName, email, phone, password, confirmPassword });
     } catch (error) {
       // Handle error, such as displaying an error message to the user
       console.error(error);
-      if (error.response && error.response.data && error.response.data.error) {
-        const errorMessage = error.response.data.error.message;
-        form.setFields([
-          {
-            name: ["user", "email"],
-            errors: [errorMessage],
-          },
-        ]);
-      }
+      //   if (error.response && error.response.data && error.response.data.error) {
+      //     const errorMessage = error.response.data.error.message;
+      //     form.setFields([
+      //       {
+      //         name: ["username"],
+      //         errors: [errorMessage],
+      //       },
+      //     ]);
+      //   }
     }
+  };
+  const validatePassword = (_, value) => {
+    if (!value) {
+      return Promise.reject('Please input your password!');
+    }
+    if (!/(?=.*[A-Z])(?=.*\d).{8,}/.test(value)) {
+      return Promise.reject('Password must contain at least one uppercase letter (A-Z), one digit, and be at least 8 characters long.');
+    }
+
+    return Promise.resolve();
   };
 
   return (
@@ -148,7 +145,7 @@ const SignUpForm = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please input your password!",
+                    validator: validatePassword,
                   },
                 ]}
                 hasFeedback
