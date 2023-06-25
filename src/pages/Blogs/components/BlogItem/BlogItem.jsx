@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 BlogItem.propTypes = {
   blog: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
@@ -17,7 +17,7 @@ function BlogItem({ blog }) {
     <div className={styles.blogItems}>
       <div>
         <div className={styles.imageBlog}>
-          <img src={blog.image} />
+          <img src={blog.thumbnail} />
         </div>
         <div className={styles.titleBlog}>
           <Link to={`/blogs/${blog._id}`} className={styles.titleBlogLink}>
@@ -31,7 +31,10 @@ function BlogItem({ blog }) {
       <div className={styles.descriptionBlog}>
         <span className={styles.descriptionBlog_date}>
           <CalendarOutlined className={styles.actionIconProduct} />
-          {blog.createAt}
+          {blog.createdAt?.slice(0, 10)
+            .split("-")
+            .reverse()
+            .join("/")}
         </span>
         <Link to={`/blogs/${blog._id}`} className={styles.descriptionBlog_view}>
           View detail...
