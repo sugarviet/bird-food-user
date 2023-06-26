@@ -1,15 +1,33 @@
+import jwtDecode from 'jwt-decode';
+import { getUserByUserName } from '../../services/User/callers';
+
 const SET_NAME = 'set_name'
 const SET_PHONE = 'set_phone'
 
-
-const initState = {
-    username: 'pokemon',
-    fullName: 'Doan Gia Bao',
-    email: 'doangiabao@gmail.com',
-    phone: '0834002706',
+const defaultUser = {
+    username: 'username',
+    fullName: 'User Full Name',
+    email: 'username@gmail.com',
+    phone: '0123456789',
     selectedCombo: [],
     selectedItems: [],
     addresses: []
+}
+
+const initState =  getInitState()
+
+function getInitState() {
+    const token = localStorage.getItem('token');
+
+    if(!token) return defaultUser
+
+    // const decodedToken = jwtDecode(token);
+
+    // const data = getUserByUserName(decodedToken.username)
+    // console.log(data)
+
+    // return data
+    return defaultUser
 }
 
 const setName = payload => ({

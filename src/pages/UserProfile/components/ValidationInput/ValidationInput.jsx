@@ -18,8 +18,9 @@ function ValidationInput({ validateTypes, title, type, value, onChange, comparat
         const validators = {
             email: validateEmail,
             phone: validatePhone,
+            password: validatePassword,
+            similar: validateSimilar,
             required: validateRequired,
-            similar: validateSimilar
         }
 
         let isValidInput = true;
@@ -55,10 +56,16 @@ function ValidationInput({ validateTypes, title, type, value, onChange, comparat
         return value == comparator
     }
 
+    const validatePassword = (password) => {
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/
+        return passwordPattern.test(password)
+    }
+
     const errorMessages = {
         required: 'Please fill in the blank, it is required',
         email: 'Please enter a valid email address (ex: birdy@gmail.com)',
         phone: 'Please enter a valid phone number (ex: 0834002706)',
+        password: 'Password must contain at least one lowercase, uppercase letter, a digit and at minimum length of 8',
         similar: 'Do not match value'
     };
 

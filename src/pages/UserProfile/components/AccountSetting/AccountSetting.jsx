@@ -1,16 +1,33 @@
 import { Input, Col, Row } from 'antd';
 import styles from './AccountSetting.module.css'
 import ValidationInput from '../ValidationInput';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../../store/User';
 import { setName, setPhone } from '../../../../store/User/Reducer';
+
 
 function AccountSetting() {
     const [user, dispatch] = useContext(UserContext)
 
-    const handleSubmit = () => {
+    const handleSubmit = async (value) => {
         // TODO call API to PUT user information
+        
     }
+
+    useEffect(() => {
+        const handleStoreData = () => {
+            const stringData = JSON.stringify(user)
+            sessionStorage.setItem('user', stringData)
+        }
+
+        window.addEventListener('beforeunload', handleStoreData)
+
+        return () => {
+            handleStoreData()
+            window.removeEventListener('beforeunload', handleStoreData)
+        }
+
+    },[])
 
     return (
         <div className={`${styles.wrapper}`}>

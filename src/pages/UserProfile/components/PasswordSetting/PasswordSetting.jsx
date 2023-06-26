@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import ValidationInput from '../ValidationInput';
 import styles from './PasswordSetting.module.css'
-import { Row, Col, Input } from 'antd';
+import { Row, Col } from 'antd';
+import { useUpdateUserPassword } from '../../../../services/User/services';
 
 function PasswordSetting() {
     const [curPassword, setCurPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-    const handleSubmit = () => {
-        // TODO call API to Change Password
+    const {mutate: updatePassword} = useUpdateUserPassword()
+
+    const handleSubmit = async () => {
+        updatePassword({curPassword, newPassword})
+        // TODO toast here
     }
 
     return (
@@ -18,12 +22,12 @@ function PasswordSetting() {
             <div>
                 <Row>
                     <Col span={24}>
-                        <ValidationInput onChange={value => setCurPassword(value)} value={curPassword} validateTypes={['required']} title='Current password'/>
+                        <ValidationInput onChange={value => setCurPassword(value)} type={'password'} value={curPassword} validateTypes={['required']} title='Current password'/>
                     </Col>
                 </Row>
                 <Row>
                     <Col span={24}>
-                        <ValidationInput onChange={value => setNewPassword(value)} type={'password'} value={newPassword} validateTypes={['required']} title='New password'/>
+                        <ValidationInput onChange={value => setNewPassword(value)} type={'password'} value={newPassword} validateTypes={['required', 'password']} title='New password'/>
                     </Col>
                 </Row>
                 <Row>
@@ -32,7 +36,7 @@ function PasswordSetting() {
                     </Col>
                 </Row>
             </div>
-            <button className={`${styles.updateBtn}`}>Change password</button>
+            <button onClick={handleSubmit} className={`${styles.updateBtn}`}>Change password</button>
         </div>
     );
 }
