@@ -77,7 +77,7 @@ const ContactUsContent = () => {
             <div className={styles.googlemap}>
                 <iframe style={{ height: '450px', width: '1320px' }}
                     src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3918.6099415304902!2d106.80730807476709!3d10.84113285799739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1685946889313!5m2!1sen!2s"
-                    frameBorder="0" allowfullscreen="" aria-hidden="false" tabIndex="0"></iframe>
+                    frameBorder="0" allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>
             </div>
         </div>
     )

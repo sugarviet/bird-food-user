@@ -8,16 +8,21 @@ import { useEffect, useState } from "react";
 
 const { Panel } = Collapse
 
-function ReviewOrder({ shippingInputList, selectedProducts }) {
+function ReviewOrder({ shippingInputList, cartItems }) {
     const [total, setTotal] = useState(0)
+    const [data, setData] = useState(cartItems);
 
     useEffect(() => {
-        var result = selectedProducts.reduce((total, current) => {
+        var result = data.reduce((total, current) => {
             return total + current.quantity * current.price;
         }, 0)
 
         setTotal(result)
-    }, [selectedProducts])
+    }, [data])
+
+    const handleDeleteProduct = (newProducts) => {
+        setData(newProducts);
+      };
 
     return (
         <Row style={{ margin: '2rem 0', padding: '0 4rem' }} gutter={16}>
@@ -44,7 +49,7 @@ function ReviewOrder({ shippingInputList, selectedProducts }) {
                         header="Cart Details"
                         className={`${styles.panel}`}
                     >
-                        <ProductTable products={selectedProducts} />
+                        <ProductTable products={data} onDeleteProduct={handleDeleteProduct}/>
                     </Panel>
                 </Collapse>
 
@@ -75,9 +80,9 @@ function ReviewOrder({ shippingInputList, selectedProducts }) {
                             <td>Product</td>
                             <td>Total</td>
                         </tr>
-                        {selectedProducts.map(product => {
+                        {data.map(product => {
                             <tr>
-                                <td>{product.name}</td>
+                                <td>{product.productName}</td>
                                 <td>{`$ ${product.quantity * product.price}`}</td>
                             </tr>
                         })}

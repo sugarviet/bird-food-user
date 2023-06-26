@@ -1,8 +1,7 @@
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col, notification } from "antd";
 import styles from "./Cart.module.css";
 import { SendOutlined } from "@ant-design/icons";
-
-
+import { useNavigate } from "react-router-dom";
 import useCart from "./hooks/useCart";
 import CartItems from "./components/CartItems";
 
@@ -10,6 +9,21 @@ const Cart = () => {
   const { calculateTotalPrice, items, removeFromCart, updateQuantity } =
     useCart();
 
+  const navigate = useNavigate();
+  const handleCheckout = () => {
+    if (items.length > 0) {
+      navigate("/cart/checkout", { state: { data: items } });
+    } else {
+      openNotification();
+    }
+  };
+  const openNotification = (productName) => {
+    notification.open({
+      message: 'Checkout error',
+      description: `Your cart is empty !`,
+      duration: 2,
+    });
+  }
   return (
     <section className={styles.shoppingCartContainer}>
       <div className={styles.shoppingCart}>
@@ -43,7 +57,7 @@ const Cart = () => {
             <span>Total Price:</span>
             <span className={styles.priceValue}>${calculateTotalPrice()}</span>
           </div>
-          <Button type="primary" className={styles.checkoutButton}>
+          <Button type="primary" className={styles.checkoutButton} onClick={() => handleCheckout()}>
             Proceed to Checkout <SendOutlined />
           </Button>
         </div>

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router";
 import BreadcrumbBanner from "../../components/Breadcrumb";
 import ReviewOder from "./components/ReviewOrder";
-import {UserOutlined, AimOutlined, PhoneOutlined, MailOutlined} from '@ant-design/icons'
+import { UserOutlined, AimOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons'
 import { Fragment } from "react";
 
 
@@ -30,24 +30,9 @@ const shippingInputList = [
     },
 ]
 
-const selectedProducts = [
-    {
-        name: "Straight Bird Foods",
-        price: 25,
-        image: 'https://i.ibb.co/SVhGw6v/Straight-Bird-Foods.png',
-        quantity: 2,
-    },
-    {
-        name: "Straight Bird Foods",
-        price: 25,
-        image: 'https://i.ibb.co/SVhGw6v/Straight-Bird-Foods.png',
-        quantity: 2,
-    },
-]
-
 function CheckOut() {
     const location = useLocation();
-
+    const { data } = location.state;
     return (
         <Fragment>
             <BreadcrumbBanner
@@ -56,9 +41,9 @@ function CheckOut() {
                 pathName={location.pathname}
             />
 
-            <ReviewOder 
+            <ReviewOder
                 shippingInputList={shippingInputList}
-                selectedProducts={selectedProducts}
+                cartItems={data}
             />
         </Fragment>
     );

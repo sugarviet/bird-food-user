@@ -1,21 +1,31 @@
 import PropTypes from 'prop-types';
 import { Col, Row } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-
+import { useState } from 'react';
 import styles from './ProductTable.module.css'
 
 ProductTable.propTypes = {
     products: PropTypes.arrayOf(
         PropTypes.shape({
             image: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
+            productName: PropTypes.string.isRequired,
             price: PropTypes.number.isRequired,
             quantity: PropTypes.number.isRequired
         })
-    )
+    ).isRequired,
 };
 
-function ProductTable({ products }) {
+
+function ProductTable({ products,onDeleteProduct }) {
+
+    const [updatedProducts, setUpdatedProducts] = useState(products);
+
+    const handleDeleteProduct = (index) => {
+        const newProducts = [...updatedProducts];
+        newProducts.splice(index, 1);
+        setUpdatedProducts(newProducts);
+        onDeleteProduct(newProducts);
+    };
     return (
         <>
             <Row className={`${styles.productWrapperHeader}`}>
@@ -45,10 +55,10 @@ function ProductTable({ products }) {
                 </Col>
             </Row>
 
-            {products.map(product => {
-                <Row className={`${styles.productWrapper}`}>
+            {updatedProducts.map((product, index) => (
+                <Row className={`${styles.productWrapper}`} key={index}>
                     <Col span={2}>
-                        <a className={`${styles.remove}`}><DeleteOutlined /></a>
+                        <a className={`${styles.remove}`} onClick={() => handleDeleteProduct(index)} ><DeleteOutlined /></a>
                     </Col>
                     <Col span={2}>
                         <div className={styles.flexCenter}>
@@ -57,7 +67,7 @@ function ProductTable({ products }) {
                     </Col>
                     <Col span={8}>
                         <div className={`${styles.flexCol}`}>
-                            <span className={`${styles.textCenter}`}>{product.name}</span>
+                            <span className={`${styles.textCenter}`}>{product.productName}</span>
                             <span className={`${styles.textCenter} ${styles.textNormal}`}>{product.description}</span>
                         </div>
                     </Col>
@@ -77,7 +87,7 @@ function ProductTable({ products }) {
                         </div>
                     </Col>
                 </Row>
-            })}
+            ))}
         </>
     );
 }
