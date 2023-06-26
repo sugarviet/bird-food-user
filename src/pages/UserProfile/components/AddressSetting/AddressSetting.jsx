@@ -2,6 +2,7 @@ import { Row, Col } from 'antd';
 import styles from './AddressSetting.module.css'
 import AddressCard from '../AddressCard';
 import { useEffect, useState } from 'react';
+import AddressForm from '../AddressForm';
 
 const addressesProp = [
     {
@@ -40,6 +41,7 @@ function AddressSetting() {
                     </Col>
                 )}
             </Row>
+            <AddressForm/>
         </div>
     );
 }

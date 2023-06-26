@@ -8,8 +8,8 @@ export const getUserByUserName = async (username) => {
   return res.data.user
 }
 
-export const updatePassword = async ({currentPassword, newPassword}) => {
+export const updateProfile = async (body) => {
   const res =  await axios.create({withCredentials: true,})
-                          .put(USER_API, {type: 'password', currentPassword, newPassword});
+                          .put(USER_API, body);
   return res.data
 }

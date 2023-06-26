@@ -4,14 +4,17 @@ import ValidationInput from '../ValidationInput';
 import { useContext, useEffect } from 'react';
 import { UserContext } from '../../../../store/User';
 import { setName, setPhone } from '../../../../store/User/Reducer';
+import { useUpdateUserProfile } from '../../../../services/User/services';
 
 
 function AccountSetting() {
     const [user, dispatch] = useContext(UserContext)
 
-    const handleSubmit = async (value) => {
-        // TODO call API to PUT user information
-        
+    const {mutate:updateUserProfile} = useUpdateUserProfile()
+
+    const handleSubmit = async (e) => {
+        updateUserProfile({type: 'userProfile', fullName: user.fullName, phone: user.phone})
+        //TODO show toast here
     }
 
     useEffect(() => {
@@ -76,6 +79,8 @@ function AccountSetting() {
                 </Row>
             </div>
             <button onClick={handleSubmit} className={`${styles.updateBtn}`}>Update information</button>
+        
+            
         </div>
     );
 }

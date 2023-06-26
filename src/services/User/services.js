@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
     getUserByUserName,
-    updatePassword
+    updateProfile
 } from './callers';
 
 
@@ -12,19 +12,19 @@ export const useGetUserByUserName = (username) => {
     })
 }
 
-export const useUpdateUserPassword = () => {
+export const useUpdateUserProfile = () => {
     const queryClient = useQueryClient();
-  
-    return useMutation(updatePassword, {
+
+    return useMutation(updateProfile, {
       onSuccess: () => {
         notification.success({
-          message: "Update password successfully",
+          message: "Update successfully",
         });
         queryClient.invalidateQueries('user');
       },
       onError: () => {
         notification.error({
-          message: "change password failed",
+          message: "update fail",
           description: "Server is not responding now",
         });
       },
