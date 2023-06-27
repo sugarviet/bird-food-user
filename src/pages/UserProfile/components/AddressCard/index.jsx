@@ -1,1 +1,1 @@
-export {default} from './AddressCard'
+export { default } from "./AddressCard";

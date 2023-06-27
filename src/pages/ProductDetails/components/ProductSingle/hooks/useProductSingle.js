@@ -1,34 +1,31 @@
-import { useState } from 'react';
-import { useGetBirdFoodById } from '../../../../../services/Product/services';
+import { useState } from "react";
+import { useGetBirdFoodById } from "../../../../../services/Product/services";
 
-function useProductSingle(id)
-{
-    const {data: product, isLoading} = useGetBirdFoodById(id);
+function useProductSingle(id) {
+  const { data: product, isLoading } = useGetBirdFoodById(id);
 
-    const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
-    const handlePlusButtonClick = () => {
-        setQuantity(quantity + 1);
-    }
+  const handlePlusButtonClick = () => {
+    setQuantity(quantity + 1);
+  };
 
-    const handleMinusButtonClick = () => {
-        if(quantity <= 1) return;
+  const handleMinusButtonClick = () => {
+    if (quantity <= 1) return;
 
-        setQuantity(quantity - 1);
-    }
+    setQuantity(quantity - 1);
+  };
 
-    const handleSizeSelectionChange = () => {
-    
-    }
+  const handleSizeSelectionChange = () => {};
 
-    return {
-        product,
-        quantity,
-        handlePlusButtonClick,
-        handleMinusButtonClick,
-        handleSizeSelectionChange,
-        isLoading
-    }
+  return {
+    product,
+    quantity,
+    handlePlusButtonClick,
+    handleMinusButtonClick,
+    handleSizeSelectionChange,
+    isLoading,
+  };
 }
 
-export default useProductSingle
+export default useProductSingle;

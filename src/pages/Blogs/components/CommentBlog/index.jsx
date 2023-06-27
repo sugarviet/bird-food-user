@@ -1,1 +1,1 @@
-export {default} from './CommentBlog'
+export { default } from "./CommentBlog";

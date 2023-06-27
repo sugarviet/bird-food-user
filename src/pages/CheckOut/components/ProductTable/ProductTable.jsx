@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Col, Row } from "antd";
 import styles from './ProductTable.module.css'
 
@@ -15,15 +15,6 @@ ProductTable.propTypes = {
 
 
 function ProductTable({ products }) {
-
-    // const [updatedProducts, setUpdatedProducts] = useState(products);
-
-    // const handleDeleteProduct = (index) => {
-    //     const newProducts = [...updatedProducts];
-    //     newProducts.splice(index, 1);
-    //     setUpdatedProducts(newProducts);
-    //     onDeleteProduct(newProducts);
-    // };
     return (
         <>
             <Row className={`${styles.productWrapperHeader}`}>

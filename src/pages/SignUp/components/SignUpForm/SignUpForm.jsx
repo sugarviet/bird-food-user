@@ -36,7 +36,6 @@ const tailFormItemLayout = {
 };
 
 const SignUpForm = () => {
-
   const { mutate } = useSignUp();
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
@@ -45,7 +44,6 @@ const SignUpForm = () => {
   const [phone, setPhone] = useState("");
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
-
 
   const handleFormSubmit = async () => {
     try {
@@ -66,10 +64,12 @@ const SignUpForm = () => {
   };
   const validatePassword = (_, value) => {
     if (!value) {
-      return Promise.reject('Please input your password!');
+      return Promise.reject("Please input your password!");
     }
     if (!/(?=.*[A-Z])(?=.*\d).{8,}/.test(value)) {
-      return Promise.reject('Password must contain at least one uppercase letter (A-Z), one digit, and be at least 8 characters long.');
+      return Promise.reject(
+        "Password must contain at least one uppercase letter (A-Z), one digit, and be at least 8 characters long."
+      );
     }
 
     return Promise.resolve();

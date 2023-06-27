@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { login } from "./callers";
 import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
-import jwtDecode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export const useLogin = () => {
       notification.success({
         message: "Login successfully",
       });
-      navigate('/');
+      navigate("/");
     },
     onError: () => {
       notification.error({
@@ -24,13 +24,13 @@ export const useLogin = () => {
 };
 export const useToken = () => {
   const { data: decodedToken } = useQuery({
-    queryKey: ['decodedToken'],
+    queryKey: ["decodedToken"],
     queryFn: () => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (token) {
         return jwtDecode(token);
       }
-    }
+    },
   });
   return decodedToken;
 };
