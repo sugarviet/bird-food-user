@@ -17,20 +17,20 @@ function AccountSetting() {
         //TODO show toast here
     }
 
-    useEffect(() => {
-        const handleStoreData = () => {
-            const stringData = JSON.stringify(user)
-            sessionStorage.setItem('user', stringData)
-        }
+    // useEffect(() => {
+    //     const handleStoreData = () => {
+    //         const stringData = JSON.stringify(user)
+    //         sessionStorage.setItem('user', stringData)
+    //     }
 
-        window.addEventListener('beforeunload', handleStoreData)
+    //     window.addEventListener('beforeunload', handleStoreData)
 
-        return () => {
-            handleStoreData()
-            window.removeEventListener('beforeunload', handleStoreData)
-        }
+    //     return () => {
+    //         handleStoreData()
+    //         window.removeEventListener('beforeunload', handleStoreData)
+    //     }
 
-    },[])
+    // },[])
 
     return (
         <div className={`${styles.wrapper}`}>

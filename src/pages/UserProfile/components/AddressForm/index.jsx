@@ -48,7 +48,8 @@ function AddressForm( {callback, handleCloseForm} ) {
                 ward_name: ward.name,
                 isDefault: false
             }
-            )
+        )
+        handleCloseForm()
     }
 
     // if(isProvincesLoading || isCitiesLoading) return <Loading/>

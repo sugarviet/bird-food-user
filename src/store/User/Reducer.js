@@ -1,34 +1,8 @@
-import jwtDecode from 'jwt-decode';
-import { getUserByUserName } from '../../services/User/callers';
 
 const SET_NAME = 'set_name'
 const SET_PHONE = 'set_phone'
-
-const defaultUser = {
-    username: 'username',
-    fullName: 'User Full Name',
-    email: 'username@gmail.com',
-    phone: '0123456789',
-    selectedCombo: [],
-    selectedItems: [],
-    addresses: []
-}
-
-const initState =  getInitState()
-
-function getInitState() {
-    const token = localStorage.getItem('token');
-
-    if(!token) return defaultUser
-
-    // const decodedToken = jwtDecode(token);
-
-    // const data = getUserByUserName(decodedToken.username)
-    // console.log(data)
-
-    // return data
-    return defaultUser
-}
+const SET_INIT_STATE = 'set_init_state'
+const SET_ADDRESSES = 'set_addresses'
 
 const setName = payload => ({
     type: SET_NAME,
@@ -40,8 +14,20 @@ const setPhone = payload => ({
     payload: payload
 })
 
+const setAddresses = payload => ({
+    type: SET_ADDRESSES,
+    payload: payload
+})
+
+const setInitState = payload => ({
+    type: SET_INIT_STATE,
+    payload: payload,
+})
+
 const reducer = (state, action) => {
     switch(action.type) {
+        case SET_INIT_STATE:
+            return action.payload
         case SET_NAME:
             return {
                 ...state,
@@ -52,10 +38,15 @@ const reducer = (state, action) => {
                 ...state,
                 phone: action.payload
             }
+        case SET_ADDRESSES:
+            return {
+                ...state,
+                addresses: action.payload
+            }
         default:
             throw new Error('Invalid Action')
     }
 }
 
-export {initState, setName, setPhone}
+export {setInitState, setName, setPhone, setAddresses}
 export default reducer
