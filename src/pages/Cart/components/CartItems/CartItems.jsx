@@ -1,4 +1,4 @@
-import { List, Button, Input,notification } from "antd";
+import { List, Button, Input, notification } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
@@ -7,7 +7,7 @@ import styles from "./CartItems.module.css";
 const CartItem = ({ items, removeFromCart, updateQuantity }) => {
   const openNotification = (name) => {
     notification.success({
-      message: 'Successfully deleted ' ,
+      message: 'Successfully deleted ',
       description: `Delete ${name} `,
       duration: 2,
     });
@@ -57,7 +57,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   if (value !== 0) {
                     updateQuantity(item.id, value);
                   } else {
-                    updateQuantity(item.id, 1); // Thiết lập số lượng là 1 nếu giá trị nhập vào là 0
+                    updateQuantity(item.id, 1);
                   }
                 }}
                 min={1}

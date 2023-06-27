@@ -11,7 +11,7 @@ function ProductList() {
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
 
-  console.log(products);
+  // console.log(products);
 
   const handleSelectCategory = (categoryId) => {
     const categoryName = categories.find(
@@ -23,7 +23,7 @@ function ProductList() {
     setSelectedCategory(categoryId);
   };
 
-  console.log(isProductsLoading, isCategoriesLoading);
+  // console.log(isProductsLoading, isCategoriesLoading);
 
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;

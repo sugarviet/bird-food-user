@@ -15,17 +15,30 @@ ProductCard.propTypes = {
 };
 
 function ProductCard({ bird }) {
+
   const { Meta } = Card;
   const addToCart = useProductToCart();
+
   const handleAddToCart = () => {
-    addToCart(bird);
-    openNotification(bird.productName);
+    try {
+      addToCart(bird);
+      openNotification(bird.productName);
+    } catch (error) {
+      openNotificationError(error.message)
+    }
   };
 
   const openNotification = (productName) => {
     notification.success({
       message: 'Successfully added',
       description: `${productName}  has been added to cart.`,
+      duration: 2,
+    });
+  };
+  const openNotificationError = (productName) => {
+    notification.error({
+      message: 'Error',
+      description: `You have reached the maximum quantity available for ${productName}.`,
       duration: 2,
     });
   };

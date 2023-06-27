@@ -6,16 +6,9 @@ const Combos = () => {
   const { firstCarouselData, secondCarouselData, active, handleActive } =
     useComboList();
 
-  const settings = {
-    infinite: true,
-    speed: 800,
-    dots: true,
-    draggable: true,
-  };
-
   return (
     <div className={styles.mealCategory}>
-      <Carousel {...settings}>
+      <Carousel>
         <div className={styles.mealWrapper}>
           {firstCarouselData?.map((data) => (
             <div key={data.id}>
@@ -45,17 +38,6 @@ const Combos = () => {
           ))}
         </div>
       </Carousel>
-      <style>
-        {`
-                    .ant-carousel .slick-dots li button {
-                        margin-top: 50px;
-                        background-color: #3cb815 !important;
-                    }
-                    .ant-carousel .slick-dots-bottom{
-                        right:150px;
-                    }
-                `}
-      </style>
     </div>
   );
 };
