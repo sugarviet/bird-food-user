@@ -8,7 +8,6 @@ import { useState } from "react";
 
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState(0);
-
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
 

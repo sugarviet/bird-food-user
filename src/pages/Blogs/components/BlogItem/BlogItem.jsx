@@ -3,17 +3,9 @@ import PropTypes from "prop-types";
 import styles from "./BlogItem.module.css";
 import { Link } from "react-router-dom";
 
-BlogItem.propTypes = {
-  blog: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-  }).isRequired,
-};
+
 function BlogItem({ blog }) {
+
   return (
     <div className={styles.blogItems}>
       <div>
@@ -25,7 +17,7 @@ function BlogItem({ blog }) {
             <span>{blog.title}</span>
           </Link>
         </div>
-        <span className={styles.descriptionBlog_des}>{blog.content}</span>
+        <span className={styles.descriptionBlog_des}>{blog.description}</span>
       </div>
       <div className={styles.descriptionBlog}>
         <span className={styles.descriptionBlog_date}>
@@ -39,4 +31,13 @@ function BlogItem({ blog }) {
     </div>
   );
 }
+BlogItem.propTypes = {
+  blog: PropTypes.shape({
+    _id: PropTypes.string,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    createdAt: PropTypes.string,
+  }).isRequired,
+};
 export default BlogItem;

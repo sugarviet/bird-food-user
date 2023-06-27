@@ -1,10 +1,17 @@
-import { List, Button, Input } from "antd";
+import { List, Button, Input,notification } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 import styles from "./CartItems.module.css";
 
 const CartItem = ({ items, removeFromCart, updateQuantity }) => {
+  const openNotification = (name) => {
+    notification.success({
+      message: 'Successfully deleted ' ,
+      description: `Delete ${name} `,
+      duration: 2,
+    });
+  }
   return (
     <div>
       <List
@@ -17,21 +24,23 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   type="ghost"
                   shape="circle"
                   className={styles.deleteIcon}
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => {
+                    openNotification(item.productName);
+                    removeFromCart(item.id);
+                  }}
                 >
-                  <CloseOutlined style={{ color: "red" }} />
+                  <CloseOutlined style={{ color: 'red' }} />
                 </Button>
                 <div className={styles.productInfo}>
                   <div className={styles.imgWrapper}>
                     <img
-                      src="https://images.thdstatic.com/productImages/3c373a6d-5ae6-45ec-ab29-6bd404bfb1b9/svn/pennington-bird-seed-food-100542054-64_600.jpg"
+                      src={item.image}
                       alt=""
                     />
                   </div>
                   <div className={styles.itemName}>
                     <small>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Fuga, minus alias! Suscipit
+                      {item.productName}
                     </small>
                   </div>
                 </div>
@@ -43,9 +52,14 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                 className={styles.quantityInput}
                 type="number"
                 value={item.quantity}
-                onChange={(e) =>
-                  updateQuantity(item.id, parseInt(e.target.value, 10))
-                }
+                onChange={(e) => {
+                  const value = parseInt(e.target.value, 10);
+                  if (value !== 0) {
+                    updateQuantity(item.id, value);
+                  } else {
+                    updateQuantity(item.id, 1); // Thiết lập số lượng là 1 nếu giá trị nhập vào là 0
+                  }
+                }}
                 min={1}
                 onBlur={(e) => {
                   if (e.target.value.trim() === "") {
@@ -55,7 +69,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
               />
             </div>
             <div className={styles.cartItemControls}>
-              <p className={styles.itemPrice}>${item.price}</p>
+              <p className={styles.itemPrice}>{item.price.toLocaleString()} VND</p>
             </div>
           </List.Item>
         )}

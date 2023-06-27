@@ -66,16 +66,17 @@
 
 .cartColumnsTitle {
   font-weight: bold;
+  margin-left: 8em;
 }
 
 .cartColumnsQuantity {
   font-weight: bold;
   text-align: center;
-  margin-right: 10em;
+  margin-right: 14em;
 }
 
 .cartColumnsPrice {
-  text-align: end;
+  text-align: center;
   font-weight: bold;
 }
 
