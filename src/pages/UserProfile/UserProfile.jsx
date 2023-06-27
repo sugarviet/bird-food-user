@@ -1,4 +1,4 @@
-import { Row, Col, Tabs } from "antd";
+import { Row, Col } from "antd";
 import { Fragment, useState } from "react";
 import Banner from "../../components/Banner";
 import TabSetting from "./components/TabSetting/TabSetting";

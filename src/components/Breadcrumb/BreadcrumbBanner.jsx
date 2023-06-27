@@ -26,7 +26,7 @@ function BreadcrumbBanner({ backgroundImage, title, pathName }) {
                                 , [{title: <Link to='/'>Home</Link>}])   
                                 
         setBreadcrumbItems(items)
-    }, [])
+    }, [pathName])
 
     return (
         <Fragment>

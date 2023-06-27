@@ -2,6 +2,17 @@ import styles from './AddressCard.module.css'
 import { Tag } from 'antd';
 import { CheckOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
+AddressCard.propTypes = {
+    address: PropTypes.shape({
+        street: PropTypes.string,
+        city: PropTypes.string,
+        province: PropTypes.string,
+        isDefault: PropTypes.bool
+    }),
+    onSetDefault: PropTypes.func
+}
 
 function AddressCard({ address, onSetDefault }) {
     return (

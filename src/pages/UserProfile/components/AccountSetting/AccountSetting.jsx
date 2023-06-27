@@ -1,4 +1,4 @@
-import { Input, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import styles from './AccountSetting.module.css'
 import ValidationInput from '../ValidationInput';
 

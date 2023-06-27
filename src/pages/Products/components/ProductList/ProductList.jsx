@@ -4,7 +4,6 @@ import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 import useCategories from "../../hooks/useCategories";
-import { useGetAllCategory } from "../../../../services/Category/services";
 import { useState } from "react";
 
 function ProductList() {

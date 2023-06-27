@@ -1,6 +1,6 @@
 import ValidationInput from '../ValidationInput';
 import styles from './PasswordSetting.module.css'
-import { Row, Col, Input } from 'antd';
+import { Row, Col } from 'antd';
 
 function PasswordSetting() {
     return (

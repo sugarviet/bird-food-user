@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 
 ProductCard.propTypes = {
     bird: PropTypes.shape({
+        _id: PropTypes.string,
         image: PropTypes.string.isRequired,
-        productName: PropTypes.string.isRequired,
+        productName: PropTypes.string,
         price: PropTypes.number.isRequired,
     }).isRequired,
 };

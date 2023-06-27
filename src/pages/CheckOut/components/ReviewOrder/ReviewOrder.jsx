@@ -5,6 +5,12 @@ import ProductTable from "../ProductTable";
 import styles from './ReviewOrder.module.css'
 import PaymentMethod from "../PaymentMethod";
 import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
+
+ReviewOrder.propTypes = {
+    shippingInputList: PropTypes.arrayOf(PropTypes.shape({})),
+    selectedProducts: PropTypes.arrayOf(PropTypes.shape({}))
+}
 
 const { Panel } = Collapse
 
