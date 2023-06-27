@@ -8,8 +8,11 @@ import PropTypes from 'prop-types';
 
 const { Panel } = Collapse;
 
+ReviewOrder.propTypes = {
+    shippingInputList: PropTypes.array.isRequired,
+    cartItems: PropTypes.array.isRequired,
+};
 function ReviewOrder({ shippingInputList, selectedProducts }) {
-    const [total, setTotal] = useState(0)
 
     var total = cartItems.reduce((total, current) => {
         return total + current.quantity * current.price;
@@ -19,20 +22,20 @@ function ReviewOrder({ shippingInputList, selectedProducts }) {
     //     setData(newProducts);
     //   };
 
-  return (
-    <Row style={{ margin: "2rem 0", padding: "0 4rem" }} gutter={16}>
-      <Col span={16}>
-        <Collapse
-          style={{ fontWeight: "700", borderRadius: "0" }}
-          size="large"
-          expandIcon={() => (
-            <CheckCircleFilled style={{ color: "var(--primary-color)" }} />
-          )}
-        >
-          <Panel header="Shipping Address" className={`${styles.panel}`}>
-            <Form inputList={shippingInputList} />
-          </Panel>
-        </Collapse>
+    return (
+        <Row style={{ margin: "2rem 0", padding: "0 4rem" }} gutter={16}>
+            <Col span={16}>
+                <Collapse
+                    style={{ fontWeight: "700", borderRadius: "0" }}
+                    size="large"
+                    expandIcon={() => (
+                        <CheckCircleFilled style={{ color: "var(--primary-color)" }} />
+                    )}
+                >
+                    <Panel header="Shipping Address" className={`${styles.panel}`}>
+                        <Form inputList={shippingInputList} />
+                    </Panel>
+                </Collapse>
 
                 <Collapse
                     style={{ fontWeight: '700', borderRadius: '0' }}

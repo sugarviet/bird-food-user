@@ -1,7 +1,8 @@
 import { CalendarOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styles from "./BlogItem.module.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 function BlogItem({ blog }) {
 
@@ -16,7 +17,7 @@ function BlogItem({ blog }) {
             <span>{blog.title}</span>
           </Link>
         </div>
-        <span className={styles.descriptionBlog_des}>{blog.content}</span>
+        <span className={styles.descriptionBlog_des}>{blog.description}</span>
       </div>
       <div className={styles.descriptionBlog}>
         <span className={styles.descriptionBlog_date}>

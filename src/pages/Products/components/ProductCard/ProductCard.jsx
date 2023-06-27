@@ -7,9 +7,9 @@ import useProductToCart from './hooks/useProductToCart';
 
 ProductCard.propTypes = {
   bird: PropTypes.shape({
-    _id: PropTypes.string,
+    _id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    productName: PropTypes.string,
+    productName: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
 };
@@ -22,8 +22,19 @@ function ProductCard({ bird }) {
     openNotification(bird.productName);
   };
 
-    return (
-      <Card
+  const openNotification = (productName) => {
+    notification.success({
+      message: 'Successfully added',
+      description: `${productName}  has been added to cart.`,
+      duration: 2,
+    });
+  };
+  const values = [20000, 50000, 70000, 90000];
+  const randomValue = values[Math.floor(Math.random() * values.length)];
+  const totalAmount = bird?.price + randomValue;
+  const formattedAmount = totalAmount.toLocaleString();
+  return (
+    <Card
       hoverable
       style={{
         width: 300,
@@ -57,8 +68,7 @@ function ProductCard({ bird }) {
         }
       />
     </Card>
-    );
+  );
 }
 
 export default ProductCard;
-
