@@ -6,7 +6,6 @@ import style from "./SignInForm.module.css";
 import { useLogin } from "../../../../services/Login/services";
 
 const SignInForm = () => {
-
   const { mutate } = useLogin();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +15,11 @@ const SignInForm = () => {
       mutate({ username, password });
     } catch (error) {
       console.error(error);
-      if (error.isAxiosError && error.response && error.response.status === 404) {
+      if (
+        error.isAxiosError &&
+        error.response &&
+        error.response.status === 404
+      ) {
         const errorMessage = error.response.statusText;
         // Xử lý lỗi, ví dụ: hiển thị thông báo lỗi cho người dùng
         console.log(errorMessage);

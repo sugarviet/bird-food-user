@@ -1,1 +1,1 @@
-export {default} from './Aboutus'
+export { default } from "./Aboutus";

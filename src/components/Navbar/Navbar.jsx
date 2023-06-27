@@ -1,7 +1,7 @@
 import { Layout, Button, Input, Tooltip, Dropdown } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import logo from '../../assets/logo1.png';
+import logo from "../../assets/logo1.png";
 
 import {
   SearchOutlined,
@@ -15,13 +15,12 @@ import styles from "./Navbar.module.css";
 
 import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
-import { useToken } from '../../services/Login/services'
+import { useToken } from "../../services/Login/services";
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
-
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -33,23 +32,23 @@ const Navbar = () => {
   }, [decodedToken]);
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setLoggedIn(false);
-    navigate('/');
+    navigate("/");
   };
 
   const items = [
     {
-      label: <Link to='/profile'>My Profile</Link>,
-      key: '0',
+      label: <Link to="/profile">My Profile</Link>,
+      key: "0",
     },
 
     {
-      type: 'divider',
+      type: "divider",
     },
     {
       label: <div onClick={logout}>Log Out</div>,
-      key: '2',
+      key: "2",
     },
   ];
 
@@ -84,24 +83,36 @@ const Navbar = () => {
       <Header className={isScroll ? styles.navbarOnScroll : styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarLogo}>
-            <Link to={"/"} className={styles.whiteText}><img className={styles.logo} src={logo} /></Link>
+            <Link to={"/"} className={styles.whiteText}>
+              <img className={styles.logo} src={logo} />
+            </Link>
           </div>
           <div className={styles.navbarAction}>
             <ul className={styles.navbarActionList}>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Home</Link>
+                <Link to={"/"} className={styles.whiteText}>
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to={"/aboutus"} className={styles.whiteText}>About us</Link>
+                <Link to={"/aboutus"} className={styles.whiteText}>
+                  About us
+                </Link>
               </li>
               <li>
-                <Link to={"/products"} className={styles.whiteText}>Products</Link>
+                <Link to={"/products"} className={styles.whiteText}>
+                  Products
+                </Link>
               </li>
               <li>
-                <Link to={"/blogs"} className={styles.whiteText}>Blogs</Link>
+                <Link to={"/blogs"} className={styles.whiteText}>
+                  Blogs
+                </Link>
               </li>
               <li>
-                <Link to={"/contactus"} className={styles.whiteText}>Contact us</Link>
+                <Link to={"/contactus"} className={styles.whiteText}>
+                  Contact us
+                </Link>
               </li>
               <li>
                 <Tooltip placement="bottom" title={"Search"}>
@@ -113,7 +124,7 @@ const Navbar = () => {
                 </Tooltip>
               </li>
               <li>
-                <Link to={'/cart'}>
+                <Link to={"/cart"}>
                   <Tooltip placement="bottom" title={"Cart"}>
                     <Button icon={<ShoppingCartOutlined />} shape="circle" />
                   </Tooltip>
@@ -126,15 +137,14 @@ const Navbar = () => {
                     menu={{
                       items,
                     }}
-                    trigger={['click']}
-                    >
+                    trigger={["click"]}
+                  >
                     <a onClick={(e) => e.preventDefault()}>
                       <Button icon={<UserOutlined />} shape="circle" />
                     </a>
                   </Dropdown>
-
                 ) : (
-                  <Link to={'/login'}>
+                  <Link to={"/login"}>
                     <Button>Login</Button>
                   </Link>
                 )}

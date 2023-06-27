@@ -1,1 +1,1 @@
-export {default} from './AddressSetting'
+export { default } from "./AddressSetting";

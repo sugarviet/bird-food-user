@@ -4,26 +4,30 @@ import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 import useCategories from "../../hooks/useCategories";
-import { useGetAllCategory } from "../../../../services/Category/services";
 import { useState } from "react";
 
 function ProductList() {
-  const [selectedCategory, setSelectedCategory] = useState(0)
-  const [foods, setFoods] = useState()
-  
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
   const { products, isProductsLoading, setType, setParam } = useProductList();
-  const { data: categories, isLoading: isCategoriesLoading } = useCategories();
-  
-  if (isProductsLoading || isCategoriesLoading) {
-    return <Loading />;
-  }
+  const { categories, isCategoriesLoading } = useCategories();
+
+  console.log(products);
 
   const handleSelectCategory = (categoryId) => {
-    const categoryName = categories.find(category => category._id == categoryId).categoryName
-    
-    setType('products-by-category')
-    setParam({categoryName: categoryName, page: 1})
-    setSelectedCategory(categoryId)
+    const categoryName = categories.find(
+      (category) => category._id == categoryId
+    ).categoryName;
+
+    setType("products-by-category");
+    setParam({ categoryName: categoryName });
+    setSelectedCategory(categoryId);
+  };
+
+  console.log(isProductsLoading, isCategoriesLoading);
+
+  if (isProductsLoading || isCategoriesLoading) {
+    return <Loading />;
   }
 
   return (
@@ -34,12 +38,12 @@ function ProductList() {
       </div>
       <h1 className={styles.textProducts}>Our Products</h1>
       <div className={styles.textDevide}>
-        <div>
+        {/* <div>
           <p className={styles.textDescription}>
             Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. <br />
             Ipsum diam justo sed rebum vero dolor duo.
           </p>
-        </div>
+        </div> */}
         <div className={styles.categoryContent}>
           <Space wrap>
             {categories?.map((category) => (
@@ -58,7 +62,7 @@ function ProductList() {
       </div>
       <div className={styles.cardContent}>
         <Row gutter={16}>
-          {products?.map((bird) => (
+          {products.map((bird) => (
             <div className={styles.cardDetail} key={bird._id}>
               <Col span={8}>
                 <ProductCard bird={bird} />

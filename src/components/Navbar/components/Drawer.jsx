@@ -65,5 +65,4 @@ Drawer.propTypes = {
   isDrawerVisible: PropTypes.bool.isRequired,
 };
 
-
 export default Drawer;

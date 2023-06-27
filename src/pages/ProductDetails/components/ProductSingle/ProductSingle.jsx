@@ -95,7 +95,9 @@ function ProductSingle() {
                     <option value="extra large">EXTRA LARGE</option>
                   </select>
                 </div>
-                <div className={`${styles.marginTop4} ${styles.productInputQuantity}`}>
+                <div
+                  className={`${styles.marginTop4} ${styles.productInputQuantity}`}
+                >
                   <button
                     className={`${styles.inputBox} ${styles.clickable}`}
                     onClick={handleMinusButtonClick}

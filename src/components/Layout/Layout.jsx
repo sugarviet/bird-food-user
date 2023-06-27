@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment } from "react";
 import Navbar from "../Navbar";
 import Routers from "../../routes/Routers";
 import Footer from "../Footer";
@@ -6,17 +6,17 @@ import Footer from "../Footer";
 import useLayout from "./hooks/useLayout";
 
 const Layout = () => {
-  const {isSignInAndSignUpPath} = useLayout();
+  const { isSignInAndSignUpPath } = useLayout();
 
   return (
     <Fragment>
-      {isSignInAndSignUpPath && <Navbar/>}
-        <div>
-            <Routers />
-        </div>
-      {isSignInAndSignUpPath && <Footer/>}
+      {isSignInAndSignUpPath && <Navbar />}
+      <div>
+        <Routers />
+      </div>
+      {isSignInAndSignUpPath && <Footer />}
     </Fragment>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

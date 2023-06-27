@@ -10,7 +10,7 @@ export const useSignUp = () => {
       notification.success({
         message: "Sign up successfully",
       });
-      navigate('/login');
+      navigate("/login");
     },
     onError: () => {
       notification.error({

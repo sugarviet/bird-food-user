@@ -5,7 +5,7 @@ function useListBlogs() {
 
   return {
     data,
-    isLoading
+    isLoading,
   };
 }
 
