@@ -20,6 +20,14 @@ const addressesProp = [
 
 function AddressSetting() {
     const [addresses, setAddresses] = useState(addressesProp)
+    const [isAddAddressOpen, setIsAddAddressOpen] = useState(false)
+
+    const handleAddAddress = (newAddress) => {
+        const newAddresses = [...addresses, newAddress]
+
+        setAddresses(newAddresses)
+    }
+
 
     useEffect(() => {
         const defaultAddress = addresses.find(address => address.isDefault)
@@ -32,7 +40,7 @@ function AddressSetting() {
             <span className={`${styles.title}`}>My addresses</span>
             <Row gutter={12}>
                 <Col span={12}>
-                    <AddressCard />
+                    <AddressCard handleOpenModal={() => setIsAddAddressOpen(true)} />
                 </Col>
 
                 {addresses.map( (address, index) =>
@@ -41,7 +49,7 @@ function AddressSetting() {
                     </Col>
                 )}
             </Row>
-            <AddressForm/>
+            {isAddAddressOpen && <AddressForm callback={handleAddAddress} handleCloseForm={() => setIsAddAddressOpen(false)}/>}
         </div>
     );
 }

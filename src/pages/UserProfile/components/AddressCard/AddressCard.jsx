@@ -3,12 +3,12 @@ import { Tag } from 'antd';
 import { CheckOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { Fragment } from 'react';
 
-function AddressCard({ address, onSetDefault }) {
+function AddressCard({ address, onSetDefault, handleOpenModal }) {
     return (
         <div className={`${styles.wrapper}`}>
             {address == undefined ?
                 <Fragment>
-                    <button className={`${styles.addNew}`}>
+                    <button onClick={handleOpenModal} className={`${styles.addNew}`}>
                         <span><PlusOutlined/></span>
                         <a className={`${styles.smallText} ${styles.marginRight4} ${styles.primaryColor}`}>Add new address</a>
                     </button>
@@ -17,8 +17,8 @@ function AddressCard({ address, onSetDefault }) {
                 <Fragment>
                     <div className={`${styles.flexBetween} ${styles.flexCol} ${styles.fullHeight}`}>
                         <div className={`${styles.detail}`}>
-                            <span>{address.street}</span>
-                            <span>{`${address.city}, ${address.province}`}</span>
+                            <span>{`${address.address}, ${address.ward_name}`}</span>
+                            <span>{`${address.district_name}, ${address.province_name}`}</span>
                         </div>
                         <div>
                             <a className={`${styles.smallText} ${styles.marginRight4} ${styles.primaryColor}`}>Edit address</a>
