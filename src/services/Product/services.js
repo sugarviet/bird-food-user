@@ -10,10 +10,10 @@ export const useGetAllBirdFood = () => {
     })
 }
 
-export const useGetAllBirdFoodByCategory = ({categoryName, page}) => {
+export const useGetAllBirdFoodByCategory = ({categoryName}) => {
     return useQuery({
-        queryKey: ['bird-foods-by-category'],
-        queryFn: () => sleep(1000).then(() => getAllBirdFoodByCategory(categoryName, page)),
+        queryKey: ['bird-foods-by-category', categoryName],
+        queryFn: () => getAllBirdFoodByCategory(categoryName),
     })
 } 
 

@@ -11,17 +11,21 @@ function ProductList() {
   
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
-  
-  if (isProductsLoading || isCategoriesLoading) {
-    return <Loading />;
-  }
 
+  console.log(products)
+  
   const handleSelectCategory = (categoryId) => {
     const categoryName = categories.find(category => category._id == categoryId).categoryName
     
     setType('products-by-category')
-    setParam({categoryName: categoryName, page: 1})
+    setParam({categoryName: categoryName})
     setSelectedCategory(categoryId)
+  }
+
+  console.log(isProductsLoading, isCategoriesLoading)
+
+  if (isProductsLoading || isCategoriesLoading) {
+    return <Loading />;
   }
 
   return (
@@ -32,12 +36,12 @@ function ProductList() {
       </div>
       <h1 className={styles.textProducts}>Our Products</h1>
       <div className={styles.textDevide}>
-        <div>
+        {/* <div>
           <p className={styles.textDescription}>
             Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. <br />
             Ipsum diam justo sed rebum vero dolor duo.
           </p>
-        </div>
+        </div> */}
         <div className={styles.categoryContent}>
           <Space wrap>
             {categories?.map((category) => (

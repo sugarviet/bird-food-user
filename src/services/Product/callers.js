@@ -8,9 +8,9 @@ export const getAllBirdFood = async () => {
   return res.data.listProduct;
 };
 
-export const getAllBirdFoodByCategory = async (categoryName, page) => {
-  const res = await axios.get(PRODUCT_SORT_API, {params: {type: categoryName, page: page}});
-  return res.data.data;
+export const getAllBirdFoodByCategory = async (categoryName) => {
+  const res = await axios.get(`${PRODUCT_SORT_API}?type=${categoryName}`);
+  return res.data.listProduct;
 }
 
 export const getBirdFoodById = async (id) => {
