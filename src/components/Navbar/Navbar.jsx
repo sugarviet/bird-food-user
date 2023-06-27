@@ -1,4 +1,4 @@
-import { Layout, Button, Input, Tooltip, Dropdown } from "antd";
+import { Layout, Button, Input, Tooltip, Dropdown, Badge } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from '../../assets/logo1.png';
@@ -21,6 +21,14 @@ const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    const localCart = localStorage.getItem("cart");
+    if (localCart) {
+      setCartItems(JSON.parse(localCart));
+    }
+  }, [cartItems]);
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -115,7 +123,9 @@ const Navbar = () => {
               <li>
                 <Link to={'/cart'}>
                   <Tooltip placement="bottom" title={"Cart"}>
-                    <Button icon={<ShoppingCartOutlined />} shape="circle" />
+                    <Badge count={cartItems.length}>
+                      <Button icon={<ShoppingCartOutlined />} shape="circle" />
+                    </Badge>
                   </Tooltip>
                 </Link>
               </li>
@@ -127,7 +137,7 @@ const Navbar = () => {
                       items,
                     }}
                     trigger={['click']}
-                    >
+                  >
                     <a onClick={(e) => e.preventDefault()}>
                       <Button icon={<UserOutlined />} shape="circle" />
                     </a>

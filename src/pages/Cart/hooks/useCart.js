@@ -35,7 +35,7 @@ function useCart() {
         total += item.price * item.quantity;
       }
     });
-    return total.toFixed(2);
+    return total.toLocaleString();
   };
 
   return {

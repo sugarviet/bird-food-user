@@ -4,12 +4,12 @@ import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 import useCategories from "../../hooks/useCategories";
-import { useGetAllCategory } from "../../../../services/Category/services";
+// import { useGetAllCategory } from "../../../../services/Category/services";
 import { useState } from "react";
 
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState(0)
-  const [foods, setFoods] = useState()
+  // const [foods, setFoods] = useState()
   
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { data: categories, isLoading: isCategoriesLoading } = useCategories();

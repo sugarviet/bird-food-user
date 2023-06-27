@@ -17,8 +17,8 @@ const Cart = () => {
       openNotification();
     }
   };
-  const openNotification = (productName) => {
-    notification.open({
+  const openNotification = () => {
+    notification.error({
       message: 'Checkout error',
       description: `Your cart is empty !`,
       duration: 2,
@@ -55,7 +55,7 @@ const Cart = () => {
         <div className={styles.cartFooter}>
           <div className={styles.totalPrice}>
             <span>Total Price:</span>
-            <span className={styles.priceValue}>${calculateTotalPrice()}</span>
+            <span className={styles.priceValue}>{calculateTotalPrice()} VND</span>
           </div>
           <Button type="primary" className={styles.checkoutButton} onClick={() => handleCheckout()}>
             Proceed to Checkout <SendOutlined />

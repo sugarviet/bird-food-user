@@ -1,10 +1,17 @@
-import { List, Button, Input } from "antd";
+import { List, Button, Input,notification } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
 import styles from "./CartItems.module.css";
 
 const CartItem = ({ items, removeFromCart, updateQuantity }) => {
+  const openNotification = (name) => {
+    notification.success({
+      message: 'Successfully deleted ' ,
+      description: `Delete ${name} `,
+      duration: 2,
+    });
+  }
   return (
     <div>
       <List
@@ -17,7 +24,10 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   type="ghost"
                   shape="circle"
                   className={styles.deleteIcon}
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => {
+                    openNotification(item.productName);
+                    removeFromCart(item.id);
+                  }}
                 >
                   <CloseOutlined style={{ color: 'red' }} />
                 </Button>
@@ -59,7 +69,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
               />
             </div>
             <div className={styles.cartItemControls}>
-              <p className={styles.itemPrice}>${item.price}</p>
+              <p className={styles.itemPrice}>{item.price.toLocaleString()} VND</p>
             </div>
           </List.Item>
         )}

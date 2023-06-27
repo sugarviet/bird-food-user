@@ -1,5 +1,3 @@
-  
-
   .cartItem {
     display: flex;
     justify-content: space-between;
@@ -9,12 +7,12 @@
     border-radius: 4px;
     margin-bottom: 10px;
   }
-  
+
   .cartItemDetails {
     display: flex;
     padding: 10px;
   }
-  
+
   .itemName {
     display: block;
     width: 100%;
@@ -22,54 +20,50 @@
     z-index: 1;
     word-wrap: break-word;
   }
-  
+
   .itemPrice {
     color: #888;
     font-size: 20px;
   }
-  
-  .productInfo{
-      display: flex;
-      width: 300px;
-      gap: 8px;
-      align-items: center;
-  }
-  
-  .imgWrapper{
-      width: 50%;
-      height: 50%;
-  }
-  
-  img{
-      width: 100%;
-      height: 100%;
-  }
-  
-  .deleteIcon{
-      display: block;
-      margin-right: 10px;
-      background-color: #f8f8f8;
-  }
-  
-  .cartItemControls {
-    display: flex;
-    align-items: center;
-      
-  }
-  
-  .itemPrice{
-      display: block;
-      margin-inline: 10px;
-  }
-  
-  .quantityInput {
 
-    margin-right: 30px;
+  .productInfo {
+    display: flex;
+    width: 300px;
+    gap: 8px;
+    align-items: center;
   }
-  
+
+  .imgWrapper {
+    width: 50%;
+    height: 50%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .deleteIcon {
+    display: block;
+    margin-right: 10px;
+    background-color: #f8f8f8;
+  }
+
+  .cartItemControls {
+   padding-right: 38px;
+
+  }
+
+  .itemPrice {
+    display: block;
+    margin-inline: 10px;
+  }
+
+  .quantityInput {
+    text-align: center;
+
+  }
+
   .removeButton {
     margin-left: 10px;
   }
-  
-
-  
