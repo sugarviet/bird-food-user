@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import { Card } from 'antd';
+import PropTypes from "prop-types";
+import { Card } from "antd";
 
 const ExampleItem = ({ user }) => {
   return (
-    <Card hoverable style={{margin: '10px 0'}}>
-        <h2>{user?.name}</h2>
+    <Card hoverable style={{ margin: "10px 0" }}>
+      <h2>{user?.name}</h2>
     </Card>
-  )
-}
+  );
+};
 
 ExampleItem.propTypes = {
   user: PropTypes.shape({
@@ -16,4 +16,4 @@ ExampleItem.propTypes = {
   }).isRequired,
 };
 
-export default ExampleItem
+export default ExampleItem;

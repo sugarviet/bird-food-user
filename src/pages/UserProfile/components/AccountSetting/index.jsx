@@ -1,1 +1,1 @@
-export {default} from './AccountSetting'
+export { default } from "./AccountSetting";

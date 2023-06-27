@@ -19,7 +19,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   className={styles.deleteIcon}
                   onClick={() => removeFromCart(item.id)}
                 >
-                  <CloseOutlined style={{color: 'red'}}/>
+                  <CloseOutlined style={{ color: "red" }} />
                 </Button>
                 <div className={styles.productInfo}>
                   <div className={styles.imgWrapper}>

@@ -1,1 +1,1 @@
-export {default} from './ValidationInput'
+export { default } from "./ValidationInput";
