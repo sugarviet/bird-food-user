@@ -28,7 +28,10 @@ const Navbar = () => {
     if (localCart) {
       setCartItems(JSON.parse(localCart));
     }
-  }, [cartItems]);
+  }, []);
+
+
+
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);

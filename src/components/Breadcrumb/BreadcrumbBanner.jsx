@@ -13,20 +13,19 @@ BreadcrumbBanner.propTypes = {
 function BreadcrumbBanner({ backgroundImage, title, pathName }) {
   const [breadcrumbItems, setBreadcrumbItems] = useState([]);
 
-    useEffect(() => {
-        const pathNames = pathName.split('/').filter(Boolean)
-        const paths = pathNames.filter(Boolean).reduce((paths, path) => 
-                                    {
-                                        const previous = paths[paths.length - 1]
-                                        paths.push(`${previous || '/'}${path}/`)
-                                        return paths
-                                    }, [])
-        
-        const items = paths.reduce((items, item, index) => [...items, {title: <Link to={item}>{pathNames[index]}</Link>}]
-                                , [{title: <Link to='/'>Home</Link>}])   
-                                
-        setBreadcrumbItems(items)
-    }, [breadcrumbItems])
+  useEffect(() => {
+    const pathNames = pathName.split('/').filter(Boolean)
+    const paths = pathNames.filter(Boolean).reduce((paths, path) => {
+      const previous = paths[paths.length - 1]
+      paths.push(`${previous || '/'}${path}/`)
+      return paths
+    }, [])
+
+    const items = paths.reduce((items, item, index) => [...items, { title: <Link to={item}>{pathNames[index]}</Link> }]
+      , [{ title: <Link to='/'>Home</Link> }])
+
+    setBreadcrumbItems(items)
+  }, [])
 
   return (
     <Fragment>
