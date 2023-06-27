@@ -1,45 +1,52 @@
-import { Carousel } from 'antd';
-import styles from './Combos.module.css';
-import useComboList from '../../hooks/useComboList';
+import { Carousel } from "antd";
+import styles from "./Combos.module.css";
+import useComboList from "../../hooks/useComboList";
 
 const Combos = () => {
-    const { firstCarouselData, secondCarouselData, active, handleActive } = useComboList();
+  const { firstCarouselData, secondCarouselData, active, handleActive } =
+    useComboList();
 
-    const settings = {
-        infinite: true,
-        speed: 800,
-        dots: true,
-        draggable: true,
-    };
-    
-    return (
-        <div className={styles.mealCategory}>
-                <Carousel {...settings}>
-                    <div className={styles.mealWrapper}>
-                        {firstCarouselData?.map(data => (
-                            <div key={data.id}>
-                                <img
-                                    className={`${styles.mealImg} ${active === data.id ? styles.active : ''}`}
-                                    src={data.image}
-                                    onClick={() => handleActive(data.id)}
-                                />
-                                <p
-                                    className={`${styles.mealName} ${active === data.id ? styles.activeText : ''}`}>
-                                    {data.name}</p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className={styles.mealWrapper}>
-                        {secondCarouselData?.map(data => (
-                            <div key={data.id}>
-                                <img className={styles.mealImg} src={data.image} alt="Meal" />
-                                <p className={styles.mealName}>{data.name}</p>
-                            </div>
-                        ))}
-                    </div>
-                </Carousel>
-            <style>
-                {`
+  const settings = {
+    infinite: true,
+    speed: 800,
+    dots: true,
+    draggable: true,
+  };
+
+  return (
+    <div className={styles.mealCategory}>
+      <Carousel {...settings}>
+        <div className={styles.mealWrapper}>
+          {firstCarouselData?.map((data) => (
+            <div key={data.id}>
+              <img
+                className={`${styles.mealImg} ${
+                  active === data.id ? styles.active : ""
+                }`}
+                src={data.image}
+                onClick={() => handleActive(data.id)}
+              />
+              <p
+                className={`${styles.mealName} ${
+                  active === data.id ? styles.activeText : ""
+                }`}
+              >
+                {data.name}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className={styles.mealWrapper}>
+          {secondCarouselData?.map((data) => (
+            <div key={data.id}>
+              <img className={styles.mealImg} src={data.image} alt="Meal" />
+              <p className={styles.mealName}>{data.name}</p>
+            </div>
+          ))}
+        </div>
+      </Carousel>
+      <style>
+        {`
                     .ant-carousel .slick-dots li button {
                         margin-top: 50px;
                         background-color: #3cb815 !important;
@@ -48,9 +55,8 @@ const Combos = () => {
                         right:150px;
                     }
                 `}
-            </style>
-        </div>
-
-    )
-}
+      </style>
+    </div>
+  );
+};
 export default Combos;

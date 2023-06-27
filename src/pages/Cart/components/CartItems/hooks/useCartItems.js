@@ -1,6 +1,3 @@
-
-function useCartItem() {
-
-}
+function useCartItem() {}
 
 export default useCartItem;

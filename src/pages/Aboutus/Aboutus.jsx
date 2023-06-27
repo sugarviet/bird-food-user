@@ -1,5 +1,5 @@
-import Banner from '../../components/Banner';
-import AboutUsContent from './components/AboutUsContent';
+import Banner from "../../components/Banner";
+import AboutUsContent from "./components/AboutUsContent";
 
 const Aboutus = () => {
   return (
@@ -7,6 +7,6 @@ const Aboutus = () => {
       <Banner title={"About Us"} />
       <AboutUsContent />
     </div>
-  )
-}
+  );
+};
 export default Aboutus;

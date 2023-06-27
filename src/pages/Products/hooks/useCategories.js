@@ -2,19 +2,20 @@ import { useState } from "react";
 import { useGetAllCategory } from "../../../services/Category/services";
 
 function useCategories() {
-    const { data: categories, isLoading: isCategoriesLoading } = useGetAllCategory()
-    const [selectedCategory, setSelectedCategory] = useState(0)
+  const { data: categories, isLoading: isCategoriesLoading } =
+    useGetAllCategory();
+  const [selectedCategory, setSelectedCategory] = useState(0);
 
-    function handleSelectCategory(categoryId) {
-        setSelectedCategory(categoryId)
-    }
+  function handleSelectCategory(categoryId) {
+    setSelectedCategory(categoryId);
+  }
 
-    return {
-        categories,
-        isCategoriesLoading,
-        selectedCategory,
-        handleSelectCategory
-    };
+  return {
+    categories,
+    isCategoriesLoading,
+    selectedCategory,
+    handleSelectCategory,
+  };
 }
 
 export default useCategories;

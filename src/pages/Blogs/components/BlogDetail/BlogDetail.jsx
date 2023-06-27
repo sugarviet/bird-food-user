@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import useSingleBlog from "../../hooks/useSingleBlog";
-import styles from './BlogDetail.module.css'
-import Banner from '../../../../components/Banner'
+import styles from "./BlogDetail.module.css";
+import Banner from "../../../../components/Banner";
 import { Row, Col } from "antd";
-import { Input } from 'antd';
+import { Input } from "antd";
 import { CalendarOutlined, CommentOutlined } from "@ant-design/icons";
 import CommentBlog from "../CommentBlog";
 import Comment from "../Comment";
@@ -14,11 +14,10 @@ const BlogDetail = () => {
 
   const { blog, isLoading } = useSingleBlog(blogId);
 
-
   const { Search } = Input;
   return (
     <div>
-      <Banner title='Blogs' />
+      <Banner title="Blogs" />
       <div className={styles.blogDetail}>
         <Row>
           <Col span={16}>
@@ -31,8 +30,7 @@ const BlogDetail = () => {
                 <img className={styles.blogImage} src={blog?.thumbnail} />
               </div>
             </div> */}
-            {isLoading &&
-              <LoadingBlog />}
+            {isLoading && <LoadingBlog />}
             <div className={styles.preview}>
               <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
             </div>
@@ -51,12 +49,16 @@ const BlogDetail = () => {
               <div className={styles.blogRightContainer}>
                 <h1 className={styles.blogRightRecent}>Recent Blog</h1>
                 <div className={styles.blogRightImageDes}>
-                  <img className={styles.blogRightImage} src={blog?.thumbnail}></img>
+                  <img
+                    className={styles.blogRightImage}
+                    src={blog?.thumbnail}
+                  ></img>
                   <div className={styles.blogRightTextDate}>
                     <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog?.createdAt?.slice(0, 10)
+                      {blog?.createdAt
+                        ?.slice(0, 10)
                         .split("-")
                         .reverse()
                         .join("/")}
@@ -68,12 +70,16 @@ const BlogDetail = () => {
                   </div>
                 </div>
                 <div className={styles.blogRightImageDes}>
-                  <img className={styles.blogRightImage} src={blog?.thumbnail}></img>
+                  <img
+                    className={styles.blogRightImage}
+                    src={blog?.thumbnail}
+                  ></img>
                   <div className={styles.blogRightTextDate}>
                     <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog?.createdAt?.slice(0, 10)
+                      {blog?.createdAt
+                        ?.slice(0, 10)
                         .split("-")
                         .reverse()
                         .join("/")}
@@ -85,12 +91,16 @@ const BlogDetail = () => {
                   </div>
                 </div>
                 <div className={styles.blogRightImageDes}>
-                  <img className={styles.blogRightImage} src={blog?.thumbnail}></img>
+                  <img
+                    className={styles.blogRightImage}
+                    src={blog?.thumbnail}
+                  ></img>
                   <div className={styles.blogRightTextDate}>
                     <h3 className={styles.blogRightTitle}>{blog?.title}</h3>
                     <span className={styles.blogRightDate}>
                       <CalendarOutlined className={styles.blogIcon} />
-                      {blog?.createdAt?.slice(0, 10)
+                      {blog?.createdAt
+                        ?.slice(0, 10)
                         .split("-")
                         .reverse()
                         .join("/")}
@@ -107,6 +117,6 @@ const BlogDetail = () => {
         </Row>
       </div>
     </div>
-  )
-}
+  );
+};
 export default BlogDetail;

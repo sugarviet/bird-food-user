@@ -4,26 +4,25 @@ function useNavbar() {
   const [isDrawerVisible, setDrawerVisible] = useState(false);
   const [isShowSearchBar, setIsShowSearchBar] = useState(false);
 
-
   const hideDrawer = () => {
     setDrawerVisible(false);
   };
 
   const handleShowDrawable = () => {
-      setDrawerVisible(!isDrawerVisible);
-    };
+    setDrawerVisible(!isDrawerVisible);
+  };
 
-    const handleShowSearchBar = () => {
-        setIsShowSearchBar(!isShowSearchBar);
-      }
+  const handleShowSearchBar = () => {
+    setIsShowSearchBar(!isShowSearchBar);
+  };
 
   return {
     isDrawerVisible,
     hideDrawer,
     handleShowDrawable,
     isShowSearchBar,
-    handleShowSearchBar
-  }
+    handleShowSearchBar,
+  };
 }
 
 export default useNavbar;

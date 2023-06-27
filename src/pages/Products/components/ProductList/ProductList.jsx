@@ -7,22 +7,24 @@ import useCategories from "../../hooks/useCategories";
 import { useState } from "react";
 
 function ProductList() {
-  const [selectedCategory, setSelectedCategory] = useState(0)
-  
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
 
-  console.log(products)
-  
-  const handleSelectCategory = (categoryId) => {
-    const categoryName = categories.find(category => category._id == categoryId).categoryName
-    
-    setType('products-by-category')
-    setParam({categoryName: categoryName})
-    setSelectedCategory(categoryId)
-  }
+  console.log(products);
 
-  console.log(isProductsLoading, isCategoriesLoading)
+  const handleSelectCategory = (categoryId) => {
+    const categoryName = categories.find(
+      (category) => category._id == categoryId
+    ).categoryName;
+
+    setType("products-by-category");
+    setParam({ categoryName: categoryName });
+    setSelectedCategory(categoryId);
+  };
+
+  console.log(isProductsLoading, isCategoriesLoading);
 
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;

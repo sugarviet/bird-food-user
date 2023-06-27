@@ -1,7 +1,7 @@
 import { CalendarOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import styles from "./BlogItem.module.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 BlogItem.propTypes = {
   blog: PropTypes.shape({
@@ -25,17 +25,12 @@ function BlogItem({ blog }) {
             <span>{blog.title}</span>
           </Link>
         </div>
-        <span className={styles.descriptionBlog_des}>
-          {blog.content}
-        </span>
+        <span className={styles.descriptionBlog_des}>{blog.content}</span>
       </div>
       <div className={styles.descriptionBlog}>
         <span className={styles.descriptionBlog_date}>
           <CalendarOutlined className={styles.actionIconProduct} />
-          {blog.createdAt?.slice(0, 10)
-            .split("-")
-            .reverse()
-            .join("/")}
+          {blog.createdAt?.slice(0, 10).split("-").reverse().join("/")}
         </span>
         <Link to={`/blogs/${blog._id}`} className={styles.descriptionBlog_view}>
           View detail...

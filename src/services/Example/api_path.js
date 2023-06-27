@@ -1,1 +1,1 @@
-export const API_GET_USERS = 'https://jsonplaceholder.typicode.com/users';
+export const API_GET_USERS = "https://jsonplaceholder.typicode.com/users";

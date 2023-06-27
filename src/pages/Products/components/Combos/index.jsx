@@ -1,1 +1,1 @@
-export {default} from './Combos'
+export { default } from "./Combos";

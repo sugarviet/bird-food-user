@@ -1,1 +1,1 @@
-export {default} from './BreadcrumbBanner'
+export { default } from "./BreadcrumbBanner";

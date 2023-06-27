@@ -1,11 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
-import {
-    getAllCombos
-} from './callers';
+import { useQuery } from "@tanstack/react-query";
+import { getAllCombos } from "./callers";
 
 export const useGetAllCombos = () => {
-    return useQuery({
-        queryKey: ['blogs'],
-        queryFn: () => getAllCombos(),
-    })
-}
+  return useQuery({
+    queryKey: ["blogs"],
+    queryFn: () => getAllCombos(),
+  });
+};

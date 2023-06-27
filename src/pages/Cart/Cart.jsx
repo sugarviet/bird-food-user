@@ -2,7 +2,6 @@ import { Button, Row, Col } from "antd";
 import styles from "./Cart.module.css";
 import { SendOutlined } from "@ant-design/icons";
 
-
 import useCart from "./hooks/useCart";
 import CartItems from "./components/CartItems";
 
