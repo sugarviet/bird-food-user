@@ -19,6 +19,7 @@ const useProductToCart = () => {
         productName: bird.productName,
         image: bird.image,
         quantity: 1,
+        stock: bird.quantity,
         price: bird.price
       });
       localStorage.setItem("cart", JSON.stringify(storedCart));

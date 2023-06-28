@@ -12,6 +12,13 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
       duration: 2,
     });
   }
+  const openNotificationError = (stock) => {
+    notification.error({
+      message: 'Failed update quantity ',
+      description: `You can only buy max ${stock} in one checkout  `,
+      duration: 2,
+    });
+  }
   return (
     <div>
       <List
@@ -54,7 +61,12 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                 value={item.quantity}
                 onChange={(e) => {
                   const value = parseInt(e.target.value, 10);
-                  if (value !== 0) {
+                  const maxStock = item.stock; 
+
+                  if (value > maxStock) {
+                    openNotificationError(maxStock);
+                    updateQuantity(item.id, maxStock); 
+                  } else if (value !== 0) {
                     updateQuantity(item.id, value);
                   } else {
                     updateQuantity(item.id, 1);
