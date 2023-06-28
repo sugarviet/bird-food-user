@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function useCart() {
-  const [items, setItems] = useState([
-    { id: 1, name: "Product 1", price: 10.99, quantity: 1 },
-    { id: 2, name: "Product 2", price: 19.99, quantity: 2 },
-    { id: 3, name: "Product 3", price: 7.99, quantity: 3 },
-  ]);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const localCart = localStorage.getItem("cart");
+    if (localCart) {
+      setItems(JSON.parse(localCart));
+    }
+  }, []);
+
+  const updateLocalStorage = (updatedItems) => {
+    localStorage.setItem("cart", JSON.stringify(updatedItems));
+  };
 
   const removeFromCart = (id) => {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
+    updateLocalStorage(updatedItems);
   };
 
   const updateQuantity = (id, quantity) => {
@@ -17,6 +25,7 @@ function useCart() {
       item.id === id ? { ...item, quantity } : item
     );
     setItems(updatedItems);
+    updateLocalStorage(updatedItems);
   };
 
   const calculateTotalPrice = () => {
@@ -26,7 +35,7 @@ function useCart() {
         total += item.price * item.quantity;
       }
     });
-    return total.toFixed(2);
+    return total.toLocaleString();
   };
 
   return {

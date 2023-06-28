@@ -1,12 +1,7 @@
 import { useLocation } from "react-router";
 import BreadcrumbBanner from "../../components/Breadcrumb";
 import ReviewOder from "./components/ReviewOrder";
-import {
-  UserOutlined,
-  AimOutlined,
-  PhoneOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+import {UserOutlined, AimOutlined, PhoneOutlined, MailOutlined} from '@ant-design/icons'
 import { Fragment } from "react";
 
 const backgroundImage =
@@ -35,38 +30,23 @@ const shippingInputList = [
   },
 ];
 
-const selectedProducts = [
-  {
-    name: "Straight Bird Foods",
-    price: 25,
-    image: "https://i.ibb.co/SVhGw6v/Straight-Bird-Foods.png",
-    quantity: 2,
-  },
-  {
-    name: "Straight Bird Foods",
-    price: 25,
-    image: "https://i.ibb.co/SVhGw6v/Straight-Bird-Foods.png",
-    quantity: 2,
-  },
-];
-
 function CheckOut() {
-  const location = useLocation();
+    const location = useLocation();
+    const { data } = location.state;
+    return (
+        <Fragment>
+            <BreadcrumbBanner
+                backgroundImage={backgroundImage}
+                title='Check Out Product'
+                pathName={location.pathname}
+            />
 
-  return (
-    <Fragment>
-      <BreadcrumbBanner
-        backgroundImage={backgroundImage}
-        title="Check Out Product"
-        pathName={location.pathname}
-      />
-
-      <ReviewOder
-        shippingInputList={shippingInputList}
-        selectedProducts={selectedProducts}
-      />
-    </Fragment>
-  );
+            <ReviewOder
+                shippingInputList={shippingInputList}
+                cartItems={data}
+            />
+        </Fragment>
+    );
 }
 
 export default CheckOut;
