@@ -5,27 +5,38 @@ import ProductTable from "../ProductTable";
 import styles from './ReviewOrder.module.css'
 import PaymentMethod from "../PaymentMethod";
 import PropTypes from 'prop-types';
+import { useCheckout } from "../../../../services/Checkout/services";
 
 const { Panel } = Collapse
 
 ReviewOrder.propTypes = {
     shippingInputList: PropTypes.array.isRequired,
     cartItems: PropTypes.array.isRequired,
-  };
+};
 
 function ReviewOrder({ shippingInputList, cartItems }) {
     console.log(cartItems)
-    // const [total, setTotal] = useState(0)
-    // const [data, setData] = useState(cartItems);
+    const { mutate } = useCheckout();
+
+    const detail_product = cartItems.map((item) => ({
+        product: item.id,
+        quantity: item.quantity,
+    }));
+    const handleSubmitCheckout = () => {
+        try {
+            mutate({
+                detail_product: detail_product,
+                total_price: total,
+            });
+            localStorage.removeItem('cart');
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     var total = cartItems.reduce((total, current) => {
         return total + current.quantity * current.price;
     }, 0)
-
-    // const handleDeleteProduct = (newProducts) => {
-    //     setData(newProducts);
-    //   };
-
     return (
         <Row style={{ margin: '2rem 0', padding: '0 4rem' }} gutter={16}>
             <Col span={16}>
@@ -73,7 +84,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
                     style={{ fontWeight: '700', borderRadius: '0' }}
                     size="large"
                 >
-                    <table style={{textAlign:'center'}}>
+                    <table style={{ textAlign: 'center' }}>
                         <thead>
                             <tr>
                                 <th>Order Detail</th>
@@ -98,7 +109,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
                         </tbody>
                     </table>
                 </Collapse>
-                <Button style={{ marginTop: '1rem' }} type="primary" shape="round" size='large'> Check out </Button>
+                <Button onClick={handleSubmitCheckout} style={{ marginTop: '1rem' }} type="primary" shape="round" size='large'> Check out </Button>
             </Col>
         </Row >
     );
