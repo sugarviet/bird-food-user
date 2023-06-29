@@ -30,7 +30,7 @@ function Provider({children}) {
             
                 await axios.get(`${USER_API}/${decodedToken.username}`)
                                     .then(res => res.data)
-                                    .then(data => dispatch(setInitState(data.user)))
+                                    .then(data => InitData)
                                     .catch(error => {throw new Error(error)})
             }
             catch(error)
@@ -47,6 +47,12 @@ function Provider({children}) {
             {children}
         </Context.Provider>
     )
+}
+
+function InitData(data)
+{
+    dispatch(setInitState(data.user))
+    localStorage.setItem('cart', JSON.stringify(data.user))
 }
 
 export default Provider

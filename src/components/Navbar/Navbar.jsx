@@ -24,17 +24,11 @@ const { Search } = Input;
 const Navbar = () => {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")) || []);
   const [user] = useContext(UserContext)
-  
-  useEffect(() => {
-    const localCart = localStorage.getItem("cart");
-    if (localCart) {
-      setCartItems(JSON.parse(localCart));
-    }
-  }, [user]);
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     if (decodedToken) {
       setLoggedIn(true);
@@ -43,9 +37,16 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("cart")
     setLoggedIn(false);
     navigate("/");
   };
+
+  useEffect(() => {
+    const localCart = localStorage.getItem("cart") || "[]";
+    
+    setCartItems(JSON.parse(localCart));
+  }, [user, loggedIn]);
 
   const items = [
     {

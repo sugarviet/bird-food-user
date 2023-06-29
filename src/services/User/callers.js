@@ -16,7 +16,6 @@ export const updateProfile = async (body) => {
 }
 
 export const updateSelectedItems = async (body) => {
-  console.log(body)
   const res = await axios.create({withCredentials: true,})
                           .post(USER_SELECTED_ITEM_API, body)
 
