@@ -6,6 +6,7 @@ import styles from './ReviewOrder.module.css'
 import PaymentMethod from "../PaymentMethod";
 import PropTypes from 'prop-types';
 import { useCheckout } from "../../../../services/Checkout/services";
+import { useState } from "react";
 
 const { Panel } = Collapse
 
@@ -15,19 +16,31 @@ ReviewOrder.propTypes = {
 };
 
 function ReviewOrder({ shippingInputList, cartItems }) {
-    console.log(cartItems)
+
     const { mutate } = useCheckout();
+    const [formValues, setFormValues] = useState({});
 
     const detail_product = cartItems.map((item) => ({
         product: item.id,
         quantity: item.quantity,
     }));
-    
+
+    const handleFormChange = (name, value) => {
+        setFormValues((prevFormValues) => ({
+            ...prevFormValues,
+            [name]: value,
+        }));
+    };
     const handleSubmitCheckout = () => {
         try {
             mutate({
                 detail_product: detail_product,
                 total_price: total,
+                addresses: {
+                    ward: formValues.Ward || shippingInputList.find(input => input.name === "Ward")?.value || "",
+                    district: formValues.District || shippingInputList.find(input => input.name === "District")?.value || "",
+                    province: formValues.Province || shippingInputList.find(input => input.name === "Province")?.value || "",
+                },
             });
             localStorage.removeItem('cart');
         } catch (error) {
@@ -50,7 +63,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
                         header="Shipping Address"
                         className={`${styles.panel}`}
                     >
-                        <Form inputList={shippingInputList} />
+                        <Form inputList={shippingInputList} onFormChange={handleFormChange} />
                     </Panel>
                 </Collapse>
 

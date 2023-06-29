@@ -35,7 +35,6 @@ const Navbar = () => {
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (decodedToken) {
       setLoggedIn(true);
