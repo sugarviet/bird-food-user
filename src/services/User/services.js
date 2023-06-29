@@ -34,8 +34,6 @@ export const useUpdateUserProfile = () => {
   };
 
   export const useUpdateUserSelectedItems = () => {
-    const queryClient = useQueryClient();
-
     return useMutation(updateSelectedItems, {
       onSuccess: () => {
         // notification.success({

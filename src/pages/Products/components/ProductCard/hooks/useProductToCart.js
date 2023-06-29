@@ -3,7 +3,7 @@ import { UserContext } from "../../../../../store/User";
 import { setSelectedProducts } from "../../../../../store/User/Reducer";
 
 const useProductToCart = () => {
-  const [user, dispatch] = useContext(UserContext);
+  const [dispatch] = useContext(UserContext);
 
   const addToCart = (bird) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];

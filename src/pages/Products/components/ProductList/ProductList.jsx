@@ -9,7 +9,7 @@ import { useUpdateUserSelectedItems } from "../../../../services/User/services";
 import { UserContext } from "../../../../store/User";
 
 function ProductList() {
-  const [user, dispatch] = useContext(UserContext)
+  const [user] = useContext(UserContext)
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
@@ -28,7 +28,7 @@ function ProductList() {
 
   const handleStoreData = () => {
     console.log("re-load")
-    // updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
+    updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
   }
 
   const handleSelectCategory = (categoryId) => {

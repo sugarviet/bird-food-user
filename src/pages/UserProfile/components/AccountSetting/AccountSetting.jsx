@@ -1,7 +1,7 @@
-import { Input, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import styles from './AccountSetting.module.css'
 import ValidationInput from '../ValidationInput';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../../../store/User';
 import { setName, setPhone } from '../../../../store/User/Reducer';
 import { useUpdateUserProfile } from '../../../../services/User/services';
@@ -12,7 +12,7 @@ function AccountSetting() {
 
     const {mutate:updateUserProfile} = useUpdateUserProfile()
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         updateUserProfile({type: 'userProfile', fullName: user.fullName, phone: user.phone})
         //TODO show toast here
     }

@@ -1,6 +1,4 @@
 import { Col, Row, Select, Input, Button } from "antd";
-import Loading from "../../../../components/Loading/Loading";
-import { useGetCities, useGetProvinces } from "../../../../services/Location/services";
 import { CloseOutlined } from "@ant-design/icons";
 import styles from './AddressCard.module.css'
 import { useState } from "react";

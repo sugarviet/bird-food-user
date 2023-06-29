@@ -23,7 +23,7 @@ const { Search } = Input;
 
 const Navbar = () => {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")) || []);
-  const [user, dispatch] = useContext(UserContext)
+  const [user] = useContext(UserContext)
   
   useEffect(() => {
     const localCart = localStorage.getItem("cart");

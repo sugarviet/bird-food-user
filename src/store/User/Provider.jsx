@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer} from "react";
 import Context from "./Context";
 import reducer, {setInitState} from "./Reducer";
 import jwtDecode from 'jwt-decode';

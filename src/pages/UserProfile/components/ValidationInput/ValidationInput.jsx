@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { Input } from "antd";
 import { WarningOutlined } from "@ant-design/icons";
 import styles from './ValidationInput.module.css'
