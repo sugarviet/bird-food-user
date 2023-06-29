@@ -5,9 +5,10 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export const checkout = async ({detail_product,  total_price }) => {
-  console.log("dataReservation", {detail_product,  total_price });
+export const checkout = async ({ addresses, detail_product, total_price }) => {
+  console.log("dataReservation", { addresses, detail_product, total_price });
   const res = await instance.post(API_CHECKOUT.CHECKOUT, {
+    addresses,
     detail_product,
     total_price
   });
