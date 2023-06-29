@@ -6,6 +6,7 @@ import AccountSetting from "./components/AccountSetting";
 import PasswordSetting from "./components/PasswordSetting";
 import AddressSetting from "./components/AddressSetting";
 import UsernameSetting from "./components/UsernameSetting/UsernameSetting";
+import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 
 const tabs = [
   {
@@ -22,6 +23,11 @@ const tabs = [
     title: "Password & Security",
     description: "Details about your password",
     children: <PasswordSetting />,
+  },
+  {
+    title: "My Purchase",
+    description: "Details about your order",
+    children: <PurchaseHistory />,
   },
 ];
 
