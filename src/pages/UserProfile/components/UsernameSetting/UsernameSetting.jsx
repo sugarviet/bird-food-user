@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../../../store/User';
 
 function UsernameSetting() {
-    const [user, dispatch] = useContext(UserContext)
+    const [user] = useContext(UserContext)
 
     return (  
         <div className={`${styles.wrapper}`}>
