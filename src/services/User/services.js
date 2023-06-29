@@ -1,7 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { notification } from "antd";
 import {
     getUserByUserName,
-    updateProfile
+    updateProfile,
+    updateSelectedItems
 } from './callers';
 
 
@@ -27,6 +29,25 @@ export const useUpdateUserProfile = () => {
           message: "update fail",
           description: "Server is not responding now",
         });
+      },
+    });
+  };
+
+  export const useUpdateUserSelectedItems = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation(updateSelectedItems, {
+      onSuccess: () => {
+        // notification.success({
+        //   message: "Update successfully",
+        // });
+        // queryClient.invalidateQueries('user');
+      },
+      onError: () => {
+        // notification.error({
+        //   message: "update fail",
+        //   description: "Server is not responding now",
+        // });
       },
     });
   };

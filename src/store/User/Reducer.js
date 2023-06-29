@@ -3,6 +3,7 @@ const SET_NAME = 'set_name'
 const SET_PHONE = 'set_phone'
 const SET_INIT_STATE = 'set_init_state'
 const SET_ADDRESSES = 'set_addresses'
+const SET_SELECTED_PRODUCTS = 'set_selected_products'
 
 const setName = payload => ({
     type: SET_NAME,
@@ -16,6 +17,11 @@ const setPhone = payload => ({
 
 const setAddresses = payload => ({
     type: SET_ADDRESSES,
+    payload: payload
+})
+
+const setSelectedProducts = payload => ({
+    type: SET_SELECTED_PRODUCTS,
     payload: payload
 })
 
@@ -43,10 +49,15 @@ const reducer = (state, action) => {
                 ...state,
                 addresses: action.payload
             }
+        case SET_SELECTED_PRODUCTS:
+            return {
+                ...state,
+                selectedItems: action.payload
+            }
         default:
             throw new Error('Invalid Action')
     }
 }
 
-export {setInitState, setName, setPhone, setAddresses}
+export {setInitState, setName, setPhone, setAddresses, setSelectedProducts}
 export default reducer

@@ -4,15 +4,31 @@ import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 import useCategories from "../../hooks/useCategories";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useUpdateUserSelectedItems } from "../../../../services/User/services";
+import { UserContext } from "../../../../store/User";
 
 function ProductList() {
+  const [user, dispatch] = useContext(UserContext)
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
-  
-  if (isProductsLoading || isCategoriesLoading) {
-    return <Loading />;
+  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
+
+  useEffect(() => {
+        window.addEventListener('beforeunload', handleStoreData)
+
+        return () => {
+            if(user.selectedItems && user.selectedCombo) 
+                handleStoreData()
+            
+            window.removeEventListener('beforeunload', handleStoreData)
+        }
+  },[])
+
+  const handleStoreData = () => {
+    console.log("re-load")
+    // updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
   }
 
   const handleSelectCategory = (categoryId) => {
@@ -24,8 +40,6 @@ function ProductList() {
     setParam({ categoryName: categoryName });
     setSelectedCategory(categoryId);
   };
-
-  // console.log(isProductsLoading, isCategoriesLoading);
 
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
@@ -39,12 +53,6 @@ function ProductList() {
       </div>
       <h1 className={styles.textProducts}>Our Products</h1>
       <div className={styles.textDevide}>
-        {/* <div>
-          <p className={styles.textDescription}>
-            Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. <br />
-            Ipsum diam justo sed rebum vero dolor duo.
-          </p>
-        </div> */}
         <div className={styles.categoryContent}>
           <Space wrap>
             {categories?.map((category) => (

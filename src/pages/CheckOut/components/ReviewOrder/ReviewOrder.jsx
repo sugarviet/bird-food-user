@@ -22,6 +22,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
         product: item.id,
         quantity: item.quantity,
     }));
+    
     const handleSubmitCheckout = () => {
         try {
             mutate({

@@ -1,6 +1,6 @@
 import { Layout, Button, Input, Tooltip, Dropdown, Badge } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo1.png";
 
 import {
@@ -16,22 +16,21 @@ import styles from "./Navbar.module.css";
 import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
 import { useToken } from "../../services/Login/services";
+import { UserContext } from "../../store/User";
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
-  const [cartItems, setCartItems] = useState([]);
-
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+  const [user, dispatch] = useContext(UserContext)
+  
   useEffect(() => {
     const localCart = localStorage.getItem("cart");
     if (localCart) {
       setCartItems(JSON.parse(localCart));
     }
-  }, []);
-
-
-
+  }, [user]);
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
