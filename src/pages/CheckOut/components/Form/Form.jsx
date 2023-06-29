@@ -11,9 +11,11 @@ Form.propTypes = {
       prefix: PropTypes.element.isRequired,
     })
   ),
+  onFormChange: PropTypes.func.isRequired,
 };
 
-function Form({ inputList }) {
+function Form({ inputList, onFormChange  }) {
+
   return (
     <Fragment>
       {inputList.map((input) => (
@@ -22,8 +24,10 @@ function Form({ inputList }) {
             size="large"
             className={`${styles.input}`}
             type={input.type}
+            defaultValue={input.value}
             placeholder={input.name}
             prefix={input.prefix}
+            onChange={(e) => onFormChange(input.name, e.target.value)}
           />
         </div>
       ))}
