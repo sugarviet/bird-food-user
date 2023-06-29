@@ -11,6 +11,7 @@ Form.propTypes = {
       prefix: PropTypes.element.isRequired,
     })
   ),
+  onFormChange: PropTypes.func.isRequired,
 };
 
 function Form({ inputList, onFormChange  }) {

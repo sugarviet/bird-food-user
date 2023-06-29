@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { checkout } from "./callers";
 import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
