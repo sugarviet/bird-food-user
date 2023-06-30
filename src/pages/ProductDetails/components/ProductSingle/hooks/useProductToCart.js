@@ -5,12 +5,15 @@ import { setSelectedProducts } from "../../../../../store/User/Reducer";
 const useProductToCart = () => {
   const [, dispatch] = useContext(UserContext); 
 
-  const addToCart = (bird) => {
+  const addToCart = (bird, quantity) => { // Thêm tham số "quantity" cho số lượng sản phẩm
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItemIndex = storedCart.findIndex((item) => item.productName === bird.productName);
+    const existingItemIndex = storedCart.findIndex(
+      (item) => item.productName === bird.productName
+    );
 
     if (existingItemIndex !== -1) {
-      const updatedQuantity = storedCart[existingItemIndex].quantity + 1;
+      const updatedQuantity = storedCart[existingItemIndex].quantity + quantity; // Sử dụng "quantity" được truyền vào
+
       const availableQuantity = bird.quantity;
 
       if (updatedQuantity <= availableQuantity) {
@@ -24,9 +27,9 @@ const useProductToCart = () => {
         id: bird._id,
         productName: bird.productName,
         image: bird.image,
-        quantity: 1,
+        quantity: quantity, // Sử dụng "quantity" được truyền vào
         stock: bird.quantity,
-        price: bird.price
+        price: bird.price,
       });
       localStorage.setItem("cart", JSON.stringify(storedCart));
       dispatch(setSelectedProducts(storedCart));

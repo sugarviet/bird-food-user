@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import styles from "./CartItems.module.css";
 
 const CartItem = ({ items, removeFromCart, updateQuantity }) => {
+
+
   const openNotification = (name) => {
     notification.success({
       message: 'Successfully deleted ',
@@ -20,6 +22,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
     });
   }
   return (
+
     <div>
       <List
         dataSource={items}
@@ -61,11 +64,11 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                 value={item.quantity}
                 onChange={(e) => {
                   const value = parseInt(e.target.value, 10);
-                  const maxStock = item.stock; 
+                  const maxStock = item.stock;
 
                   if (value > maxStock) {
                     openNotificationError(maxStock);
-                    updateQuantity(item.id, maxStock); 
+                    updateQuantity(item.id, maxStock);
                   } else if (value !== 0) {
                     updateQuantity(item.id, value);
                   } else {
@@ -81,12 +84,13 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
               />
             </div>
             <div className={styles.cartItemControls}>
-              <p className={styles.itemPrice}>{item.price.toLocaleString()} VND</p>
+              <p className={styles.itemPrice}>{item.price} VND</p>
             </div>
           </List.Item>
         )}
       />
     </div>
+
   );
 };
 

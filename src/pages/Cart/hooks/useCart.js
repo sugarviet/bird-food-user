@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../../store/User";
+import { setSelectedProducts } from "../../../store/User/Reducer";
 function useCart() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([JSON.parse(localStorage.getItem("cart")) || []]);
+  const [user] = useContext(UserContext)
+  const [, dispatch] = useContext(UserContext);
 
   useEffect(() => {
     const localCart = localStorage.getItem("cart");
     if (localCart) {
       setItems(JSON.parse(localCart));
     }
-  }, []);
+  }, [user]);
 
   const updateLocalStorage = (updatedItems) => {
     localStorage.setItem("cart", JSON.stringify(updatedItems));
@@ -18,6 +21,7 @@ function useCart() {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
     updateLocalStorage(updatedItems);
+    dispatch(setSelectedProducts(updatedItems));
   };
 
   const updateQuantity = (id, quantity) => {
@@ -26,6 +30,7 @@ function useCart() {
     );
     setItems(updatedItems);
     updateLocalStorage(updatedItems);
+    dispatch(setSelectedProducts(updatedItems));
   };
 
   const calculateTotalPrice = () => {

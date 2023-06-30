@@ -14,6 +14,7 @@ function ProductSingle() {
     handleSizeSelectionChange,
     product,
     quantity,
+    handleAddToCart,
     isLoading,
   } = useProductSingle(productId);
 
@@ -122,6 +123,7 @@ function ProductSingle() {
               <p>
                 <button
                   className={`${styles.addToCartButton} ${styles.clickable} ${styles.marginTop4}`}
+                  onClick={handleAddToCart}
                 >
                   <span>Add to cart</span>
                 </button>

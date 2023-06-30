@@ -1,14 +1,15 @@
 import { Button, Row, Col, notification } from "antd";
 import styles from "./Cart.module.css";
 import { SendOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCart from "./hooks/useCart";
 import CartItems from "./components/CartItems";
-
+import { useToken } from "../../services/Login/services";
 const Cart = () => {
   const { calculateTotalPrice, items, removeFromCart, updateQuantity } =
     useCart();
 
+  const decodeToken = useToken();
   const navigate = useNavigate();
   const handleCheckout = () => {
     if (items.length > 0) {
@@ -45,21 +46,38 @@ const Cart = () => {
           </Row>
 
           {/* Render all the items in the cart */}
-          <CartItems
-            items={items}
+          {decodeToken ? (
+            <CartItems
+              items={items}
+              removeFromCart={removeFromCart}
+              updateQuantity={updateQuantity}
+            />
+          ) : (<CartItems
             removeFromCart={removeFromCart}
             updateQuantity={updateQuantity}
-          />
+          />)}
         </div>
 
         <div className={styles.cartFooter}>
           <div className={styles.totalPrice}>
             <span>Total Price:</span>
-            <span className={styles.priceValue}>{calculateTotalPrice()} VND</span>
+            {decodeToken ? (
+              <span className={styles.priceValue}>{calculateTotalPrice()} VND</span>
+            ) : (
+              <span className={styles.priceValue}>0 VND</span>
+            )}
           </div>
-          <Button type="primary" className={styles.checkoutButton} onClick={() => handleCheckout()}>
-            Proceed to Checkout <SendOutlined />
-          </Button>
+          {decodeToken ? (
+            <Button type="primary" className={styles.checkoutButton} onClick={() => handleCheckout()}>
+              Proceed to Checkout <SendOutlined />
+            </Button>
+          ) : (
+            <Link to='/login'>
+              <Button type="primary" className={styles.checkoutButton}>
+                Proceed to Checkout <SendOutlined />
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </section>
