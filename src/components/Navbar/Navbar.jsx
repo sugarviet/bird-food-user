@@ -43,6 +43,7 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    // localStorage.setItem("cart", JSON.stringify([]));
     setLoggedIn(false);
     navigate("/");
   };
@@ -134,13 +135,21 @@ const Navbar = () => {
                 </Tooltip>
               </li>
               <li>
-                <Link to={"/cart"}>
-                  <Tooltip placement="bottom" title={"Cart"}>
-                    <Badge count={cartItems.length}>
+                {loggedIn ? (
+                  <Link to={"/cart"}>
+                    <Tooltip placement="bottom" title={"Cart"}>
+                      <Badge count={cartItems.length}>
+                        <Button icon={<ShoppingCartOutlined />} shape="circle" />
+                      </Badge>
+                    </Tooltip>
+                  </Link>
+                ) : (
+                  <Link to={"/login"}>
+                    <Tooltip placement="bottom" title={"Cart"}>
                       <Button icon={<ShoppingCartOutlined />} shape="circle" />
-                    </Badge>
-                  </Tooltip>
-                </Link>
+                    </Tooltip>
+                  </Link>
+                )}
               </li>
               <li>
                 {loggedIn ? (

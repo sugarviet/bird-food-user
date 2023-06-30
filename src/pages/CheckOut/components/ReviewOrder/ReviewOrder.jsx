@@ -7,7 +7,9 @@ import PaymentMethod from "../PaymentMethod";
 import PropTypes from 'prop-types';
 import { useCheckout } from "../../../../services/Checkout/services";
 import { useState } from "react";
-
+import { useContext } from "react";
+import { UserContext } from "../../../../store/User";
+import { setSelectedProducts } from "../../../../store/User/Reducer";
 const { Panel } = Collapse
 
 ReviewOrder.propTypes = {
@@ -19,6 +21,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
 
     const { mutate } = useCheckout();
     const [formValues, setFormValues] = useState({});
+    const [, dispatch] = useContext(UserContext);
 
     const detail_product = cartItems.map((item) => ({
         product: item.id,
@@ -37,12 +40,13 @@ function ReviewOrder({ shippingInputList, cartItems }) {
                 detail_product: detail_product,
                 total_price: total,
                 addresses: {
-                    ward: formValues.Ward || shippingInputList.find(input => input.name === "Ward")?.value || "",
-                    district: formValues.District || shippingInputList.find(input => input.name === "District")?.value || "",
-                    province: formValues.Province || shippingInputList.find(input => input.name === "Province")?.value || "",
+                    ward_name: formValues.Ward || shippingInputList.find(input => input.name === "Ward")?.value || "",
+                    district_name: formValues.District || shippingInputList.find(input => input.name === "District")?.value || "",
+                    province_name: formValues.Province || shippingInputList.find(input => input.name === "Province")?.value || "",
                 },
             });
-            localStorage.removeItem('cart');
+            localStorage.setItem("cart", JSON.stringify([]));
+            dispatch(setSelectedProducts(JSON.parse(localStorage.getItem("cart"))));
         } catch (error) {
             console.error(error);
         }

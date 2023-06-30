@@ -3,7 +3,7 @@ import { Tabs } from 'antd';
 import { useState } from 'react';
 import Pending from '../Pending/Pending';
 import Shipping from '../Shipping/Shipping';
-import Completed from '../../Completed/Completed';
+import Completed from '../Completed/Completed';
 const tabs = [
     {
         label: "Pending",
