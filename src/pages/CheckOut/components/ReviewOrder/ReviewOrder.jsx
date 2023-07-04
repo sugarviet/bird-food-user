@@ -17,9 +17,8 @@ ReviewOrder.propTypes = {
     cartItems: PropTypes.array.isRequired,
 };
 
-function ReviewOrder({ shippingInputList, cartItems }) {
+function ReviewOrder({ shippingInputList, cartItems, handleCheckOut }) {
 
-    const { mutate } = useCheckout();
     const [formValues, setFormValues] = useState({});
     const [, dispatch] = useContext(UserContext);
 
@@ -34,27 +33,11 @@ function ReviewOrder({ shippingInputList, cartItems }) {
             [name]: value,
         }));
     };
-    const handleSubmitCheckout = () => {
-        try {
-            mutate({
-                detail_product: detail_product,
-                total_price: total,
-                addresses: {
-                    ward_name: formValues.Ward || shippingInputList.find(input => input.name === "Ward")?.value || "",
-                    district_name: formValues.District || shippingInputList.find(input => input.name === "District")?.value || "",
-                    province_name: formValues.Province || shippingInputList.find(input => input.name === "Province")?.value || "",
-                },
-            });
-            localStorage.setItem("cart", JSON.stringify([]));
-            dispatch(setSelectedProducts(JSON.parse(localStorage.getItem("cart"))));
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
     var total = cartItems.reduce((total, current) => {
         return total + current.quantity * current.price;
     }, 0)
+
     return (
         <Row style={{ margin: '2rem 0', padding: '0 4rem' }} gutter={16}>
             <Col span={16}>
@@ -64,7 +47,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
                     expandIcon={() => <CheckCircleFilled style={{ color: 'var(--primary-color)' }} />}
                 >
                     <Panel
-                        header="Shipping Address"
+                        header="Shipping Detail"
                         className={`${styles.panel}`}
                     >
                         <Form inputList={shippingInputList} onFormChange={handleFormChange} />
@@ -127,7 +110,7 @@ function ReviewOrder({ shippingInputList, cartItems }) {
                         </tbody>
                     </table>
                 </Collapse>
-                <Button onClick={handleSubmitCheckout} style={{ marginTop: '1rem' }} type="primary" shape="round" size='large'> Check out </Button>
+                <Button onClick={() => handleCheckOut(detail_product, total)} style={{ marginTop: '1rem' }} type="primary" shape="round" size='large'> Check out </Button>
             </Col>
         </Row >
     );
