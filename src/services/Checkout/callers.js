@@ -10,9 +10,8 @@ export const checkout = async ({ addresses, detail_product, total_price }) => {
   const res = await instance.post(API_CHECKOUT.CHECKOUT, {
     addresses,
     detail_product,
-    total_price
+    total_price,
   });
 
   return res.data;
 };
-

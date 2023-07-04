@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useGetBirdFoodById } from "../../../../../services/Product/services";
 import useProductToCart from "./useProductToCart";
-import { notification } from 'antd'
+import { notification } from "antd";
 
 function useComboSingle(id) {
   const { data: product, isLoading } = useGetBirdFoodById(id);
@@ -19,11 +19,11 @@ function useComboSingle(id) {
     setQuantity(quantity - 1);
   };
 
-  const handleSizeSelectionChange = () => { };
+  const handleSizeSelectionChange = () => {};
 
   const handleAddToCart = () => {
     try {
-      const updatedProduct = { ...product};
+      const updatedProduct = { ...product };
       addToCart(updatedProduct, quantity);
       openNotification(product.name);
     } catch (error) {
@@ -33,14 +33,14 @@ function useComboSingle(id) {
 
   const openNotification = (productName) => {
     notification.success({
-      message: 'Successfully added',
+      message: "Successfully added",
       description: `${productName}  has been added to cart.`,
       duration: 2,
     });
   };
   const openNotificationError = (productName) => {
     notification.error({
-      message: 'Error',
+      message: "Error",
       description: `You have reached the maximum quantity available for ${productName}.`,
       duration: 2,
     });

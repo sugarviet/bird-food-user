@@ -11,7 +11,7 @@ export const useCheckout = () => {
         message: "Checkout Added",
         description: "The checkout has been added successfully.",
       });
-      navigate('/');
+      navigate("/");
     },
     onError: () => {
       notification.error({

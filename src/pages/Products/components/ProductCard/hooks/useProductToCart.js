@@ -3,11 +3,13 @@ import { UserContext } from "../../../../../store/User";
 import { setSelectedProducts } from "../../../../../store/User/Reducer";
 
 const useProductToCart = () => {
-  const [, dispatch] = useContext(UserContext); 
+  const [, dispatch] = useContext(UserContext);
 
   const addToCart = (bird) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItemIndex = storedCart.findIndex((item) => item.productName === bird.productName);
+    const existingItemIndex = storedCart.findIndex(
+      (item) => item.productName === bird.productName
+    );
 
     if (existingItemIndex !== -1) {
       const updatedQuantity = storedCart[existingItemIndex].quantity + 1;
@@ -26,7 +28,7 @@ const useProductToCart = () => {
         image: bird.image,
         quantity: 1,
         stock: bird.quantity,
-        price: bird.price
+        price: bird.price,
       });
       localStorage.setItem("cart", JSON.stringify(storedCart));
       dispatch(setSelectedProducts(storedCart));

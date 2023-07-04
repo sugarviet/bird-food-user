@@ -14,8 +14,7 @@ Form.propTypes = {
   onFormChange: PropTypes.func.isRequired,
 };
 
-function Form({ inputList, onFormChange  }) {
-
+function Form({ inputList, onFormChange }) {
   return (
     <Fragment>
       {inputList.map((input) => (

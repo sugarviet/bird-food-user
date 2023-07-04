@@ -150,7 +150,7 @@ const ContactUsContent = () => {
           tabIndex="0"
         ></iframe>
       </div>
-        </div>
-    )
-}
+    </div>
+  );
+};
 export default ContactUsContent;

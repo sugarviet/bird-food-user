@@ -24,10 +24,9 @@ const carouselData = [
   },
 ];
 
-
 const Banner = () => {
   return (
-    <Carousel  autoplay className={styles.sliderWrapper}>
+    <Carousel autoplay className={styles.sliderWrapper}>
       {carouselData.map((slide) => (
         <div key={slide.id} className={styles.sliderContent}>
           <div className={styles.sliderImgContainer}>
