@@ -3,7 +3,7 @@ import { getAllCombos } from "./callers";
 
 export const useGetAllCombos = () => {
   return useQuery({
-    queryKey: ["blogs"],
+    queryKey: ["combos"],
     queryFn: () => getAllCombos(),
   });
 };
