@@ -17,7 +17,9 @@ import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
 import { useToken } from "../../services/Login/services";
 import { UserContext } from "../../store/User";
-import { setSelectedProducts } from "../../store/User/Reducer";
+
+import { useLogOut } from "../../services/LogOut/services";
+
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -25,7 +27,7 @@ const { Search } = Input;
 const Navbar = () => {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")) || []);
   const [user] = useContext(UserContext)
-  
+  const { mutate } = useLogOut();
   useEffect(() => {
     const cart = user.selectedItems
     console.log(cart)
@@ -48,10 +50,9 @@ const Navbar = () => {
   }, [decodedToken]);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    mutate();
     localStorage.setItem("cart", JSON.stringify([]));
     setLoggedIn(false);
-    navigate("/");
   };
 
   const items = [
