@@ -2,8 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../store/User";
 import { setSelectedProducts } from "../../../store/User/Reducer";
 function useCart() {
-  const [items, setItems] = useState([JSON.parse(localStorage.getItem("cart")) || []]);
-  const [user] = useContext(UserContext)
+  const [items, setItems] = useState([
+    JSON.parse(localStorage.getItem("cart")) || [],
+  ]);
+  const [user] = useContext(UserContext);
   const [, dispatch] = useContext(UserContext);
 
   useEffect(() => {

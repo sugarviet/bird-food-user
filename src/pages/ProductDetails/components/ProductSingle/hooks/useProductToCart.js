@@ -3,9 +3,10 @@ import { UserContext } from "../../../../../store/User";
 import { setSelectedProducts } from "../../../../../store/User/Reducer";
 
 const useProductToCart = () => {
-  const [, dispatch] = useContext(UserContext); 
+  const [, dispatch] = useContext(UserContext);
 
-  const addToCart = (bird, quantity) => { // Thêm tham số "quantity" cho số lượng sản phẩm
+  const addToCart = (bird, quantity) => {
+    // Thêm tham số "quantity" cho số lượng sản phẩm
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const existingItemIndex = storedCart.findIndex(
       (item) => item.productName === bird.productName

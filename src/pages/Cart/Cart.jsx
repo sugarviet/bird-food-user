@@ -20,11 +20,11 @@ const Cart = () => {
   };
   const openNotification = () => {
     notification.error({
-      message: 'Checkout error',
+      message: "Checkout error",
       description: `Your cart is empty !`,
       duration: 2,
     });
-  }
+  };
   return (
     <section className={styles.shoppingCartContainer}>
       <div className={styles.shoppingCart}>
@@ -52,27 +52,35 @@ const Cart = () => {
               removeFromCart={removeFromCart}
               updateQuantity={updateQuantity}
             />
-          ) : (<CartItems
-            removeFromCart={removeFromCart}
-            updateQuantity={updateQuantity}
-          />)}
+          ) : (
+            <CartItems
+              removeFromCart={removeFromCart}
+              updateQuantity={updateQuantity}
+            />
+          )}
         </div>
 
         <div className={styles.cartFooter}>
           <div className={styles.totalPrice}>
             <span>Total Price:</span>
             {decodeToken ? (
-              <span className={styles.priceValue}>{calculateTotalPrice()} VND</span>
+              <span className={styles.priceValue}>
+                {calculateTotalPrice()} VND
+              </span>
             ) : (
               <span className={styles.priceValue}>0 VND</span>
             )}
           </div>
           {decodeToken ? (
-            <Button type="primary" className={styles.checkoutButton} onClick={() => handleCheckout()}>
+            <Button
+              type="primary"
+              className={styles.checkoutButton}
+              onClick={() => handleCheckout()}
+            >
               Proceed to Checkout <SendOutlined />
             </Button>
           ) : (
-            <Link to='/login'>
+            <Link to="/login">
               <Button type="primary" className={styles.checkoutButton}>
                 Proceed to Checkout <SendOutlined />
               </Button>

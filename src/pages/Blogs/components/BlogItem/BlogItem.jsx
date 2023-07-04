@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./BlogItem.module.css";
 import { Link } from "react-router-dom";
 
-
 function BlogItem({ blog }) {
-
   return (
     <div className={styles.blogItems}>
       <div>

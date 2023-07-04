@@ -3,7 +3,7 @@ import { useGetAllCombos } from "../../../services/Combo/services";
 
 function useComboList() {
   const { data, isLoading } = useGetAllCombos();
-  console.log('dataCombo', data);
+  console.log("dataCombo", data);
 
   const firstCarouselData = data?.slice(0, 8);
 
@@ -26,7 +26,7 @@ function useComboList() {
 
     isLoading,
 
-    data
+    data,
   };
 }
 

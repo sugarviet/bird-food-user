@@ -1,5 +1,5 @@
 import styles from "./TabSetting.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function TabSetting({ tab, isActive, handleOnClick }) {
   return (

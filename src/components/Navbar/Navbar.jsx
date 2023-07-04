@@ -22,9 +22,11 @@ const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
-  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")) || []);
-  const [user] = useContext(UserContext)
-  
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+  const [user] = useContext(UserContext);
+
   useEffect(() => {
     const localCart = localStorage.getItem("cart");
     if (localCart) {
@@ -139,7 +141,10 @@ const Navbar = () => {
                   <Link to={"/cart"}>
                     <Tooltip placement="bottom" title={"Cart"}>
                       <Badge count={cartItems.length}>
-                        <Button icon={<ShoppingCartOutlined />} shape="circle" />
+                        <Button
+                          icon={<ShoppingCartOutlined />}
+                          shape="circle"
+                        />
                       </Badge>
                     </Tooltip>
                   </Link>

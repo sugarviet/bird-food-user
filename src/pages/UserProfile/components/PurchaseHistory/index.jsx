@@ -1,1 +1,1 @@
-export {default} from './PurchaseHistory'
+export { default } from "./PurchaseHistory";

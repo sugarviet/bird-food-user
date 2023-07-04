@@ -5,24 +5,21 @@ import PropTypes from "prop-types";
 import styles from "./CartItems.module.css";
 
 const CartItem = ({ items, removeFromCart, updateQuantity }) => {
-
-
   const openNotification = (name) => {
     notification.success({
-      message: 'Successfully deleted ',
+      message: "Successfully deleted ",
       description: `Delete ${name} `,
       duration: 2,
     });
-  }
+  };
   const openNotificationError = (stock) => {
     notification.error({
-      message: 'Failed update quantity ',
+      message: "Failed update quantity ",
       description: `You can only buy max ${stock} in one checkout  `,
       duration: 2,
     });
-  }
+  };
   return (
-
     <div>
       <List
         dataSource={items}
@@ -39,19 +36,14 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                     removeFromCart(item.id);
                   }}
                 >
-                  <CloseOutlined style={{ color: 'red' }} />
+                  <CloseOutlined style={{ color: "red" }} />
                 </Button>
                 <div className={styles.productInfo}>
                   <div className={styles.imgWrapper}>
-                    <img
-                      src={item.image}
-                      alt=""
-                    />
+                    <img src={item.image} alt="" />
                   </div>
                   <div className={styles.itemName}>
-                    <small>
-                      {item.productName}
-                    </small>
+                    <small>{item.productName}</small>
                   </div>
                 </div>
               </div>
@@ -90,7 +82,6 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
         )}
       />
     </div>
-
   );
 };
 

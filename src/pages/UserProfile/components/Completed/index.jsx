@@ -1,1 +1,1 @@
-export {default} from './Completed'
+export { default } from "./Completed";
