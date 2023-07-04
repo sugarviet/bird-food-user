@@ -3,7 +3,7 @@ import { Tag } from 'antd';
 import { CheckOutlined, CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { Fragment } from 'react';
 
-function AddressCard({ address, onSetDefault, handleOpenModal }) {
+function AddressCard({ address, onSetDefault, onDelete, handleOpenModal }) {
     return (
         <div className={`${styles.wrapper}`}>
             {address == undefined ?
@@ -29,7 +29,7 @@ function AddressCard({ address, onSetDefault, handleOpenModal }) {
                         </div>
                     </div>
 
-                    <button className={`${styles.removeBtn}`}><CloseOutlined /></button>
+                    <button onClick={() => onDelete(address)} className={`${styles.removeBtn}`}><CloseOutlined /></button>
                 </Fragment>
             }
         </div>

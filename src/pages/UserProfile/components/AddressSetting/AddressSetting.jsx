@@ -20,19 +20,32 @@ function AddressSetting() {
         const newAddresses = [...addresses, newAddress]
 
         dispatch(setAddresses(newAddresses))
+        updateAddresses({type: 'addresses', addresses: newAddresses})
+    }
+
+    const handleSetAddressDefault = (address) => {
+        let curDefaultAddress = addresses.find(add => add.isDefault)
+        let newAddress = addresses.find(add => add._id === address._id)
+
+        if(curDefaultAddress) curDefaultAddress.isDefault = false;
+        if(newAddress) newAddress.isDefault = true;
+
+        dispatch(setAddresses(addresses))
 
         updateAddresses({type: 'addresses', addresses: addresses})
     }
 
-    const handleSetAddressDefault = (address) => {
-        const newAddress = {...address, isDefault: true}
-    }
+    const handleDeleteAddress = (address) => {
+        const newAddresses = addresses.filter(add => add._id != address._id)
 
+        dispatch(setAddresses(newAddresses))
+        updateAddresses({type: 'addresses', addresses: newAddresses})
+    }
 
     useEffect(() => {
         const defaultAddress = addresses.find(address => address.isDefault)
 
-        setAddresses([defaultAddress, ...addresses.filter(address => !address.isDefault)])
+        dispatch(setAddresses([defaultAddress, ...addresses.filter(address => !address.isDefault)]))
     }, [])
 
     return (
@@ -45,7 +58,7 @@ function AddressSetting() {
 
                 {addresses.map( (address, index) =>
                     <Col key={index} span={12}>
-                        <AddressCard onSetDefault={handleSetAddressDefault} address={address}/>
+                        <AddressCard onDelete={handleDeleteAddress} onSetDefault={handleSetAddressDefault} address={address}/>
                     </Col>
                 )}
             </Row>

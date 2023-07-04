@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd';
 import styles from './AccountSetting.module.css'
 import ValidationInput from '../ValidationInput';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../../../store/User';
 import { setName, setPhone } from '../../../../store/User/Reducer';
 import { useUpdateUserProfile } from '../../../../services/User/services';
@@ -9,28 +9,20 @@ import { useUpdateUserProfile } from '../../../../services/User/services';
 
 function AccountSetting() {
     const [user, dispatch] = useContext(UserContext)
+    const [address, setAddress] = useState({});
 
     const {mutate:updateUserProfile} = useUpdateUserProfile()
 
     const handleSubmit = async () => {
         updateUserProfile({type: 'userProfile', fullName: user.fullName, phone: user.phone})
-        //TODO show toast here
     }
 
-    // useEffect(() => {
-    //     const handleStoreData = () => {
-    //         const stringData = JSON.stringify(user)
-    //         sessionStorage.setItem('user', stringData)
-    //     }
+    useEffect(() => {
+        if(!user.username) return;
 
-    //     window.addEventListener('beforeunload', handleStoreData)
-
-    //     return () => {
-    //         handleStoreData()
-    //         window.removeEventListener('beforeunload', handleStoreData)
-    //     }
-
-    // },[])
+        const defaultAddress = user.addresses.find(add => add.isDefault)
+        setAddress(defaultAddress)
+    }, [user])
 
     return (
         <div className={`${styles.wrapper}`}>
@@ -60,20 +52,30 @@ function AccountSetting() {
                         <ValidationInput
                             validateTypes={['required']}
                             title='Address'
+                            value={address.address}
                         />
                     </Col>
                 </Row>
                 <Row gutter={16}>
-                    <Col span={12}>
-                        <ValidationInput
-                            validateTypes={['required']}
-                            title='City'
-                        />
-                    </Col>
-                    <Col span={12}>
+                    <Col span={8}>
                         <ValidationInput
                             validateTypes={['required']}
                             title='Province'
+                            value={address.province_name}
+                        />
+                    </Col>
+                    <Col span={8}>
+                        <ValidationInput
+                            validateTypes={['required']}
+                            title='City'
+                            value={address.district_name}
+                        />
+                    </Col>
+                    <Col span={8}>
+                        <ValidationInput
+                            validateTypes={['required']}
+                            title='Ward'
+                            value={address.ward_name}
                         />
                     </Col>
                 </Row>

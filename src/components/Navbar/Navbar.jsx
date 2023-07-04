@@ -30,7 +30,7 @@ const Navbar = () => {
     if (localCart) {
       setCartItems(JSON.parse(localCart));
     }
-  }, [user]);
+  }, []);
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);

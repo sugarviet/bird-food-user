@@ -7,10 +7,10 @@ import axios from 'axios';
 const USER_API = 'http://localhost:8080/user'
 
 const defaultUser = {
-    username: 'username',
-    fullName: 'User Full Name',
-    email: 'username@gmail.com',
-    phone: '0123456789',
+    username: '',
+    fullName: '',
+    email: '',
+    phone: '',
     selectedCombo: [],
     selectedItems: [],
     addresses: []
