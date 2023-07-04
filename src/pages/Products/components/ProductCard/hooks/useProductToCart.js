@@ -21,7 +21,7 @@ const useProductToCart = () => {
       }
     } else {
       storedCart.push({
-        id: bird._id,
+        productId: bird._id,
         productName: bird.productName,
         image: bird.image,
         quantity: 1,

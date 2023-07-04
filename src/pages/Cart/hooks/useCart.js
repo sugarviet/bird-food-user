@@ -2,14 +2,20 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../store/User";
 import { setSelectedProducts } from "../../../store/User/Reducer";
 function useCart() {
-  const [items, setItems] = useState([JSON.parse(localStorage.getItem("cart")) || []]);
+  const [items, setItems] = useState([]);
   const [user] = useContext(UserContext)
   const [, dispatch] = useContext(UserContext);
 
+
   useEffect(() => {
-    const localCart = localStorage.getItem("cart");
-    if (localCart) {
-      setItems(JSON.parse(localCart));
+    const cart = user.selectedItems
+    console.log(cart)
+    if (cart) {
+      setItems(cart);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      setItems([]);
+      localStorage.setItem("cart", JSON.stringify([]));
     }
   }, [user]);
 
@@ -17,16 +23,16 @@ function useCart() {
     localStorage.setItem("cart", JSON.stringify(updatedItems));
   };
 
-  const removeFromCart = (id) => {
-    const updatedItems = items.filter((item) => item.id !== id);
+  const removeFromCart = (productId) => {
+    const updatedItems = items.filter((item) => item.productId !== productId);
     setItems(updatedItems);
     updateLocalStorage(updatedItems);
     dispatch(setSelectedProducts(updatedItems));
   };
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = (productId, quantity) => {
     const updatedItems = items.map((item) =>
-      item.id === id ? { ...item, quantity } : item
+      item.productId === productId ? { ...item, quantity } : item
     );
     setItems(updatedItems);
     updateLocalStorage(updatedItems);

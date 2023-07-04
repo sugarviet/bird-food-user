@@ -36,7 +36,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   className={styles.deleteIcon}
                   onClick={() => {
                     openNotification(item.productName);
-                    removeFromCart(item.id);
+                    removeFromCart(item.productId);
                   }}
                 >
                   <CloseOutlined style={{ color: 'red' }} />
@@ -68,17 +68,17 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
 
                   if (value > maxStock) {
                     openNotificationError(maxStock);
-                    updateQuantity(item.id, maxStock);
+                    updateQuantity(item.productId, maxStock);
                   } else if (value !== 0) {
-                    updateQuantity(item.id, value);
+                    updateQuantity(item.productId, value);
                   } else {
-                    updateQuantity(item.id, 1);
+                    updateQuantity(item.productId, 1);
                   }
                 }}
                 min={1}
                 onBlur={(e) => {
                   if (e.target.value.trim() === "") {
-                    removeFromCart(item.id);
+                    removeFromCart(item.productId);
                   }
                 }}
               />
