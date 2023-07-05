@@ -1,22 +1,23 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../store/User";
-import { setSelectedProducts } from "../../../store/User/Reducer";
+import { setSelectedCombos, setSelectedProducts } from "../../../store/User/Reducer";
 function useCart() {
-  const [items, setItems] = useState([]);
-  const [user] = useContext(UserContext)
-  const [, dispatch] = useContext(UserContext);
-
+  const [items, setItems] = useState([])
+  const [combos, setCombos] = useState([])
+  const [user, dispatch] = useContext(UserContext)
 
   useEffect(() => {
-    const cart = user.selectedItems
-    console.log(cart)
-    if (cart) {
-      setItems(cart);
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      setItems([]);
-      localStorage.setItem("cart", JSON.stringify([]));
-    }
+    localStorage.setItem("cart", JSON.stringify([]));
+
+    if(!user.username) return
+
+    setItems(user.selectedItems)
+
+    const formattedCombos =  user.selectedCombo.map(combo => ({...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount}))
+
+    setCombos(formattedCombos)
+
+    localStorage.setItem("cart", JSON.stringify(items));
   }, [user]);
 
   const updateLocalStorage = (updatedItems) => {
@@ -29,6 +30,11 @@ function useCart() {
     updateLocalStorage(updatedItems);
     dispatch(setSelectedProducts(updatedItems));
   };
+
+  const removeComboFromCart = (comboId) => {
+    const updatedCombos = combos.filter(combo => combo._id != comboId)
+    dispatch(setSelectedCombos(updatedCombos))
+  }
 
   const updateQuantity = (productId, quantity) => {
     const updatedItems = items.map((item) =>
@@ -46,14 +52,22 @@ function useCart() {
         total += item.price * item.quantity;
       }
     });
+    combos.forEach((item) => {
+      if (!isNaN(item.price) && !isNaN(item.quantity)) {
+        total += item.price * item.quantity;
+      }
+    });
     return total.toLocaleString();
   };
 
   return {
     items,
+    combos,
+    user,
     calculateTotalPrice,
     updateQuantity,
     removeFromCart,
+    removeComboFromCart,
   };
 }
 

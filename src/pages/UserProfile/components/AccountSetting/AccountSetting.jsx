@@ -23,7 +23,10 @@ function AccountSetting() {
   useEffect(() => {
     if (!user.username) return;
 
-    const defaultAddress = user.addresses.find((add) => add.isDefault);
+    let defaultAddress = user.addresses.find((add) => add.isDefault);
+
+    if(!defaultAddress) defaultAddress = {}
+
     setAddress(defaultAddress);
   }, [user]);
 

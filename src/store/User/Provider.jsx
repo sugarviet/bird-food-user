@@ -24,7 +24,11 @@ function Provider({ children }) {
       try {
         const token = localStorage.getItem("token");
 
-        if (!token) dispatch(setInitState(defaultUser));
+        if (!token) 
+        {
+            dispatch(setInitState(defaultUser));
+            return
+        }
 
         const decodedToken = jwtDecode(token);
 

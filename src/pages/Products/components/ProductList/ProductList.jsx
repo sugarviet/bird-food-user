@@ -9,29 +9,10 @@ import { useUpdateUserSelectedItems } from "../../../../services/User/services";
 import { UserContext } from "../../../../store/User";
 
 function ProductList() {
-  const [user] = useContext(UserContext)
   
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
-  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
-
-  useEffect(() => {
-        window.addEventListener('beforeunload', handleStoreData)
-
-        return () => {
-            if(user.selectedItems && user.selectedCombo) 
-                handleStoreData()
-            
-            window.removeEventListener('beforeunload', handleStoreData)
-        }
-  },[])
-
-  const handleStoreData = () => {
-    console.log("re-load")
-    updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
-  }
-
 
   const handleSelectCategory = (categoryId) => {
     const categoryName = categories.find(

@@ -4,13 +4,19 @@ import { Link } from "react-router-dom";
 import { EyeTwoTone, ShoppingTwoTone } from "@ant-design/icons";
 
 import useComboList from "../../hooks/useComboList";
-import { useToken } from "antd/es/theme/internal";
 import Loading from "../../../../components/Loading/Loading";
+import { useContext } from "react";
+import { UserContext } from "../../../../store/User";
+import { setSelectedCombos } from "../../../../store/User/Reducer";
+import { useToken } from "../../../../services/Login/services";
 
 const { Meta } = Card;
 
 const Combos = () => {
   const isLogged = useToken();
+
+  const [user, dispatch] = useContext(UserContext)
+  const {selectedCombo: selectedCombos} = user
 
   const { data, isLoading } = useComboList();
 
@@ -18,22 +24,28 @@ const Combos = () => {
     return <Loading />;
   }
 
-  const handleAddToCart = () => {
-    try {
-      // addToCart(bird);
-      // openNotification(bird.productName);
-    } catch (error) {
-      openNotificationError(error.message);
-    }
+  const handleAddToCart = (bird) => {
+      bird.quantity = 1
+      let combo = selectedCombos.find(c => c._id == bird._id)
+
+      let newSelectedCombos = selectedCombos
+
+      if(combo) combo.quantity += 1
+      else newSelectedCombos = [...selectedCombos, bird]
+
+      dispatch(setSelectedCombos(newSelectedCombos))
+
+      openNotification(bird.comboName);
   };
 
-  // const openNotification = (productName) => {
-  //   notification.success({
-  //     message: 'Successfully added',
-  //     description: `${productName}  has been added to cart.`,
-  //     duration: 2,
-  //   });
-  // };
+  const openNotification = (comboName) => {
+    notification.success({
+      message: 'Successfully added',
+      description: `${comboName}  has been added to cart.`,
+      duration: 2,
+    });
+  };
+
   const openNotificationError = (productName) => {
     notification.error({
       message: "Error",
@@ -89,7 +101,7 @@ const Combos = () => {
                       {isLogged ? (
                         <a
                           className={styles.actionDetailProduct}
-                          onClick={handleAddToCart}
+                          onClick={() => handleAddToCart(bird)}
                         >
                           <ShoppingTwoTone
                             className={styles.actionIconProduct}

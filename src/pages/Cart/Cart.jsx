@@ -5,15 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 import useCart from "./hooks/useCart";
 import CartItems from "./components/CartItems";
 import { useToken } from "../../services/Login/services";
+import { useEffect } from "react";
+import { useUpdateUserSelectedItems } from "../../services/User/services";
+
 const Cart = () => {
-  const { calculateTotalPrice, items, removeFromCart, updateQuantity } =
+  const { calculateTotalPrice, user,items, combos,removeFromCart, removeComboFromCart, updateQuantity } =
     useCart();
+  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
 
   const decodeToken = useToken();
   const navigate = useNavigate();
+  
   const handleCheckout = () => {
-    if (items.length > 0) {
-      navigate("/cart/checkout", { state: { data: items } });
+    if (items.length > 0 || combos.length > 0) {
+      navigate("/cart/checkout", { state: { data: [...items, ...formattedCombos] } });
     } else {
       openNotification();
     }
@@ -25,6 +30,20 @@ const Cart = () => {
       duration: 2,
     });
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombos})
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      handleBeforeUnload()
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [])
+
   return (
     <section className={styles.shoppingCartContainer}>
       <div className={styles.shoppingCart}>
@@ -35,7 +54,7 @@ const Cart = () => {
         <div className={styles.cartBody}>
           <Row className={styles.cartColumns}>
             <Col span={12}>
-              <p className={styles.cartColumnsTitle}>Item</p>
+              <p className={styles.cartColumnsTitle}>Product</p>
             </Col>
             <Col span={8}>
               <p className={styles.cartColumnsQuantity}>Quantity</p>
@@ -55,6 +74,34 @@ const Cart = () => {
           ) : (
             <CartItems
               removeFromCart={removeFromCart}
+              updateQuantity={updateQuantity}
+            />
+          )}
+        </div>
+
+        <div className={styles.cartBody}>
+          <Row className={styles.cartColumns}>
+            <Col span={12}>
+              <p className={styles.cartColumnsTitle}>Combo</p>
+            </Col>
+            <Col span={8}>
+              <p className={styles.cartColumnsQuantity}>Quantity</p>
+            </Col>
+            <Col span={4}>
+              <p className={styles.cartColumnsPrice}>Price</p>
+            </Col>
+          </Row>
+
+          {/* Render all the items in the cart */}
+          {decodeToken ? (
+            <CartItems
+              items={combos}
+              removeFromCart={removeComboFromCart}
+              updateQuantity={updateQuantity}
+            />
+          ) : (
+            <CartItems
+              removeFromCart={removeComboFromCart}
               updateQuantity={updateQuantity}
             />
           )}

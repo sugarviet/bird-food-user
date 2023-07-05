@@ -16,8 +16,6 @@ ProductCard.propTypes = {
 };
 
 function ProductCard({ bird }) {
-  
-
   const isLogged = useToken();
   const { Meta } = Card;
   const addToCart = useProductToCart();

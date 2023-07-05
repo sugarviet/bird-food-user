@@ -45,6 +45,8 @@ function AddressSetting() {
   useEffect(() => {
     const defaultAddress = addresses.find((address) => address.isDefault);
 
+    if(!defaultAddress) return;
+
     dispatch(
       setAddresses([
         defaultAddress,
