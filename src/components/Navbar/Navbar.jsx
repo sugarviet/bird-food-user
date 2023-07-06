@@ -23,22 +23,7 @@ const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
-  const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("cart")) || []
-  );
   const [user] = useContext(UserContext);
-
-  useEffect(() => {
-    const cart = user.selectedItems
-    console.log(cart)
-    if (cart) {
-      setCartItems(cart);
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      setCartItems([]);
-      localStorage.setItem("cart", JSON.stringify([]));
-    }
-  }, []);
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -50,8 +35,6 @@ const Navbar = () => {
   }, [decodedToken]);
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.setItem("cart", JSON.stringify([]));
     setLoggedIn(false);
     navigate("/");
   };
@@ -146,7 +129,7 @@ const Navbar = () => {
                 {loggedIn ? (
                   <Link to={"/cart"}>
                     <Tooltip placement="bottom" title={"Cart"}>
-                      <Badge count={cartItems.length}>
+                      <Badge count={user.selectedItems.length + user.selectedCombo.length}>
                         <Button
                           icon={<ShoppingCartOutlined />}
                           shape="circle"
