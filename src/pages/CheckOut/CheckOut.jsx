@@ -10,12 +10,13 @@ import {
 import { Fragment, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../store/User";
 import { useCheckout } from "../../services/Checkout/services";
+import { setSelectedCombos, setSelectedProducts } from "../../store/User/Reducer";
 
 const backgroundImage =
   "https://static.vecteezy.com/system/resources/previews/002/662/018/large_2x/easter-eggs-in-a-natural-nest-with-bird-eggs-on-a-pink-background-view-from-above-banner-photo.jpg";
 
 function CheckOut() {
-  const [user] = useContext(UserContext);
+  const [user, dispatch] = useContext(UserContext);
   const [defaultAddress, setDefaultAddress] = useState({});
   const [shippingInputList, setShippingInputList] = useState();
 
@@ -35,8 +36,8 @@ function CheckOut() {
           province_name: defaultAddress.province_name,
         },
       });
-      localStorage.setItem("cart", JSON.stringify([]));
-      dispatch(setSelectedProducts(JSON.parse(localStorage.getItem("cart"))));
+      dispatch(setSelectedCombos([]))
+      dispatch(setSelectedProducts([]))
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +46,7 @@ function CheckOut() {
   useEffect(() => {
     if (!user.username) return;
 
-    const address = user.addresses.find((address) => address.isDefault);
+    const address = user.addresses.find((address) => address.isDefault) || {};
 
     const newShippingInputList = [
       {
@@ -69,7 +70,7 @@ function CheckOut() {
       {
         name: "Address",
         type: "string",
-        value: `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`,
+        value: `${address ? '' : (`${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`)} `,
         prefix: <EnvironmentOutlined />,
       },
     ];
