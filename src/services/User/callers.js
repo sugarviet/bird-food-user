@@ -17,10 +17,10 @@ export const updateProfile = async (body) => {
 };
 
 export const updateSelectedItems = async ({selectedProducts, selectedCombos}) => {
-  const newProducts = selectedProducts.map(product => ({productId: product.productId, quantity: product.quantity}))
+  const newProducts = selectedProducts.map(product => ({productId: product._id, quantity: product.quantity}))
   const newCombos = selectedCombos.map(combo => ({comboId: combo._id, quantity: combo.quantity}))
 
-  console.log(newProducts, selectedCombos)
+  console.log(selectedProducts, selectedCombos)
   const res = await axios
     .create({ withCredentials: true })
     .post(USER_SELECTED_ITEM_API, {selectedProducts: newProducts, selectedCombos: newCombos});

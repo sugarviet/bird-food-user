@@ -9,14 +9,14 @@ import { useContext } from "react";
 import { UserContext } from "../../../../store/User";
 import { setSelectedCombos } from "../../../../store/User/Reducer";
 import { useToken } from "../../../../services/Login/services";
+import useCart from "../../../Cart/hooks/useCart";
 
 const { Meta } = Card;
 
 const Combos = () => {
   const isLogged = useToken();
 
-  const [user, dispatch] = useContext(UserContext)
-  const {selectedCombo: selectedCombos} = user
+  const {handleAddCombo} = useCart()
 
   const { data, isLoading } = useComboList();
 
@@ -25,15 +25,7 @@ const Combos = () => {
   }
 
   const handleAddToCart = (bird) => {
-      bird.quantity = 1
-      let combo = selectedCombos.find(c => c._id == bird._id)
-
-      let newSelectedCombos = selectedCombos
-
-      if(combo) combo.quantity += 1
-      else newSelectedCombos = [...selectedCombos, bird]
-
-      dispatch(setSelectedCombos(newSelectedCombos))
+      handleAddCombo(bird)
 
       openNotification(bird.comboName);
   };

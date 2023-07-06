@@ -1,17 +1,34 @@
 import { useContext } from "react";
 import { UserContext } from "../../../store/User";
 import { setSelectedCombos, setSelectedProducts } from "../../../store/User/Reducer";
+import { useUpdateUserSelectedItems } from "../../../services/User/services";
+
 function useCart() {
   const [user, dispatch] = useContext(UserContext)
+  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
 
   const {selectedItems: items, selectedCombo: combos} = user
 
-  console.log(user)
+  const isAdded = (product, products) => {
+    let addedProduct = products.find(p => p._id === product._id)
+
+    if(!addedProduct) return false
+
+    addedProduct.quantity += 1
+    return true
+  }
+
+  const handleStoreCart = () => {
+    updateUserSelectedItems({selectedProducts: items, selectedCombos: combos})
+  }
 
   const handleAddCombo  = (combo) => 
   {
-    // const formattedCombo =  {...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount}
+    combo.quantity = 1 
 
+    if(isAdded(combo, combos)) return 
+    
+    // const formattedCombo =  {...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount}
     const newCombos = [...combos, combo]
 
     dispatch(setSelectedCombos(newCombos))
@@ -19,7 +36,11 @@ function useCart() {
 
   const handleAddItem = (item) =>
   {
-    const newItems = [...items, item]
+    item.quantity = 1
+
+    if(isAdded(item, items)) return
+
+    const newItems = [...items,  item]
 
     dispatch(setSelectedProducts(newItems))
   }
@@ -38,8 +59,8 @@ function useCart() {
   }
 
   const getTotal = () => {
-    const totalItems = items.reduce( (total, current) => total + current, 0)
-    const totalCombos = combos.reduce( (total, current) => total + current , 0)
+    const totalItems = items.reduce( (total, current) => total + current.price * current.quantity, 0)
+    const totalCombos = combos.reduce( (total, current) => total + current.priceAfterDiscount * current.quantity, 0)
 
     return totalItems + totalCombos
   }
@@ -53,7 +74,8 @@ function useCart() {
     handleAddItem,
     handleAddCombo,
     handleRemoveItem,
-    handleRemoveCombo
+    handleRemoveCombo,
+    handleStoreCart
   };
 }
 

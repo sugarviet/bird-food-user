@@ -5,12 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import useCart from "./hooks/useCart";
 import CartItems from "./components/CartItems";
 import { useToken } from "../../services/Login/services";
-import { useEffect } from "react";
-import { useUpdateUserSelectedItems } from "../../services/User/services";
 
 const Cart = () => {
   const { items, combos, total, handleRemoveItem, handleRemoveCombo } = useCart();
-  // const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
 
   const decodeToken = useToken();
 
@@ -31,19 +28,6 @@ const Cart = () => {
       duration: 2,
     });
   };
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombos})
-  //   }
-
-  //   window.addEventListener('beforeunload', handleBeforeUnload)
-
-  //   return () => {
-  //     handleBeforeUnload()
-  //     window.removeEventListener('beforeunload', handleBeforeUnload)
-  //   }
-  // }, [])
 
   return (
     <section className={styles.shoppingCartContainer}>
