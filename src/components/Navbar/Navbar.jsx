@@ -36,7 +36,9 @@ const Navbar = () => {
 
   const logout = () => {
     setLoggedIn(false);
+    localStorage.removeItem('token')
     navigate("/");
+    window.location.reload()
   };
 
   const items = [

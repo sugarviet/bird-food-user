@@ -19,7 +19,7 @@ function useCart() {
   }
 
   const handleStoreCart = () => {
-    updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
+    updateUserSelectedItems({selectedProducts: items, selectedCombos: combos})
   }
 
   const handleAddCombo  = (combo) => 

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Navbar from "../Navbar";
 import Routers from "../../routes/Routers";
 import Footer from "../Footer";
@@ -7,21 +7,17 @@ import useCart from "../../pages/Cart/hooks/useCart";
 import { useEffect } from "react";
 
 const Layout = () => {
-  const {handleStoreCart} = useCart()
+  const {items, combos, handleStoreCart} = useCart()
   const { isSignInAndSignUpPath } = useLayout();
 
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault()
-      handleStoreCart()
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
+    console.log(items, combos)
+    window.addEventListener('beforeunload', handleStoreCart)
 
     return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload)
+        window.removeEventListener('beforeunload', handleStoreCart)
     }
-  },[])
+  }, [items, combos])
 
   return (
     <Fragment>

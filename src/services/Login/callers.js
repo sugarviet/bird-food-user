@@ -6,7 +6,6 @@ const instance = axios.create({
 });
 
 export const login = async ({ username, password }) => {
-  console.log("dataLogin", { username, password });
   const res = await instance.post(API.LOGIN, { username, password });
 
   return res.data;

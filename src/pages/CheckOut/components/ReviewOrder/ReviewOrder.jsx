@@ -50,7 +50,7 @@ function ReviewOrder({ shippingInputList, cartItems, handleCheckOut }) {
   };
 
   const detail_product = cartItems.map((item) => ({
-    product: item.id,
+    productId: item._id,
     quantity: item.quantity,
   }));
 
