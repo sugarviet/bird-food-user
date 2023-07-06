@@ -22,3 +22,10 @@ td
     padding: 16px 24px;
     font-weight: 400;
 }
+
+.input
+{
+    border-radius: 0;
+    margin: .5rem 0;
+    padding: 1rem;
+}
