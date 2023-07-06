@@ -18,7 +18,7 @@ const backgroundImage =
 
 function CheckOut() {
   const [user, dispatch] = useContext(UserContext);
-  const [defaultAddress, setDefaultAddress] = useState({});
+  const [defaultAddress, setDefaultAddress] = useState();
   const [shippingInputList, setShippingInputList] = useState();
 
   const location = useLocation();
@@ -28,7 +28,7 @@ function CheckOut() {
 
   const handleCheckOut = (detail_product, total) => {
     try {
-      if(defaultAddress) throw new Error("Address do not filled")
+      if(!defaultAddress) throw new Error("Address do not filled")
 
       mutate({
         detail_product: detail_product,
@@ -52,7 +52,7 @@ function CheckOut() {
   useEffect(() => {
     if (!user.username) return;
 
-    const address = user.addresses.find((address) => address.isDefault) || {};
+    const address = user.addresses.find((address) => address.isDefault);
 
     const newShippingInputList = [
       {
@@ -76,7 +76,7 @@ function CheckOut() {
       {
         name: "Address",
         type: "string",
-        value: `${address ? '' : (`${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`)} `,
+        value: address ? `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}` : "",
         prefix: <EnvironmentOutlined />,
       },
     ];
