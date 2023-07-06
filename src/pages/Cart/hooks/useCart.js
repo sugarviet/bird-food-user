@@ -28,7 +28,6 @@ function useCart() {
 
     if(isAdded(combo, combos)) return 
     
-    // const formattedCombo =  {...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount}
     const newCombos = [...combos, combo]
 
     dispatch(setSelectedCombos(newCombos))
