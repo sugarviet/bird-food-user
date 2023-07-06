@@ -1,70 +1,99 @@
 import { useContext } from "react";
 import { UserContext } from "../../../store/User";
-import { setSelectedCombos, setSelectedProducts } from "../../../store/User/Reducer";
+import {
+  setSelectedCombos,
+  setSelectedProducts,
+} from "../../../store/User/Reducer";
 import { useUpdateUserSelectedItems } from "../../../services/User/services";
 
 function useCart() {
-  const [user, dispatch] = useContext(UserContext)
-  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
+  const [user, dispatch] = useContext(UserContext);
+  const { mutate: updateUserSelectedItems } = useUpdateUserSelectedItems();
 
-  const {selectedItems: items, selectedCombo: combos} = user
+  const { selectedItems: items, selectedCombo: combos } = user;
 
   const isAdded = (product, products) => {
-    let addedProduct = products.find(p => p._id === product._id)
+    let addedProduct = products.find((p) => p._id === product._id);
 
-    if(!addedProduct) return false
+    if (!addedProduct) return false;
 
-    addedProduct.quantity += 1
-    return true
-  }
+    addedProduct.quantity += 1;
+    return true;
+  };
 
+  // const handleStoreCart = () => {
+  //   updateUserSelectedItems({
+  //     selectedProducts: [...items],
+  //     selectedCombos: [...combos],
+  //   });
+  // };
   const handleStoreCart = () => {
-    updateUserSelectedItems({selectedProducts: items, selectedCombos: combos})
-  }
+    const updatedSelectedProducts = items
+      ? items.map((product) => ({
+          productId: product._id,
+          quantity: product.quantity,
+        }))
+      : [];
 
-  const handleAddCombo  = (combo) => 
-  {
-    combo.quantity = 1 
+    const updatedSelectedCombos = combos
+      ? combos.map((combo) => ({
+          comboId: combo._id,
+          quantity: combo.quantity,
+        }))
+      : [];
 
-    if(isAdded(combo, combos)) return 
-    
-    const newCombos = [...combos, combo]
+    updateUserSelectedItems({
+      selectedProducts: updatedSelectedProducts,
+      selectedCombos: updatedSelectedCombos,
+    });
+  };
 
-    dispatch(setSelectedCombos(newCombos))
-  }
+  const handleAddCombo = (combo) => {
+    combo.quantity = 1;
 
-  const handleAddItem = (item) =>
-  {
-    item.quantity = 1
+    if (isAdded(combo, combos)) return;
 
-    if(isAdded(item, items)) return
+    const newCombos = [...combos, combo];
 
-    const newItems = [...items,  item]
+    dispatch(setSelectedCombos(newCombos));
+  };
 
-    dispatch(setSelectedProducts(newItems))
-  }
+  const handleAddItem = (item) => {
+    item.quantity = 1;
 
-  const handleRemoveItem = (id) => 
-  {
-    const newItems = items.filter(item => item._id !== id)
+    if (isAdded(item, items)) return;
 
-    dispatch(setSelectedProducts(newItems))
-  }
+    const newItems = [...items, item];
+
+    dispatch(setSelectedProducts(newItems));
+  };
+
+  const handleRemoveItem = (id) => {
+    const newItems = items.filter((item) => item._id !== id);
+
+    dispatch(setSelectedProducts(newItems));
+  };
 
   const handleRemoveCombo = (id) => {
-    const newCombos = combos.filter(combo => combo._id !== id)
+    const newCombos = combos.filter((combo) => combo._id !== id);
 
-    dispatch(setSelectedCombos(newCombos))
-  }
+    dispatch(setSelectedCombos(newCombos));
+  };
 
   const getTotal = () => {
-    const totalItems = items.reduce( (total, current) => total + current.price * current.quantity, 0)
-    const totalCombos = combos.reduce( (total, current) => total + current.priceAfterDiscount * current.quantity, 0)
+    const totalItems = items.reduce(
+      (total, current) => total + current.price * current.quantity,
+      0
+    );
+    const totalCombos = combos.reduce(
+      (total, current) => total + current.priceAfterDiscount * current.quantity,
+      0
+    );
 
-    return totalItems + totalCombos
-  }
+    return totalItems + totalCombos;
+  };
 
-  const total = getTotal()
+  const total = getTotal();
 
   return {
     items,
@@ -74,7 +103,7 @@ function useCart() {
     handleAddCombo,
     handleRemoveItem,
     handleRemoveCombo,
-    handleStoreCart
+    handleStoreCart,
   };
 }
 
