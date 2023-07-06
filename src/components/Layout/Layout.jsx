@@ -11,10 +11,15 @@ const Layout = () => {
   const { isSignInAndSignUpPath } = useLayout();
 
   useEffect(() => {
-    window.addEventListener('beforeunload', handleStoreCart)
+    const handleBeforeUnload = (event) => {
+      event.preventDefault()
+      handleStoreCart()
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
 
     return () => {
-        window.removeEventListener('beforeunload', handleStoreCart)
+        window.removeEventListener('beforeunload', handleBeforeUnload)
     }
   },[])
 

@@ -19,7 +19,7 @@ function useCart() {
   }
 
   const handleStoreCart = () => {
-    updateUserSelectedItems({selectedProducts: items, selectedCombos: combos})
+    updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
   }
 
   const handleAddCombo  = (combo) => 
@@ -46,7 +46,7 @@ function useCart() {
 
   const handleRemoveItem = (id) => 
   {
-    const newItems = items.filter(item => item.productId !== id)
+    const newItems = items.filter(item => item._id !== id)
 
     dispatch(setSelectedProducts(newItems))
   }

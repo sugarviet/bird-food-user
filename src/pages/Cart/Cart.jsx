@@ -9,7 +9,7 @@ import { useToken } from "../../services/Login/services";
 const Cart = () => {
   const { items, combos, total, handleRemoveItem, handleRemoveCombo } = useCart();
 
-  const formattedCombos = combos.map(combo => ({...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount})) 
+  const formattedCombos = combos.map(combo => ({...combo, productName: combo.comboName, price: combo.priceAfterDiscount})) 
 
   const decodeToken = useToken();
 
