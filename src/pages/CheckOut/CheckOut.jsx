@@ -34,6 +34,7 @@ function CheckOut() {
         detail_product: detail_product,
         total_price: total,
         addresses: {
+          address: defaultAddress.address,
           ward_name: defaultAddress.ward_name,
           district_name: defaultAddress.district_name,
           province_name: defaultAddress.province_name,
