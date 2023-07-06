@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import Context from "./Context";
 import reducer, { setInitState } from "./Reducer";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import { useToken } from "../../services/Login/services";
 
 const USER_API = "http://localhost:8080/user";
 
@@ -17,20 +18,17 @@ const defaultUser = {
 };
 
 function Provider({ children }) {
-  const [state, dispatch] = useReducer(reducer, {});
+  const [state, dispatch] = useReducer(reducer, defaultUser);
+
+  const decodedToken = useToken()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("token");
-
-        if (!token) 
-        {
-            dispatch(setInitState(defaultUser));
-            return
+        if (!decodedToken) {
+          dispatch(setInitState(defaultUser))  
+          return
         }
-
-        const decodedToken = jwtDecode(token);
 
         await axios
           .get(`${USER_API}/${decodedToken.username}`)
@@ -45,7 +43,7 @@ function Provider({ children }) {
     };
 
     fetchData();
-  }, []);
+  }, [decodedToken]);
 
   return (
     <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>

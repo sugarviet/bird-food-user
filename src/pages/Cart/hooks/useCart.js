@@ -1,73 +1,59 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../store/User";
 import { setSelectedCombos, setSelectedProducts } from "../../../store/User/Reducer";
 function useCart() {
-  const [items, setItems] = useState([])
-  const [combos, setCombos] = useState([])
   const [user, dispatch] = useContext(UserContext)
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify([]));
+  const {selectedItems: items, selectedCombo: combos} = user
 
-    if(!user.username) return
+  console.log(user)
 
-    setItems(user.selectedItems)
+  const handleAddCombo  = (combo) => 
+  {
+    // const formattedCombo =  {...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount}
 
-    const formattedCombos =  user.selectedCombo.map(combo => ({...combo, productId: combo.comboId, productName: combo.comboName, price: combo.priceAfterDiscount}))
+    const newCombos = [...combos, combo]
 
-    setCombos(formattedCombos)
-
-    localStorage.setItem("cart", JSON.stringify(items));
-  }, [user]);
-
-  const updateLocalStorage = (updatedItems) => {
-    localStorage.setItem("cart", JSON.stringify(updatedItems));
-  };
-
-  const removeFromCart = (productId) => {
-    const updatedItems = items.filter((item) => item.productId !== productId);
-    setItems(updatedItems);
-    updateLocalStorage(updatedItems);
-    dispatch(setSelectedProducts(updatedItems));
-  };
-
-  const removeComboFromCart = (comboId) => {
-    const updatedCombos = combos.filter(combo => combo._id != comboId)
-    dispatch(setSelectedCombos(updatedCombos))
+    dispatch(setSelectedCombos(newCombos))
   }
 
-  const updateQuantity = (productId, quantity) => {
-    const updatedItems = items.map((item) =>
-      item.productId === productId ? { ...item, quantity } : item
-    );
-    setItems(updatedItems);
-    updateLocalStorage(updatedItems);
-    dispatch(setSelectedProducts(updatedItems));
-  };
+  const handleAddItem = (item) =>
+  {
+    const newItems = [...items, item]
 
-  const calculateTotalPrice = () => {
-    let total = 0;
-    items.forEach((item) => {
-      if (!isNaN(item.price) && !isNaN(item.quantity)) {
-        total += item.price * item.quantity;
-      }
-    });
-    combos.forEach((item) => {
-      if (!isNaN(item.price) && !isNaN(item.quantity)) {
-        total += item.price * item.quantity;
-      }
-    });
-    return total.toLocaleString();
-  };
+    dispatch(setSelectedProducts(newItems))
+  }
+
+  const handleRemoveItem = (id) => 
+  {
+    const newItems = items.filter(item => item.productId !== id)
+
+    dispatch(setSelectedProducts(newItems))
+  }
+
+  const handleRemoveCombo = (id) => {
+    const newCombos = combos.filter(combo => combo._id !== id)
+
+    dispatch(setSelectedCombos(newCombos))
+  }
+
+  const getTotal = () => {
+    const totalItems = items.reduce( (total, current) => total + current, 0)
+    const totalCombos = combos.reduce( (total, current) => total + current , 0)
+
+    return totalItems + totalCombos
+  }
+
+  const total = getTotal()
 
   return {
     items,
     combos,
-    user,
-    calculateTotalPrice,
-    updateQuantity,
-    removeFromCart,
-    removeComboFromCart,
+    total,
+    handleAddItem,
+    handleAddCombo,
+    handleRemoveItem,
+    handleRemoveCombo
   };
 }
 

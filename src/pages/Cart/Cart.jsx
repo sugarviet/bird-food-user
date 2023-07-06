@@ -9,11 +9,11 @@ import { useEffect } from "react";
 import { useUpdateUserSelectedItems } from "../../services/User/services";
 
 const Cart = () => {
-  const { calculateTotalPrice, user,items, combos,removeFromCart, removeComboFromCart, updateQuantity } =
-    useCart();
-  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
+  const { items, combos, total, handleRemoveItem, handleRemoveCombo } = useCart();
+  // const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
 
   const decodeToken = useToken();
+
   const navigate = useNavigate();
   
   const handleCheckout = () => {
@@ -23,6 +23,7 @@ const Cart = () => {
       openNotification();
     }
   };
+
   const openNotification = () => {
     notification.error({
       message: "Checkout error",
@@ -31,18 +32,18 @@ const Cart = () => {
     });
   };
 
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombos})
-    }
+  // useEffect(() => {
+  //   const handleBeforeUnload = () => {
+  //     updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombos})
+  //   }
 
-    window.addEventListener('beforeunload', handleBeforeUnload)
+  //   window.addEventListener('beforeunload', handleBeforeUnload)
 
-    return () => {
-      handleBeforeUnload()
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
-  }, [])
+  //   return () => {
+  //     handleBeforeUnload()
+  //     window.removeEventListener('beforeunload', handleBeforeUnload)
+  //   }
+  // }, [])
 
   return (
     <section className={styles.shoppingCartContainer}>
@@ -68,14 +69,10 @@ const Cart = () => {
           {decodeToken ? (
             <CartItems
               items={items}
-              removeFromCart={removeFromCart}
-              updateQuantity={updateQuantity}
+              removeFromCart={handleRemoveItem}
             />
           ) : (
-            <CartItems
-              removeFromCart={removeFromCart}
-              updateQuantity={updateQuantity}
-            />
+            <CartItems/>
           )}
         </div>
 
@@ -96,14 +93,10 @@ const Cart = () => {
           {decodeToken ? (
             <CartItems
               items={combos}
-              removeFromCart={removeComboFromCart}
-              updateQuantity={updateQuantity}
+              removeFromCart={handleRemoveCombo}
             />
           ) : (
-            <CartItems
-              removeFromCart={removeComboFromCart}
-              updateQuantity={updateQuantity}
-            />
+            <CartItems/>
           )}
         </div>
 
@@ -112,7 +105,7 @@ const Cart = () => {
             <span>Total Price:</span>
             {decodeToken ? (
               <span className={styles.priceValue}>
-                {calculateTotalPrice()} VND
+                {total} VND
               </span>
             ) : (
               <span className={styles.priceValue}>0 VND</span>
