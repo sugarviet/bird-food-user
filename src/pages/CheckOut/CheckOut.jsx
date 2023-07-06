@@ -11,6 +11,7 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../store/User";
 import { useCheckout } from "../../services/Checkout/services";
 import { setSelectedCombos, setSelectedProducts } from "../../store/User/Reducer";
+import { notification } from "antd";
 
 const backgroundImage =
   "https://static.vecteezy.com/system/resources/previews/002/662/018/large_2x/easter-eggs-in-a-natural-nest-with-bird-eggs-on-a-pink-background-view-from-above-banner-photo.jpg";
@@ -27,6 +28,8 @@ function CheckOut() {
 
   const handleCheckOut = (detail_product, total) => {
     try {
+      if(defaultAddress) throw new Error("Address do not filled")
+
       mutate({
         detail_product: detail_product,
         total_price: total,
@@ -39,7 +42,9 @@ function CheckOut() {
       dispatch(setSelectedCombos([]))
       dispatch(setSelectedProducts([]))
     } catch (error) {
-      console.error(error);
+      notification.error({
+        message: error.message,
+      });
     }
   };
 
