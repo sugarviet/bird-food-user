@@ -5,6 +5,7 @@ import {
   setSelectedProducts,
 } from "../../../store/User/Reducer";
 import { useUpdateUserSelectedItems } from "../../../services/User/services";
+import { notification } from "antd";
 
 function useCart() {
   const [user, dispatch] = useContext(UserContext);
@@ -18,6 +19,7 @@ function useCart() {
     if (!addedProduct) return false;
 
     addedProduct.quantity += product.quantity;
+    notification.success({message: `Quantity has been updated`})
     return true;
   };
 
@@ -67,6 +69,8 @@ function useCart() {
     const newCombos = [...combos, combo];
 
     dispatch(setSelectedCombos(newCombos));
+    notification.success({message: `Add ${combo.comboName} successfully`})
+
   };
 
   const handleAddItem = (item, quantity = 1) => {
@@ -78,6 +82,7 @@ function useCart() {
     const newItems = [...items, item];
 
     dispatch(setSelectedProducts(newItems));
+    notification.success({message: `Add ${item.productName} successfully`})
   };
 
   const handleRemoveItem = (id) => {

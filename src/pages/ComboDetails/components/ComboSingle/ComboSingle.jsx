@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useGetComboById } from "../../../../services/Combo/services";
 import Loading from "../../../../components/Loading/Loading";
 import useCart from "../../../Cart/hooks/useCart";
+import useCurrency from "../../../../hooks/useCurrency";
 
 function ComboSingle() {
   const { comboId } = useParams();
@@ -13,16 +14,11 @@ function ComboSingle() {
   const { data: combo, isLoading} = useGetComboById(comboId)
   const { handleAddCombo } = useCart()
 
+  const formattedPrice = useCurrency(combo?.priceAfterDiscount || 0)
+
+  const formattedDiscount = useCurrency(combo?.priceAfterDiscount * 100/90 * 0.1 || 0)
+
   if(isLoading) return <Loading/>
-
-  const formattedPrice = (price) => {
-    return price.toLocaleString('vi-VN', {
-      style: 'currency',
-      currency: 'VND'
-    })
-  }
-
-  const discount = combo.priceAfterDiscount * 100/90 * 0.1
 
   return (
     <div className={styles.productSingleWrapper}>
@@ -42,7 +38,7 @@ function ComboSingle() {
               <p
                 className={`${styles.productSinglePrice} ${styles.fontSizeXL}`}
               >
-                <span>{formattedPrice(combo.priceAfterDiscount)}</span>
+                <span>{formattedPrice}</span>
               </p>
               <p
                 style={{ color: "#808080", fontWeight: "400" }}
@@ -62,7 +58,7 @@ function ComboSingle() {
                 ))}
                 </ul>
                 <div className={styles.marginTop4}>
-                  <span>You save <span style={{color: "#82ae46", fontWeight: '700'}}>{formattedPrice(discount)}</span> when buying combo</span>
+                  <span>You save <span style={{color: "#82ae46", fontWeight: '700'}}>{formattedDiscount}</span> when buying combo</span>
                 </div>
               </p>
               <div className={`${styles.fontSizeL}`}>

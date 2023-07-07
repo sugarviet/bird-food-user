@@ -23,7 +23,12 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
     <div>
       <List
         dataSource={items}
-        renderItem={(item) => (
+        renderItem={(item) => {
+          const formattedPrice = item.price.toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+          })
+          return (
           <List.Item className={styles.cartItem}>
             <div className={styles.cartItemDetails}>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -74,10 +79,10 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
               />
             </div>
             <div className={styles.cartItemControls}>
-              <p className={styles.itemPrice}>{item.price} VND</p>
+              <p className={styles.itemPrice}>{formattedPrice}</p>
             </div>
           </List.Item>
-        )}
+        )}}
       />
     </div>
   );
