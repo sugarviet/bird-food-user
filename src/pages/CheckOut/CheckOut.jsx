@@ -24,8 +24,6 @@ function CheckOut() {
   const [defaultAddress, setDefaultAddress] = useState();
   const [shippingInputList, setShippingInputList] = useState();
 
-  console.log(defaultAddress)
-
   const location = useLocation();
   const { data } = location.state;
 
