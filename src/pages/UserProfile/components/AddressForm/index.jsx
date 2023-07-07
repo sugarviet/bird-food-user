@@ -14,9 +14,6 @@ function AddressForm({ callback, handleCloseForm }) {
   const [cities, setCities] = useState([]);
   const [wards, setWards] = useState([]);
 
-  // let {data: provinces, isLoading: isProvincesLoading} = useGetProvinces()
-  // let {data: cities, isLoading: isCitiesLoading} = useGetCities(province.id || '/')
-
   const handleProvinceChange = (value, key) => {
     setProvince({ name: value, id: key.key });
 
@@ -48,8 +45,6 @@ function AddressForm({ callback, handleCloseForm }) {
     });
     handleCloseForm();
   };
-
-  // if(isProvincesLoading || isCitiesLoading) return <Loading/>
 
   return (
     <div className={`${styles.overlay}`}>

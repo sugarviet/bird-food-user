@@ -33,7 +33,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   className={styles.deleteIcon}
                   onClick={() => {
                     openNotification(item.productName);
-                    removeFromCart(item.productId);
+                    removeFromCart(item._id);
                   }}
                 >
                   <CloseOutlined style={{ color: "red" }} />

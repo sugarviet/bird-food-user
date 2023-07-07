@@ -1,5 +1,5 @@
 import { Layout, Button, Input, Tooltip, Dropdown, Badge } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo1.png";
 
@@ -17,32 +17,22 @@ import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
 import { useToken } from "../../services/Login/services";
 import { UserContext } from "../../store/User";
-import { setSelectedProducts } from "../../store/User/Reducer";
+
+import { useLogOut } from "../../services/LogOut/services";
+
+
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
-  const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("cart")) || []
-  );
   const [user] = useContext(UserContext);
-
-  useEffect(() => {
-    const cart = user.selectedItems
-    console.log(cart)
-    if (cart) {
-      setCartItems(cart);
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      setCartItems([]);
-      localStorage.setItem("cart", JSON.stringify([]));
-    }
-  }, []);
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
+
+  const { mutate } = useLogOut();
+
   useEffect(() => {
     if (decodedToken) {
       setLoggedIn(true);
@@ -50,10 +40,10 @@ const Navbar = () => {
   }, [decodedToken]);
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.setItem("cart", JSON.stringify([]));
+    mutate();
     setLoggedIn(false);
-    navigate("/");
+    localStorage.removeItem('token')
+    // window.location.reload()
   };
 
   const items = [
@@ -146,7 +136,7 @@ const Navbar = () => {
                 {loggedIn ? (
                   <Link to={"/cart"}>
                     <Tooltip placement="bottom" title={"Cart"}>
-                      <Badge count={cartItems.length}>
+                      <Badge count={user.selectedItems.length + user.selectedCombo.length}>
                         <Button
                           icon={<ShoppingCartOutlined />}
                           shape="circle"

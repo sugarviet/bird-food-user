@@ -10,13 +10,18 @@ import {
 import { Fragment, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../store/User";
 import { useCheckout } from "../../services/Checkout/services";
+import {
+  setSelectedCombos,
+  setSelectedProducts,
+} from "../../store/User/Reducer";
+import { notification } from "antd";
 
 const backgroundImage =
   "https://static.vecteezy.com/system/resources/previews/002/662/018/large_2x/easter-eggs-in-a-natural-nest-with-bird-eggs-on-a-pink-background-view-from-above-banner-photo.jpg";
 
 function CheckOut() {
-  const [user] = useContext(UserContext);
-  const [defaultAddress, setDefaultAddress] = useState({});
+  const [user, dispatch] = useContext(UserContext);
+  const [defaultAddress, setDefaultAddress] = useState();
   const [shippingInputList, setShippingInputList] = useState();
 
   const location = useLocation();
@@ -24,21 +29,38 @@ function CheckOut() {
 
   const { mutate } = useCheckout();
 
-  const handleCheckOut = (detail_product, total) => {
+  const handleCheckOut = (detail_product, detail_combo, total) => {
     try {
-      mutate({
+      if (!defaultAddress) throw new Error("Address do not filled");
+
+      console.log({
         detail_product: detail_product,
         total_price: total,
         addresses: {
+          address: defaultAddress.address,
           ward_name: defaultAddress.ward_name,
           district_name: defaultAddress.district_name,
           province_name: defaultAddress.province_name,
         },
       });
-      localStorage.setItem("cart", JSON.stringify([]));
-      dispatch(setSelectedProducts(JSON.parse(localStorage.getItem("cart"))));
+
+      mutate({
+        detail_product: detail_product,
+        detail_combo: detail_combo,
+        total_price: total,
+        addresses: {
+          address: defaultAddress.address,
+          ward_name: defaultAddress.ward_name,
+          district_name: defaultAddress.district_name,
+          province_name: defaultAddress.province_name,
+        },
+      });
+      dispatch(setSelectedCombos([]));
+      dispatch(setSelectedProducts([]));
     } catch (error) {
-      console.error(error);
+      notification.error({
+        message: error.message,
+      });
     }
   };
 
@@ -69,7 +91,9 @@ function CheckOut() {
       {
         name: "Address",
         type: "string",
-        value: `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`,
+        value: address
+          ? `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`
+          : "",
         prefix: <EnvironmentOutlined />,
       },
     ];

@@ -3,7 +3,6 @@ import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
 import { Card, notification } from 'antd'
 import styles from './ProductCard.module.css'
 import { Link } from 'react-router-dom';
-import useProductToCart from './hooks/useProductToCart';
 import { useToken } from "../../../../services/Login/services"
 
 ProductCard.propTypes = {
@@ -15,16 +14,14 @@ ProductCard.propTypes = {
   }).isRequired,
 };
 
-function ProductCard({ bird }) {
-  
+function ProductCard({ bird, handleAddItem }) {
 
   const isLogged = useToken();
   const { Meta } = Card;
-  const addToCart = useProductToCart();
 
   const handleAddToCart = () => {
     try {
-      addToCart(bird);
+      handleAddItem(bird);
       openNotification(bird.productName);
     } catch (error) {
       openNotificationError(error.message)
@@ -38,6 +35,7 @@ function ProductCard({ bird }) {
       duration: 2,
     });
   };
+
   const openNotificationError = (productName) => {
     notification.error({
       message: 'Error',
@@ -45,10 +43,12 @@ function ProductCard({ bird }) {
       duration: 2,
     });
   };
+
   const values = [20000, 50000, 70000, 90000];
   const randomValue = values[Math.floor(Math.random() * values.length)];
   const totalAmount = bird?.price + randomValue;
   const formattedAmount = totalAmount.toLocaleString();
+
   return (
       <Card
         hoverable

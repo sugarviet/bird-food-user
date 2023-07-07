@@ -4,34 +4,16 @@ import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
 import useCategories from "../../hooks/useCategories";
-import { useState, useEffect, useContext } from "react";
-import { useUpdateUserSelectedItems } from "../../../../services/User/services";
-import { UserContext } from "../../../../store/User";
+import { useState } from "react";
+import useCart from "../../../Cart/hooks/useCart";
 
 function ProductList() {
-  const [user] = useContext(UserContext)
   
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
-  const { mutate: updateUserSelectedItems} = useUpdateUserSelectedItems()
 
-  useEffect(() => {
-        window.addEventListener('beforeunload', handleStoreData)
-
-        return () => {
-            if(user.selectedItems && user.selectedCombo) 
-                handleStoreData()
-            
-            window.removeEventListener('beforeunload', handleStoreData)
-        }
-  },[])
-
-  const handleStoreData = () => {
-    console.log("re-load")
-    updateUserSelectedItems({selectedProducts: user.selectedItems, selectedCombos: user.selectedCombo})
-  }
-
+  const {handleAddItem} = useCart()
 
   const handleSelectCategory = (categoryId) => {
     const categoryName = categories.find(
@@ -76,7 +58,7 @@ function ProductList() {
           {products.map((bird) => (
             <div className={styles.cardDetail} key={bird._id}>
               <Col span={8}>
-                <ProductCard bird={bird} />
+                <ProductCard bird={bird} handleAddItem={handleAddItem} />
               </Col>
             </div>
           ))}

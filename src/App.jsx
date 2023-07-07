@@ -1,8 +1,6 @@
 import { Fragment } from "react";
 import "./App.css";
-
 import { ConfigProvider } from "antd";
-
 import Layout from "./components/Layout";
 import { UserProvider } from "./store/User";
 

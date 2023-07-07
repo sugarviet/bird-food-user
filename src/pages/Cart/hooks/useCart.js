@@ -1,59 +1,109 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../store/User";
-import { setSelectedProducts } from "../../../store/User/Reducer";
+import {
+  setSelectedCombos,
+  setSelectedProducts,
+} from "../../../store/User/Reducer";
+import { useUpdateUserSelectedItems } from "../../../services/User/services";
+
 function useCart() {
-  const [items, setItems] = useState([]);
-  const [user] = useContext(UserContext)
-  const [, dispatch] = useContext(UserContext);
+  const [user, dispatch] = useContext(UserContext);
+  const { mutate: updateUserSelectedItems } = useUpdateUserSelectedItems();
 
+  const { selectedItems: items, selectedCombo: combos } = user;
 
-  useEffect(() => {
-    const cart = user.selectedItems
-    console.log(cart)
-    if (cart) {
-      setItems(cart);
-      localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
-      setItems([]);
-      localStorage.setItem("cart", JSON.stringify([]));
-    }
-  }, [user]);
+  const isAdded = (product, products) => {
+    let addedProduct = products.find((p) => p._id === product._id);
 
-  const updateLocalStorage = (updatedItems) => {
-    localStorage.setItem("cart", JSON.stringify(updatedItems));
+    if (!addedProduct) return false;
+
+    addedProduct.quantity += 1;
+    return true;
   };
 
-  const removeFromCart = (productId) => {
-    const updatedItems = items.filter((item) => item.productId !== productId);
-    setItems(updatedItems);
-    updateLocalStorage(updatedItems);
-    dispatch(setSelectedProducts(updatedItems));
-  };
+  // const handleStoreCart = () => {
+  //   updateUserSelectedItems({
+  //     selectedProducts: [...items],
+  //     selectedCombos: [...combos],
+  //   });
+  // };
+  const handleStoreCart = () => {
+    const updatedSelectedProducts = items
+      ? items.map((product) => ({
+          productId: product._id,
+          quantity: product.quantity,
+        }))
+      : [];
 
-  const updateQuantity = (productId, quantity) => {
-    const updatedItems = items.map((item) =>
-      item.productId === productId ? { ...item, quantity } : item
-    );
-    setItems(updatedItems);
-    updateLocalStorage(updatedItems);
-    dispatch(setSelectedProducts(updatedItems));
-  };
+    const updatedSelectedCombos = combos
+      ? combos.map((combo) => ({
+          comboId: combo._id,
+          quantity: combo.quantity,
+        }))
+      : [];
 
-  const calculateTotalPrice = () => {
-    let total = 0;
-    items.forEach((item) => {
-      if (!isNaN(item.price) && !isNaN(item.quantity)) {
-        total += item.price * item.quantity;
-      }
+    updateUserSelectedItems({
+      selectedProducts: updatedSelectedProducts,
+      selectedCombos: updatedSelectedCombos,
     });
-    return total.toLocaleString();
   };
+
+  const handleAddCombo = (combo) => {
+    combo.quantity = 1;
+
+    if (isAdded(combo, combos)) return;
+
+    const newCombos = [...combos, combo];
+
+    dispatch(setSelectedCombos(newCombos));
+  };
+
+  const handleAddItem = (item) => {
+    item.quantity = 1;
+
+    if (isAdded(item, items)) return;
+
+    const newItems = [...items, item];
+
+    dispatch(setSelectedProducts(newItems));
+  };
+
+  const handleRemoveItem = (id) => {
+    const newItems = items.filter((item) => item._id !== id);
+
+    dispatch(setSelectedProducts(newItems));
+  };
+
+  const handleRemoveCombo = (id) => {
+    const newCombos = combos.filter((combo) => combo._id !== id);
+
+    dispatch(setSelectedCombos(newCombos));
+  };
+
+  const getTotal = () => {
+    const totalItems = items.reduce(
+      (total, current) => total + current.price * current.quantity,
+      0
+    );
+    const totalCombos = combos.reduce(
+      (total, current) => total + current.priceAfterDiscount * current.quantity,
+      0
+    );
+
+    return totalItems + totalCombos;
+  };
+
+  const total = getTotal();
 
   return {
     items,
-    calculateTotalPrice,
-    updateQuantity,
-    removeFromCart,
+    combos,
+    total,
+    handleAddItem,
+    handleAddCombo,
+    handleRemoveItem,
+    handleRemoveCombo,
+    handleStoreCart,
   };
 }
 

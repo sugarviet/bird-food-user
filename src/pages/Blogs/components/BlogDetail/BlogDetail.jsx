@@ -21,18 +21,14 @@ const BlogDetail = () => {
       <div className={styles.blogDetail}>
         <Row>
           <Col span={16}>
-            {/* <div>
+            <div>
               <h1 className={styles.blogTitle}>{blog?.title}</h1>
-              {isLoading &&
-                <LoadingBlog />}
-              <div>
-                <p className={styles.blogContent}>{blog?.content}</p>
-                <img className={styles.blogImage} src={blog?.thumbnail} />
-              </div>
-            </div> */}
+              <img className={styles.blogImage} src={blog?.thumbnail} />
+            </div>
             {isLoading && <LoadingBlog />}
             <div className={styles.preview}>
               <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
+
             </div>
             <CommentBlog />
             <Comment />

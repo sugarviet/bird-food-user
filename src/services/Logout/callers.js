@@ -5,8 +5,7 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export const login = async ({ username, password }) => {
-  const res = await instance.post(API.LOGIN, { username, password });
-
+export const logout = async () => {
+  const res = await instance.get(API.LOGOUT);
   return res.data;
 };

@@ -4,6 +4,9 @@ import {
   getUserByUserName,
   updateProfile,
   updateSelectedItems,
+  getOrderDone,
+  getOrderPending,
+  getOrderShipping
 } from "./callers";
 
 export const useGetUserByUserName = (username) => {
@@ -46,5 +49,26 @@ export const useUpdateUserSelectedItems = () => {
       //   description: "Server is not responding now",
       // });
     },
+  });
+};
+
+
+export const useGetOrderPending = () => {
+  return useQuery({
+    queryKey: ["pendings"],
+    queryFn: () => getOrderPending(),
+  });
+};
+
+export const useGetOrderShipping = () => {
+  return useQuery({
+    queryKey: ["shippings"],
+    queryFn: () => getOrderShipping(),
+  });
+};
+export const useGetOrderDone = () => {
+  return useQuery({
+    queryKey: ["done"],
+    queryFn: () => getOrderDone(),
   });
 };
