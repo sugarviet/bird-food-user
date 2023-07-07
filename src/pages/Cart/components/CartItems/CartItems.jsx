@@ -1,4 +1,4 @@
-import { List, Button, Input, notification } from "antd";
+import { List, Button, Input, notification, InputNumber } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
@@ -50,21 +50,19 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
             </div>
 
             <div>
-              <Input
+              <InputNumber
                 className={styles.quantityInput}
-                type="number"
                 value={item.quantity}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value, 10);
-                  const maxStock = item.stock;
+                onChange={(number) => {
+                  const maxStock = item.inStock;
 
-                  if (value > maxStock) {
+                  if (number > maxStock) {
                     openNotificationError(maxStock);
-                    updateQuantity(item.productId, maxStock);
-                  } else if (value !== 0) {
-                    updateQuantity(item.productId, value);
-                  } else {
-                    updateQuantity(item.productId, 1);
+                    updateQuantity(item._id, maxStock);
+                  }
+                  else 
+                  {
+                    updateQuantity(item._id, number);
                   }
                 }}
                 min={1}
