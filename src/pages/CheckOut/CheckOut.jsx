@@ -33,17 +33,6 @@ function CheckOut() {
     try {
       if (!defaultAddress) throw new Error("Address do not filled");
 
-      console.log({
-        detail_product: detail_product,
-        total_price: total,
-        addresses: {
-          address: defaultAddress.address,
-          ward_name: defaultAddress.ward_name,
-          district_name: defaultAddress.district_name,
-          province_name: defaultAddress.province_name,
-        },
-      });
-
       mutate({
         detail_product: detail_product,
         detail_combo: detail_combo,
@@ -55,6 +44,7 @@ function CheckOut() {
           province_name: defaultAddress.province_name,
         },
       });
+
       dispatch(setSelectedCombos([]));
       dispatch(setSelectedProducts([]));
     } catch (error) {
@@ -88,14 +78,6 @@ function CheckOut() {
         value: user.phone,
         prefix: <PhoneOutlined />,
       },
-      {
-        name: "Address",
-        type: "string",
-        value: address
-          ? `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`
-          : "",
-        prefix: <EnvironmentOutlined />,
-      },
     ];
 
     setDefaultAddress(address);
@@ -114,6 +96,8 @@ function CheckOut() {
         shippingInputList={shippingInputList}
         cartItems={data}
         handleCheckOut={handleCheckOut}
+        shippingAddress={defaultAddress}
+        onAddressChange={(address) => setDefaultAddress(address)}
       />
     </Fragment>
   );
