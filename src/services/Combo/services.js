@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllCombos } from "./callers";
+import { getAllCombos, getComboDetail } from "./callers";
 
 export const useGetAllCombos = () => {
   return useQuery({
@@ -7,3 +7,10 @@ export const useGetAllCombos = () => {
     queryFn: () => getAllCombos(),
   });
 };
+
+export const useGetComboById = (id) => {
+  return useQuery({
+    queryKey: ["combo"],
+    queryFn: () => getComboDetail(id)
+  })
+}

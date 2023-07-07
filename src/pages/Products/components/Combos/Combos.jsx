@@ -80,7 +80,7 @@ const Combos = () => {
                   actions={[
                     <div className={styles.actionProduct} key={"keyId"}>
                       <Link
-                        to={`/products/${bird._id}`}
+                        to={`/combos/${bird._id}`}
                         className={styles.actionDetailProduct}
                       >
                         <EyeTwoTone

@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { useGetBirdFoodById } from "../../../../../services/Product/services";
-import useProductToCart from "./useProductToCart";
 import { notification } from "antd";
 
 function useComboSingle(id) {
   const { data: product, isLoading } = useGetBirdFoodById(id);
 
   const [quantity, setQuantity] = useState(1);
-
-  const addToCart = useProductToCart();
 
   const handlePlusButtonClick = () => {
     setQuantity(quantity + 1);

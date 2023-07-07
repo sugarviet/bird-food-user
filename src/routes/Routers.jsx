@@ -12,6 +12,7 @@ import Blogs from "../pages/Blogs";
 import CheckOut from "../pages/CheckOut/CheckOut";
 import BlogDetail from "../pages/Blogs/components/BlogDetail";
 import UserProfile from "../pages/UserProfile";
+import ComboDetails from "../pages/ComboDetails/ComboDetails";
 
 const Routers = () => {
   return (
@@ -20,7 +21,7 @@ const Routers = () => {
       <Route path="/example" element={<Example />} />
       <Route path="/products" element={<Product />} />
       <Route path="/products/:productId" element={<ProductDetails />} />
-      <Route path="/combos/:comboId" element={<ProductDetails />} />
+      <Route path="/combos/:comboId" element={<ComboDetails />} />
       <Route path="/aboutus" element={<Aboutus />} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
