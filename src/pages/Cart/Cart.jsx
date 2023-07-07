@@ -7,17 +7,30 @@ import CartItems from "./components/CartItems";
 import { useToken } from "../../services/Login/services";
 
 const Cart = () => {
-  const { items, combos, total, handleRemoveItem, handleRemoveCombo } = useCart();
+  const { items, combos, total, handleRemoveItem, handleRemoveCombo } =
+    useCart();
 
-  const formattedCombos = combos.map(combo => ({...combo, productName: combo.comboName, price: combo.priceAfterDiscount})) 
+  const formattedCombos = combos.map((combo) => ({
+    ...combo,
+    productName: combo.comboName,
+    price: combo.priceAfterDiscount,
+  }));
 
   const decodeToken = useToken();
 
   const navigate = useNavigate();
-  
+
   const handleCheckout = () => {
     if (items.length > 0 || combos.length > 0) {
-      navigate("/cart/checkout", { state: { data: [...items, ...formattedCombos] } });
+      navigate("/cart/checkout", {
+        // state: { data: [...items, ...formattedCombos] },
+        state: {
+          data: {
+            detail_product: items,
+            detail_combo: formattedCombos,
+          },
+        },
+      });
     } else {
       openNotification();
     }
@@ -53,12 +66,9 @@ const Cart = () => {
 
           {/* Render all the items in the cart */}
           {decodeToken ? (
-            <CartItems
-              items={items}
-              removeFromCart={handleRemoveItem}
-            />
+            <CartItems items={items} removeFromCart={handleRemoveItem} />
           ) : (
-            <CartItems/>
+            <CartItems />
           )}
         </div>
 
@@ -82,7 +92,7 @@ const Cart = () => {
               removeFromCart={handleRemoveCombo}
             />
           ) : (
-            <CartItems/>
+            <CartItems />
           )}
         </div>
 
@@ -90,9 +100,7 @@ const Cart = () => {
           <div className={styles.totalPrice}>
             <span>Total Price:</span>
             {decodeToken ? (
-              <span className={styles.priceValue}>
-                {total} VND
-              </span>
+              <span className={styles.priceValue}>{total} VND</span>
             ) : (
               <span className={styles.priceValue}>0 VND</span>
             )}

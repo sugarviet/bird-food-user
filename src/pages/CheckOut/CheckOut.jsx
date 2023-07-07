@@ -10,7 +10,10 @@ import {
 import { Fragment, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../store/User";
 import { useCheckout } from "../../services/Checkout/services";
-import { setSelectedCombos, setSelectedProducts } from "../../store/User/Reducer";
+import {
+  setSelectedCombos,
+  setSelectedProducts,
+} from "../../store/User/Reducer";
 import { notification } from "antd";
 
 const backgroundImage =
@@ -26,9 +29,9 @@ function CheckOut() {
 
   const { mutate } = useCheckout();
 
-  const handleCheckOut = (detail_product, total) => {
+  const handleCheckOut = (detail_product, detail_combo, total) => {
     try {
-      if(!defaultAddress) throw new Error("Address do not filled")
+      if (!defaultAddress) throw new Error("Address do not filled");
 
       console.log({
         detail_product: detail_product,
@@ -39,10 +42,11 @@ function CheckOut() {
           district_name: defaultAddress.district_name,
           province_name: defaultAddress.province_name,
         },
-      })
+      });
 
       mutate({
         detail_product: detail_product,
+        detail_combo: detail_combo,
         total_price: total,
         addresses: {
           address: defaultAddress.address,
@@ -51,8 +55,8 @@ function CheckOut() {
           province_name: defaultAddress.province_name,
         },
       });
-      dispatch(setSelectedCombos([]))
-      dispatch(setSelectedProducts([]))
+      dispatch(setSelectedCombos([]));
+      dispatch(setSelectedProducts([]));
     } catch (error) {
       notification.error({
         message: error.message,
@@ -87,7 +91,9 @@ function CheckOut() {
       {
         name: "Address",
         type: "string",
-        value: address ? `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}` : "",
+        value: address
+          ? `${address.address}, ${address.province_name}, ${address.district_name}, ${address.ward_name}`
+          : "",
         prefix: <EnvironmentOutlined />,
       },
     ];

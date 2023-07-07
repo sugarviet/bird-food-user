@@ -7,17 +7,16 @@ import useCart from "../../pages/Cart/hooks/useCart";
 import { useEffect } from "react";
 
 const Layout = () => {
-  const {items, combos, handleStoreCart} = useCart()
+  const { items, combos, handleStoreCart } = useCart();
   const { isSignInAndSignUpPath } = useLayout();
 
   useEffect(() => {
-    console.log(items, combos)
-    window.addEventListener('beforeunload', handleStoreCart)
+    window.addEventListener("beforeunload", handleStoreCart);
 
     return () => {
-        window.removeEventListener('beforeunload', handleStoreCart)
-    }
-  }, [items, combos])
+      window.removeEventListener("beforeunload", handleStoreCart);
+    };
+  }, [items, combos]);
 
   return (
     <Fragment>
