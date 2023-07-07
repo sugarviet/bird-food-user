@@ -8,14 +8,18 @@ function BlogItem({ blog }) {
     <div className={styles.blogItems}>
       <div>
         <div className={styles.imageBlog}>
-          <img src={blog.thumbnail} />
+          <img src={blog.thumbnail ? blog.thumbnail : blog.image} />
         </div>
         <div className={styles.titleBlog}>
           <Link to={`/blogs/${blog._id}`} className={styles.titleBlogLink}>
             <span>{blog.title}</span>
           </Link>
         </div>
-        <span className={styles.descriptionBlog_des}>{blog.description}</span>
+        <span className={styles.descriptionBlog_des}>
+          <div className={styles.descriptionBlog_des_inner}>
+            {blog.description}
+          </div>
+        </span>
       </div>
       <div className={styles.descriptionBlog}>
         <span className={styles.descriptionBlog_date}>
@@ -33,6 +37,7 @@ BlogItem.propTypes = {
   blog: PropTypes.shape({
     _id: PropTypes.string,
     thumbnail: PropTypes.string,
+    image: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     createdAt: PropTypes.string,
