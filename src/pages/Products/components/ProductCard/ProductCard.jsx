@@ -22,18 +22,9 @@ function ProductCard({ bird, handleAddItem }) {
   const handleAddToCart = () => {
     try {
       handleAddItem(bird);
-      openNotification(bird.productName);
     } catch (error) {
       openNotificationError(error.message)
     }
-  };
-
-  const openNotification = (productName) => {
-    notification.success({
-      message: 'Successfully added',
-      description: `${productName}  has been added to cart.`,
-      duration: 2,
-    });
   };
 
   const openNotificationError = (productName) => {

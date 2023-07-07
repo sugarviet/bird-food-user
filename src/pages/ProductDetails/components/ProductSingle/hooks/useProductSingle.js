@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGetBirdFoodById } from "../../../../../services/Product/services";
 import useProductToCart from "./useProductToCart";
 import { notification } from "antd";
+import useCurrency from "../../../../../hooks/useCurrency";
 
 function useProductSingle(id) {
   const { data: product, isLoading } = useGetBirdFoodById(id);

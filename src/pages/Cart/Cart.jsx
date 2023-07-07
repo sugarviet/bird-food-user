@@ -5,10 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useCart from "./hooks/useCart";
 import CartItems from "./components/CartItems";
 import { useToken } from "../../services/Login/services";
+import useCurrency from "../../hooks/useCurrency";
 
 const Cart = () => {
   const { items, combos, total, handleRemoveItem, handleRemoveCombo, handleUpdateComboQuantity, handleUpdateItemQuantity } =
     useCart();
+
+  const formattedTotal = useCurrency(total || 0)
 
   const formattedCombos = combos.map((combo) => ({
     ...combo,
@@ -100,11 +103,7 @@ const Cart = () => {
         <div className={styles.cartFooter}>
           <div className={styles.totalPrice}>
             <span>Total Price:</span>
-            {decodeToken ? (
-              <span className={styles.priceValue}>{total} VND</span>
-            ) : (
-              <span className={styles.priceValue}>0 VND</span>
-            )}
+              <span className={styles.priceValue}>{formattedTotal}</span>
           </div>
           {decodeToken ? (
             <Button
