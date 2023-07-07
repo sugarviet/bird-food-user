@@ -54,6 +54,14 @@
     color: rgb(115, 114, 114);
 }
 
+.descriptionBlog_des_inner {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
 .descriptionBlog_des {
     margin-bottom: 60px;
     display: block;

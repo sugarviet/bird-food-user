@@ -1,12 +1,17 @@
 import styles from "./ListBlogs.module.css";
-import { Row, Col } from "antd";
-import { Pagination } from "antd";
+import { List } from "antd";
 import BlogItem from "../BlogItem/BlogItem";
 import useListBlogs from "../../hooks/useListBlogs";
 import Loading from "../../../../components/Loading";
+import { useState } from "react";
 
 function ListBlogs() {
   const { data, isLoading } = useListBlogs();
+  const [currentPageBlog, setCurrentPageBlog] = useState(1);
+
+  const handlePageBlogChange = (page) => {
+    setCurrentPageBlog(page);
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -28,17 +33,35 @@ function ListBlogs() {
             justo sed rebum vero dolor duo.
           </span>
         </div>
-        <Row gutter={[16, 16]}>
+        {/* <Row gutter={[16, 16]}>
           {data?.map((blog) => (
             <Col span={8} key={blog._id}>
               <BlogItem blog={blog} />
             </Col>
           ))}
-        </Row>
+        </Row> */}
+        <List
+          grid={{
+            gutter: [16],
+            column: 3,
+          }}
+          pagination={{
+            pageSize: 6,
+            current: currentPageBlog,
+            onChange: handlePageBlogChange,
+            hideOnSinglePage: true,
+          }}
+          dataSource={data}
+          renderItem={(blog) => (
+            <List.Item key={blog._id} style={{height: 430}}>
+              <BlogItem blog={blog} key={blog._id}/>
+            </List.Item>
+          )}
+        />
       </div>
-      <div className={styles.paginationProduct}>
+      {/* <div className={styles.paginationProduct}>
         <Pagination defaultCurrent={1} total={50} />
-      </div>
+      </div> */}
     </div>
   );
 }
