@@ -7,7 +7,7 @@ import CartItems from "./components/CartItems";
 import { useToken } from "../../services/Login/services";
 
 const Cart = () => {
-  const { items, combos, total, handleRemoveItem, handleRemoveCombo } =
+  const { items, combos, total, handleRemoveItem, handleRemoveCombo, handleUpdateComboQuantity, handleUpdateItemQuantity } =
     useCart();
 
   const formattedCombos = combos.map((combo) => ({
@@ -66,7 +66,7 @@ const Cart = () => {
 
           {/* Render all the items in the cart */}
           {decodeToken ? (
-            <CartItems items={items} removeFromCart={handleRemoveItem} />
+            <CartItems items={items} removeFromCart={handleRemoveItem} updateQuantity={handleUpdateItemQuantity}/>
           ) : (
             <CartItems />
           )}
@@ -90,6 +90,7 @@ const Cart = () => {
             <CartItems
               items={formattedCombos}
               removeFromCart={handleRemoveCombo}
+              updateQuantity={handleUpdateComboQuantity}
             />
           ) : (
             <CartItems />
