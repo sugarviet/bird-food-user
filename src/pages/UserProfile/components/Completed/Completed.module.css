@@ -1,20 +1,17 @@
 .pendingHeader {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-between;
     padding-bottom: 2px;
+    padding: 5px;
 }
-
-
-
-
-
 
 
 .productWrapper {
     align-items: center;
     border-bottom: 1px solid #e3e3e3;
     padding: 1rem 0;
+    margin-bottom: 10px;
 }
 
 .productWrapperHeader {
@@ -61,4 +58,39 @@
     font-size: 12px;
     color: #ccc;
     font-family: "Poppins", Arial, sans-serif;
+}
+
+.totalBottom {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 7px 10px;
+    font-weight: 500;
+}
+
+.shippingImg {
+    background-image: url('https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/5fafbb923393b712b96488590b8f781f.png');
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+
+.shippingContent {
+    height: 400px;
+    text-align: center;
+}
+
+.shippingContainer {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
+    border-radius: 0.125rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    height: 500px;
 }
