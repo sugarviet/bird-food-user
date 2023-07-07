@@ -23,10 +23,7 @@ const tabs = [
 ];
 
 const PurchaseHistory = () => {
-  const [size, setSize] = useState("small");
-  const onChange = (e) => {
-    setSize(e.target.value);
-  };
+
 
   return (
     <div className={`${styles.wrapper}`}>
@@ -34,7 +31,7 @@ const PurchaseHistory = () => {
         className={styles.tabStyle}
         defaultActiveKey="1"
         type="card"
-        size={size}
+        size="small"
         items={tabs}
         style={{ display: "flex" }}
       >
@@ -45,12 +42,18 @@ const PurchaseHistory = () => {
         ))}
       </Tabs>
       <style>
-        {`
-        .css-dev-only-do-not-override-lbcgob.ant-tabs-card.ant-tabs-small > .ant-tabs-nav .ant-tabs-tab {
-            padding: 6px 90px;
-          }
-        `}
-      </style>
+  {`
+    .css-dev-only-do-not-override-lbcgob.ant-tabs-card.ant-tabs-small > .ant-tabs-nav {
+      position: sticky;
+      top: 64px; 
+      z-index: 1;
+      background-color: #e5e5e5;
+    }
+    .css-dev-only-do-not-override-lbcgob.ant-tabs-card.ant-tabs-small > .ant-tabs-nav .ant-tabs-tab {
+      padding: 6px 102px;
+    }
+  `}
+</style>
     </div>
   );
 };

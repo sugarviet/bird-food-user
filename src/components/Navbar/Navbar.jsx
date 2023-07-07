@@ -1,5 +1,5 @@
 import { Layout, Button, Input, Tooltip, Dropdown, Badge } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo1.png";
 
@@ -17,7 +17,10 @@ import useNavbar from "./hooks/useNavbar";
 import Drawer from "./components/Drawer";
 import { useToken } from "../../services/Login/services";
 import { UserContext } from "../../store/User";
-import { setSelectedProducts } from "../../store/User/Reducer";
+
+import { useLogOut } from "../../services/LogOut/services";
+
+
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -27,7 +30,9 @@ const Navbar = () => {
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
+
+  const { mutate } = useLogOut();
+
   useEffect(() => {
     if (decodedToken) {
       setLoggedIn(true);
@@ -35,10 +40,10 @@ const Navbar = () => {
   }, [decodedToken]);
 
   const logout = () => {
+    mutate();
     setLoggedIn(false);
     localStorage.removeItem('token')
-    navigate("/");
-    window.location.reload()
+    // window.location.reload()
   };
 
   const items = [
