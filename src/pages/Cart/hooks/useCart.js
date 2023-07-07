@@ -17,7 +17,7 @@ function useCart() {
 
     if (!addedProduct) return false;
 
-    addedProduct.quantity += 1;
+    addedProduct.quantity += product.quantity;
     return true;
   };
 
@@ -58,9 +58,9 @@ function useCart() {
     });
   };
 
-  const handleAddCombo = (combo) => {
+  const handleAddCombo = (combo, quantity = 1) => {
     combo.inStock = combo.quantity
-    combo.quantity = 1;
+    combo.quantity = quantity;
 
     if (isAdded(combo, combos)) return;
 
@@ -69,9 +69,9 @@ function useCart() {
     dispatch(setSelectedCombos(newCombos));
   };
 
-  const handleAddItem = (item) => {
+  const handleAddItem = (item, quantity = 1) => {
     item.inStock = item.quantity
-    item.quantity = 1;
+    item.quantity = quantity;
 
     if (isAdded(item, items)) return;
 

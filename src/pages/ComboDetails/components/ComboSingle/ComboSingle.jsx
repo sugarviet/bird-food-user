@@ -5,11 +5,13 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useGetComboById } from "../../../../services/Combo/services";
 import Loading from "../../../../components/Loading/Loading";
+import useCart from "../../../Cart/hooks/useCart";
 
 function ComboSingle() {
   const { comboId } = useParams();
   const [quantity, setQuantity] = useState(1);
   const { data: combo, isLoading} = useGetComboById(comboId)
+  const { handleAddCombo } = useCart()
 
   if(isLoading) return <Loading/>
 
@@ -96,7 +98,7 @@ function ComboSingle() {
               <p>
                 <button
                   className={`${styles.addToCartButton} ${styles.clickable} ${styles.marginTop4}`}
-                  // onClick={handleAddToCart}
+                  onClick={() => handleAddCombo(combo, quantity)}
                 >
                   <span>Add to cart</span>
                 </button>
