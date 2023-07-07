@@ -1,8 +1,21 @@
 .navbar {
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   width: 100%;
-  background-color: #48d41d;
+  background-color: transparent;
+  transition: 0.25s ease-in-out;
+  font-weight: 700;
+}
+
+.navbarOnScroll {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  background-color: rgba(34, 34, 34, 0.5);
+  backdrop-filter: blur(6px);
+  font-weight: 700;
+  transition: 0.5s ease-in-out;
+
 }
 
 .navbarContainer {
@@ -21,7 +34,7 @@
   list-style: none;
   display: flex;
   gap: 2em;
-  color: #fff;
+  /* color: #fff; */
   align-items: center;
 }
 
@@ -36,47 +49,42 @@
   display: none;
 }
 
-/* .navbarSearchBar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 3em;
-    padding: 1em;
-
-    height: 200px;
-} */
-
-.whiteText{
+.whiteText {
   color: white;
 }
 
+.whiteText:hover {
+  color: #48d41d;
+}
+
 .navbarSearchBar {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    right: 0;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    gap: 2em;
-    z-index: 1; 
-  }
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  z-index: 1;
+}
 
 .navbarSearchBar::before {
-    content: "";
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #fff;
+  /* background-color: #fff; */
+  /* background-color: rgba(34, 34, 34, 0.5);
+  backdrop-filter: blur(6px); */
 }
 
-.invisible{
-    display: none;
-    transition: 0.8s;
+.invisible {
+  display: none;
+  transition: 0.8s;
 }
-
 
 @media (max-width: 768px) {
   .navbarContainer {
@@ -102,4 +110,8 @@
   .navbarMenu {
     display: block;
   }
+}
+.logo{
+  width: 170px;
+  margin-top: 23px;
 }

@@ -36,14 +36,21 @@ const Banner = () => {
             <h1>Product</h1>
             <div className={styles.breadcrumb}>
               <Breadcrumb
-                separator="/" style={{ fontSize: '20px' }}
+                separator="/"
+                style={{ fontSize: "20px" }}
                 items={[
                   {
-                    title: <Link to="/" className={styles.breadcumbText}>Home</Link>,
+                    title: (
+                      <Link to="/" className={styles.breadcumbText}>
+                        Home
+                      </Link>
+                    ),
                   },
                   {
-                    title: <span className={styles.breadcumbSpan}>Products</span>,
-                  }
+                    title: (
+                      <span className={styles.breadcumbSpan}>Products</span>
+                    ),
+                  },
                 ]}
               />
             </div>

@@ -1,11 +1,12 @@
-import { Layout, Button, Input, Drawer, Menu, Tooltip } from "antd";
-import { Link } from "react-router-dom";
+import { Layout, Button, Input, Tooltip, Dropdown, Badge } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import logo from "../../assets/logo1.png";
 
 import {
   SearchOutlined,
   UserOutlined,
   ShoppingCartOutlined,
-  HomeOutlined,
   MenuOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
@@ -13,11 +14,48 @@ import {
 import styles from "./Navbar.module.css";
 
 import useNavbar from "./hooks/useNavbar";
+import Drawer from "./components/Drawer";
+import { useToken } from "../../services/Login/services";
+import { UserContext } from "../../store/User";
+import { setSelectedProducts } from "../../store/User/Reducer";
 
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
+  const [user] = useContext(UserContext);
+
+  const decodedToken = useToken();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (decodedToken) {
+      setLoggedIn(true);
+    }
+  }, [decodedToken]);
+
+  const logout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem('token')
+    navigate("/");
+    window.location.reload()
+  };
+
+  const items = [
+    {
+      label: <Link to="/profile">My Profile</Link>,
+      key: "0",
+    },
+
+    {
+      type: "divider",
+    },
+    {
+      label: <div onClick={logout}>Log Out</div>,
+      key: "2",
+    },
+  ];
+
   const {
     isDrawerVisible,
     handleShowDrawable,
@@ -26,29 +64,59 @@ const Navbar = () => {
     handleShowSearchBar,
   } = useNavbar();
 
+  const [isScroll, setIsScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition >= 75) {
+        setIsScroll(true);
+      } else {
+        setIsScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isScroll]);
+
   return (
     <Layout>
-      <Header className={styles.navbar}>
+      <Header className={isScroll ? styles.navbarOnScroll : styles.navbar}>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarLogo}>
-            <Link to={"/"} className={styles.whiteText}>Logo</Link>
+            <Link to={"/"} className={styles.whiteText}>
+              <img className={styles.logo} src={logo} />
+            </Link>
           </div>
           <div className={styles.navbarAction}>
             <ul className={styles.navbarActionList}>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Home</Link>
+                <Link to={"/"} className={styles.whiteText}>
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>About us</Link>
+                <Link to={"/aboutus"} className={styles.whiteText}>
+                  About us
+                </Link>
               </li>
               <li>
-                <Link to={"/products"} className={styles.whiteText}>Products</Link>
+                <Link to={"/products"} className={styles.whiteText}>
+                  Products
+                </Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Page</Link>
+                <Link to={"/blogs"} className={styles.whiteText}>
+                  Blogs
+                </Link>
               </li>
               <li>
-                <Link to={"/"} className={styles.whiteText}>Contact us</Link>
+                <Link to={"/contactus"} className={styles.whiteText}>
+                  Contact us
+                </Link>
               </li>
               <li>
                 <Tooltip placement="bottom" title={"Search"}>
@@ -60,19 +128,43 @@ const Navbar = () => {
                 </Tooltip>
               </li>
               <li>
-                <Tooltip placement="bottom" title={"User's account"}>
-                  <Button icon={<UserOutlined />} shape="circle" />
-                </Tooltip>
+                {loggedIn ? (
+                  <Link to={"/cart"}>
+                    <Tooltip placement="bottom" title={"Cart"}>
+                      <Badge count={user.selectedItems.length + user.selectedCombo.length}>
+                        <Button
+                          icon={<ShoppingCartOutlined />}
+                          shape="circle"
+                        />
+                      </Badge>
+                    </Tooltip>
+                  </Link>
+                ) : (
+                  <Link to={"/login"}>
+                    <Tooltip placement="bottom" title={"Cart"}>
+                      <Button icon={<ShoppingCartOutlined />} shape="circle" />
+                    </Tooltip>
+                  </Link>
+                )}
               </li>
               <li>
-                <Tooltip placement="bottom" title={"Cart"}>
-                  <Button icon={<ShoppingCartOutlined />} shape="circle" />
-                </Tooltip>
-              </li>
-              <li>
-                <Link to={'/login'}>
-                  <Button>Login</Button>
-                </Link>
+                {loggedIn ? (
+                  <Dropdown
+                    placement="bottom"
+                    menu={{
+                      items,
+                    }}
+                    trigger={["click"]}
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Button icon={<UserOutlined />} shape="circle" />
+                    </a>
+                  </Dropdown>
+                ) : (
+                  <Link to={"/login"}>
+                    <Button>Login</Button>
+                  </Link>
+                )}
               </li>
             </ul>
             <Button
@@ -100,34 +192,7 @@ const Navbar = () => {
       </div>
 
       {/* Show menu when on mobile's screen */}
-      <div>
-        <Drawer
-          title="Menu"
-          placement="right"
-          closable={false}
-          onClose={hideDrawer}
-          visible={isDrawerVisible}
-          bodyStyle={{ padding: 0 }}
-        >
-          <Menu mode="vertical">
-            <Menu.Item key="1" icon={<HomeOutlined />}>
-              <Link to={"/"}>Home</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<UserOutlined />}>
-              <Link to={"/"}>About us</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UserOutlined />}>
-              <Link to={"/"}>Products</Link>
-            </Menu.Item>
-            <Menu.Item key="4" icon={<UserOutlined />}>
-              <Link to={"/"}>Page</Link>
-            </Menu.Item>
-            <Menu.Item key="5" icon={<UserOutlined />}>
-              <Link to={"/"}>Contact us</Link>
-            </Menu.Item>
-          </Menu>
-        </Drawer>
-      </div>
+      <Drawer isDrawerVisible={isDrawerVisible} hideDrawer={hideDrawer} />
     </Layout>
   );
 };

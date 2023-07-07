@@ -1,0 +1,16 @@
+.title
+{
+}
+
+.input 
+{
+    margin-top: .5rem;
+}
+
+.message
+{
+    font-size: x-small;
+    margin-bottom: .5rem;
+    color: red;
+    font-weight: 700;
+}

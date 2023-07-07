@@ -1,0 +1,86 @@
+.shoppingCartContainer {
+  padding: 60px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.shoppingCart {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cartHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.cartTitle {
+  font-weight: 700;
+  font-size: 24px;
+  color: gray;
+}
+
+.cartBody {
+  margin-bottom: 20px;
+}
+
+.cartFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalPrice {
+  color: gray;
+  font-weight: 600;
+}
+
+.priceValue {
+  color: #3cb815;
+  font-weight: 700;
+  font-size: 20px;
+  margin-left: 8px;
+}
+
+.cartItemQuantity {
+  text-align: right;
+}
+
+.cartColumn {
+  padding: 0 8px;
+}
+
+.cartColumns {
+  align-items: end;
+  padding: 16px;
+  background-color: rgb(233, 232, 232);
+  border-radius: 4px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.cartColumnsTitle {
+  font-weight: bold;
+  margin-left: 8em;
+}
+
+.cartColumnsQuantity {
+  font-weight: bold;
+  text-align: center;
+  margin-right: 14em;
+}
+
+.cartColumnsPrice {
+  text-align: center;
+  font-weight: bold;
+}
+
+.checkoutButton{
+  flex-direction: row-reverse;
+  font-weight: 600;
+}

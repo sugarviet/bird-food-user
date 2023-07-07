@@ -1,9 +1,20 @@
 import axios from "axios";
 
-import { API_GET_BIRDFOOD } from "./api_path";
+import { PRODUCT_API, PRODUCT_SORT_API } from "./api_path";
 
 export const getAllBirdFood = async () => {
-  const res =  await axios.get(API_GET_BIRDFOOD);
+  const res = await axios.get(PRODUCT_API);
 
-  return res.data;
+  return res.data.listProduct;
+};
+
+export const getAllBirdFoodByCategory = async (categoryName) => {
+  const res = await axios.get(`${PRODUCT_SORT_API}?type=${categoryName}`);
+  return res.data.listProduct;
+};
+
+export const getBirdFoodById = async (id) => {
+  const res = await axios.get(`${PRODUCT_API}/${id}`);
+
+  return res.data.product;
 };
