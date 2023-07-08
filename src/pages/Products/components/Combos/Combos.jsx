@@ -1,26 +1,34 @@
-import { Card, Row, Col, Pagination, notification, List } from "antd";
+import { Card, Col, Pagination, notification, List, Select } from "antd";
 import styles from "./Combos.module.css";
 import { Link } from "react-router-dom";
 import { EyeTwoTone, ShoppingTwoTone } from "@ant-design/icons";
 
 import useComboList from "../../hooks/useComboList";
 import Loading from "../../../../components/Loading/Loading";
-import { useContext, useState } from "react";
-import { UserContext } from "../../../../store/User";
-import { setSelectedCombos } from "../../../../store/User/Reducer";
+import { useState } from "react";
 import { useToken } from "../../../../services/Login/services";
 import useCart from "../../../Cart/hooks/useCart";
 
 const { Meta } = Card;
 
+const PRICE_DES = "Price High to Low"
+const PRICE_INS = "Price Low to High"
+
+const sortingOptions=[
+  { value: PRICE_DES, label: PRICE_DES },
+  { value: PRICE_INS, label: PRICE_INS },
+]
+
 const Combos = () => {
   const isLogged = useToken();
+
+  const [sortBy, setSortBy] = useState()
+
+  const [currentPageCombo, setCurrentPageCombo] = useState(1);
 
   const { handleAddCombo } = useCart();
 
   const { data, isLoading } = useComboList();
-
-  const [currentPageCombo, setCurrentPageCombo] = useState(1);
 
   if (isLoading) {
     return <Loading />;
@@ -44,17 +52,20 @@ const Combos = () => {
     });
   };
 
-  const openNotificationError = (productName) => {
-    notification.error({
-      message: "Error",
-      description: `You have reached the maximum quantity available for ${productName}.`,
-      duration: 2,
-    });
-  };
-  // const values = [20000, 50000, 70000, 90000];
-  // const randomValue = values[Math.floor(Math.random() * values.length)];
-  // const totalAmount = bird?.price + randomValue;
-  // const formattedAmount = totalAmount.toLocaleString();
+  const handleSorting = (value) => {
+    switch(value)
+    {
+      case PRICE_DES:
+          data.sort((a, b) => b.priceAfterDiscount - a.priceAfterDiscount)
+          break;
+      case PRICE_INS:
+          data.sort((a, b) => a.priceAfterDiscount - b.priceAfterDiscount)
+          break;
+      default:
+          break;
+    }
+    setSortBy(value)
+  }
 
   return (
     <div className={styles.textBanner}>
@@ -62,7 +73,17 @@ const Combos = () => {
         <hr className={styles.hrTop} />
         <hr className={styles.hrBot} />
       </div>
-      <h1 className={styles.textProducts}>Our Combos</h1>
+      <div className={styles.flexBetween}>
+        <h1 className={styles.textProducts}>Our Combos</h1>
+        <Select
+      placeholder="Sort By"
+      value={sortBy}
+      options={sortingOptions}
+      style={{ width: 'max-content' }}
+      onChange={handleSorting}
+    />
+      </div>
+      
       <div className={styles.textDevide}>
         <div className={styles.categoryContent}></div>
       </div>
@@ -147,7 +168,7 @@ const Combos = () => {
             column: 4,
           }}
           dataSource={data}
-          pagination={{
+          pagination={{ 
             pageSize: 8,
             current: currentPageCombo,
             onChange: handlePageComboChange,
@@ -216,9 +237,9 @@ const Combos = () => {
                       description={
                         <div className={styles.titlePrice}>
                           <p className={styles.priceProduct}>
-                            {bird?.priceAfterDiscount} VND
+                            {bird?.priceAfterDiscount.toLocaleString()} đ
                           </p>
-                          <p className={styles.priceSaleProduct}>{`$ VND`}</p>
+                          <p className={styles.priceSaleProduct}>{`${(bird?.priceAfterDiscount * 100/90).toLocaleString()} đ`}</p>
                         </div>
                       }
                     />

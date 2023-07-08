@@ -1,5 +1,5 @@
 import styles from "./ProductList.module.css";
-import { Button, Space, Col, Row, Pagination, List } from "antd";
+import { Button, Space, Col, Row, Pagination, List, Select } from "antd";
 import useProductList from "../../hooks/useProductList";
 import ProductCard from "../ProductCard/ProductCard";
 import Loading from "../../../../components/Loading";
@@ -7,11 +7,20 @@ import useCategories from "../../hooks/useCategories";
 import { useState } from "react";
 import useCart from "../../../Cart/hooks/useCart";
 
+const PRICE_DES = "Price High to Low"
+const PRICE_INS = "Price Low to High"
+
+const sortingOptions=[
+  { value: PRICE_DES, label: PRICE_DES },
+  { value: PRICE_INS, label: PRICE_INS },
+]
+
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
   const [currentPageProduct, setCurrentPageProduct] = useState(1);
+  const [sortBy, setSortBy] = useState()
 
   const { handleAddItem } = useCart();
 
@@ -30,6 +39,21 @@ function ProductList() {
     setCurrentPageProduct(page);
   };
 
+  const handleSorting = (value) => {
+    switch(value)
+    {
+      case PRICE_DES:
+          products.sort((a, b) => b.price - a.price)
+          break;
+      case PRICE_INS:
+          products.sort((a, b) => a.price - b.price)
+          break;
+      default:
+          break;
+    }
+    setSortBy(value)
+  }
+
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
   }
@@ -40,7 +64,16 @@ function ProductList() {
         <hr className={styles.hrTop} />
         <hr className={styles.hrBot} />
       </div>
-      <h1 className={styles.textProducts}>Our Products</h1>
+      <div className={styles.flexBetween}>
+        <h1 className={styles.textProducts}>Our Combos</h1>
+        <Select
+      placeholder="Sort By"
+      value={sortBy}
+      options={sortingOptions}
+      style={{ width: 'max-content' }}
+      onChange={handleSorting}
+    />
+      </div>
       <div className={styles.textDevide}>
         <div className={styles.categoryContent}>
           <Space wrap>
