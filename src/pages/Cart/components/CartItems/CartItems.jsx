@@ -1,4 +1,4 @@
-import { List, Button, Input, notification } from "antd";
+import { List, Button, Input, notification, InputNumber } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
@@ -23,7 +23,12 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
     <div>
       <List
         dataSource={items}
-        renderItem={(item) => (
+        renderItem={(item) => {
+          const formattedPrice = item.price.toLocaleString('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+          })
+          return (
           <List.Item className={styles.cartItem}>
             <div className={styles.cartItemDetails}>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -50,21 +55,19 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
             </div>
 
             <div>
-              <Input
+              <InputNumber
                 className={styles.quantityInput}
-                type="number"
                 value={item.quantity}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value, 10);
-                  const maxStock = item.stock;
+                onChange={(number) => {
+                  const maxStock = item.inStock;
 
-                  if (value > maxStock) {
+                  if (number > maxStock) {
                     openNotificationError(maxStock);
-                    updateQuantity(item.productId, maxStock);
-                  } else if (value !== 0) {
-                    updateQuantity(item.productId, value);
-                  } else {
-                    updateQuantity(item.productId, 1);
+                    updateQuantity(item._id, maxStock);
+                  }
+                  else 
+                  {
+                    updateQuantity(item._id, number);
                   }
                 }}
                 min={1}
@@ -76,10 +79,10 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
               />
             </div>
             <div className={styles.cartItemControls}>
-              <p className={styles.itemPrice}>{item.price} VND</p>
+              <p className={styles.itemPrice}>{formattedPrice}</p>
             </div>
           </List.Item>
-        )}
+        )}}
       />
     </div>
   );

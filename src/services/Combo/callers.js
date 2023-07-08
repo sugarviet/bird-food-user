@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { COMBO_API, COMBO_DETAI_API } from "./api_path";
+import { COMBO_API } from "./api_path";
 
 export const getAllCombos = async () => {
   const res = await axios.get(COMBO_API);
@@ -9,7 +9,7 @@ export const getAllCombos = async () => {
 };
 
 export const getComboDetail = async (comboId) => {
-  const res = await axios.get(`${COMBO_DETAI_API}/${comboId}`);
+  const res = await axios.get(`${COMBO_API}/${comboId}`);
 
-  return res.data;
+  return res.data.combo;
 };

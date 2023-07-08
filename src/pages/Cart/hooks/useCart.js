@@ -5,6 +5,7 @@ import {
   setSelectedProducts,
 } from "../../../store/User/Reducer";
 import { useUpdateUserSelectedItems } from "../../../services/User/services";
+import { notification } from "antd";
 
 function useCart() {
   const [user, dispatch] = useContext(UserContext);
@@ -17,16 +18,27 @@ function useCart() {
 
     if (!addedProduct) return false;
 
-    addedProduct.quantity += 1;
+    addedProduct.quantity += product.quantity;
+    notification.success({message: `Quantity has been updated`})
     return true;
   };
 
-  // const handleStoreCart = () => {
-  //   updateUserSelectedItems({
-  //     selectedProducts: [...items],
-  //     selectedCombos: [...combos],
-  //   });
-  // };
+  const handleUpdateItemQuantity = (id, quantity) => {
+    const updatedItems = items.map((item) =>
+      item._id === id ? { ...item, quantity } : item
+    );
+
+    dispatch(setSelectedProducts(updatedItems));
+  };
+
+  const handleUpdateComboQuantity = (id, quantity) => {
+    const updatedCombos = combos.map((combo) =>
+      combo._id === id ? { ...combo, quantity } : combo
+    );
+
+    dispatch(setSelectedCombos(updatedCombos));
+  };
+
   const handleStoreCart = () => {
     const updatedSelectedProducts = items
       ? items.map((product) => ({
@@ -48,24 +60,29 @@ function useCart() {
     });
   };
 
-  const handleAddCombo = (combo) => {
-    combo.quantity = 1;
+  const handleAddCombo = (combo, quantity = 1) => {
+    combo.inStock = combo.quantity
+    combo.quantity = quantity;
 
     if (isAdded(combo, combos)) return;
 
     const newCombos = [...combos, combo];
 
     dispatch(setSelectedCombos(newCombos));
+    notification.success({message: `Add ${combo.comboName} successfully`})
+
   };
 
-  const handleAddItem = (item) => {
-    item.quantity = 1;
+  const handleAddItem = (item, quantity = 1) => {
+    item.inStock = item.quantity
+    item.quantity = quantity;
 
     if (isAdded(item, items)) return;
 
     const newItems = [...items, item];
 
     dispatch(setSelectedProducts(newItems));
+    notification.success({message: `Add ${item.productName} successfully`})
   };
 
   const handleRemoveItem = (id) => {
@@ -103,6 +120,8 @@ function useCart() {
     handleAddCombo,
     handleRemoveItem,
     handleRemoveCombo,
+    handleUpdateItemQuantity,
+    handleUpdateComboQuantity,
     handleStoreCart,
   };
 }

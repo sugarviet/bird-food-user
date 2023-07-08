@@ -1,1 +1,1 @@
-export { default } from "./ProductSingle";
+export { default } from "./ComboSingle";

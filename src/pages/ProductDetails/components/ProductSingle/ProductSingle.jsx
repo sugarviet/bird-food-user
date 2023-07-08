@@ -4,23 +4,31 @@ import { StarOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import useProductSingle from "./hooks/useProductSingle";
 import Loading from "../../../../components/Loading";
+import useCart from "../../../Cart/hooks/useCart";
+
+const description = 'Our Bird Food product is a nutritious blend of seeds, grains, and pellets designed to meet the dietary needs of various bird species. Packed with essential nutrients, it promotes optimal health and natural behavior. Trust our high-quality formulation for happy, healthy birds'
 
 function ProductSingle() {
   const { productId } = useParams();
 
+  const { handleAddItem } = useCart()
+
   const {
     handleMinusButtonClick,
     handlePlusButtonClick,
-    handleSizeSelectionChange,
     product,
     quantity,
-    handleAddToCart,
     isLoading,
   } = useProductSingle(productId);
 
   if (isLoading) {
     return <Loading />;
   }
+
+  const formattedPrice = product.price.toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND"
+  })
 
   return (
     <div className={styles.productSingleWrapper}>
@@ -36,66 +44,19 @@ function ProductSingle() {
 
           <Col span={12}>
             <div className={styles.productSingleInfo}>
-              <h3 className={`${styles.fontSizeXL}`}>{product.name}</h3>
-              <div
-                className={`${styles.productSingleRating} ${styles.fontSizeL}`}
-              >
-                <p
-                  className={`${styles.productSingleRatingStar} ${styles.marginRight4}`}
-                >
-                  <a className={styles.marginRight4}>{product.rating}</a>
-                  <a href="">
-                    <StarOutlined />
-                  </a>
-                  <a href="">
-                    <StarOutlined />
-                  </a>
-                  <a href="">
-                    <StarOutlined />
-                  </a>
-                  <a href="">
-                    <StarOutlined />
-                  </a>
-                  <a href="">
-                    <StarOutlined />
-                  </a>
-                </p>
-                <p>
-                  <a className={styles.marginRight4} style={{ color: "#000" }}>
-                    <span style={{ marginRight: "4px" }}>100</span>
-                    <span style={{ color: "#bbb" }}>Rating</span>
-                  </a>
-                </p>
-                <p>
-                  <a className={styles.marginRight4} style={{ color: "#000" }}>
-                    <span style={{ marginRight: "4px" }}>100</span>
-                    <span style={{ color: "#bbb" }}>Sold</span>
-                  </a>
-                </p>
-              </div>
+              <h3 className={`${styles.fontSizeXL}`}>{product.productName}</h3>
               <p
                 className={`${styles.productSinglePrice} ${styles.fontSizeXL}`}
               >
-                <span>{`$ ${product.price}`}</span>
+                <span style={{color: "#82ae46", fontWeight: '700'}}>{formattedPrice}</span>
               </p>
               <p
                 style={{ color: "#808080", fontWeight: "400" }}
                 className={`${styles.fontSizeL}`}
               >
-                {product.description}
+                {description}
               </p>
               <div className={`${styles.fontSizeL}`}>
-                <div className={`${styles.marginTop4}`}>
-                  <select
-                    className={`${styles.inputBox} ${styles.clickable}`}
-                    onChange={handleSizeSelectionChange}
-                  >
-                    <option value="small">SMALL</option>
-                    <option value="medium">MEDIUM</option>
-                    <option value="large">LARGE</option>
-                    <option value="extra large">EXTRA LARGE</option>
-                  </select>
-                </div>
                 <div
                   className={`${styles.marginTop4} ${styles.productInputQuantity}`}
                 >
@@ -123,7 +84,7 @@ function ProductSingle() {
               <p>
                 <button
                   className={`${styles.addToCartButton} ${styles.clickable} ${styles.marginTop4}`}
-                  onClick={handleAddToCart}
+                  onClick={() => handleAddItem(product, quantity)}
                 >
                   <span>Add to cart</span>
                 </button>
