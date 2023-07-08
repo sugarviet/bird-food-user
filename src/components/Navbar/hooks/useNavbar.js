@@ -22,6 +22,7 @@ function useNavbar() {
     handleShowDrawable,
     isShowSearchBar,
     handleShowSearchBar,
+    setIsShowSearchBar
   };
 }
 
