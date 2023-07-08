@@ -6,7 +6,9 @@ import {
   updateSelectedItems,
   getOrderDone,
   getOrderPending,
-  getOrderShipping
+  getOrderShipping,
+  cancelOrder,
+  getOrderCancel,
 } from "./callers";
 
 export const useGetUserByUserName = (username) => {
@@ -52,7 +54,6 @@ export const useUpdateUserSelectedItems = () => {
   });
 };
 
-
 export const useGetOrderPending = () => {
   return useQuery({
     queryKey: ["pendings"],
@@ -70,5 +71,28 @@ export const useGetOrderDone = () => {
   return useQuery({
     queryKey: ["done"],
     queryFn: () => getOrderDone(),
+  });
+};
+export const useGetOrderCancel = () => {
+  return useQuery({
+    queryKey: ["cancel"],
+    queryFn: () => getOrderCancel(),
+  });
+};
+export const useCancelOrder = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(cancelOrder, {
+    onSuccess: () => {
+      notification.success({
+        message: "Confirmed with shipper successfully",
+      });
+      queryClient.invalidateQueries("shippings");
+    },
+    onError: () => {
+      notification.error({
+        message: "Confirmed order failed",
+      });
+    },
   });
 };

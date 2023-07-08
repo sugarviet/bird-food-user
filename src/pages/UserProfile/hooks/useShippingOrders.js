@@ -1,14 +1,12 @@
-
 import { useGetOrderShipping } from "../../../services/User/services";
 
-
 function usePendingOrders() {
-    const { data, isLoading } = useGetOrderShipping();
+  const { data, isLoading } = useGetOrderShipping();
 
-    return {
-        data,
-        isLoading
-    };
+  return {
+    data,
+    isLoading,
+  };
 }
 
 export default usePendingOrders;

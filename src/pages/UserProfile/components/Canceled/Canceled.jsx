@@ -1,22 +1,15 @@
-import styles from "./Pending.module.css";
+import styles from "./Shipping.module.css";
 import { Col, Row, Divider, Button } from "antd";
-import usePendingOrders from "../../hooks/usePendingOrders";
+import useCanceledOrders from "../../hooks/useCanceledOrders";
 import Loading from "../../../../components/Loading/Loading";
-import { useCancelOrder } from "../../../../services/User/services";
 
-const Pending = () => {
-  const { data, isLoading } = usePendingOrders();
-  const { mutate: cancelOrder } = useCancelOrder();
+const Canceled = () => {
+  const { data, isLoading } = useCanceledOrders();
 
   if (isLoading) {
     return <Loading />;
   }
-  const handleCancelClick = (order) => {
-    cancelOrder({
-      ...order,
-      orderId: order._id,
-    });
-  };
+
   return (
     <div>
       {!data?.listOrder?.length > 0 ? (
@@ -32,7 +25,7 @@ const Pending = () => {
             style={{ width: "1em" }}
           >
             <h3 style={{ color: "#3cb815" }}>
-              Waiting for approved by Birdy <span role="img">🥺</span>
+              Thank You For Your Support! <span role="img">🥺</span>
             </h3>
           </Divider>
           {data?.listOrder?.map((order) => (
@@ -49,39 +42,6 @@ const Pending = () => {
                     .join("/")}
                 </div>
                 <div className={styles.pendingHeader}>
-                  <div style={{ display: "flex" }}>
-                    <p
-                      style={{
-                        color: "black",
-                        fontSize: "14px",
-                        fontWeight: "500",
-                        textTransform: "uppercase",
-                        paddingRight: "5px",
-                      }}
-                    >
-                      {" "}
-                      Order ID:{" "}
-                    </p>
-                    <p
-                      style={{
-                        color: "#ee4d2d",
-                        fontSize: "14px",
-                        fontWeight: "500",
-                        textTransform: "uppercase",
-                        paddingRight: "5px",
-                      }}
-                    >
-                      {order.orderCode}
-                    </p>
-                  </div>
-                  <Divider
-                    type="vertical"
-                    style={{
-                      marginTop: "7px",
-                      backgroundColor: "#626366",
-                      width: "1px",
-                    }}
-                  />
                   <div style={{ display: "flex" }}>
                     <p
                       style={{
@@ -114,66 +74,7 @@ const Pending = () => {
                   justifyContent: "flex-end",
                   paddingBottom: "10px",
                 }}
-              >
-                <div style={{ display: "flex" }}>
-                  <p
-                    style={{
-                      display: "block",
-                      color: "black",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                      paddingRight: "5px",
-                    }}
-                  >
-                    Shipping Status:
-                  </p>
-                  <p
-                    style={{
-                      display: "block",
-                      color: "#ee4d2d",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                      paddingRight: "5px",
-                    }}
-                  >
-                    {order.shipStatus}
-                  </p>
-                </div>
-              </div>
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                <div style={{ display: "flex" }}>
-                  <p
-                    style={{
-                      display: "block",
-                      color: "black",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                      paddingRight: "5px",
-                    }}
-                  >
-                    Expected Delivery:
-                  </p>
-                  <p
-                    style={{
-                      display: "block",
-                      color: "#ee4d2d",
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      textTransform: "uppercase",
-                      paddingRight: "5px",
-                    }}
-                  >
-                    {order.expected_delivery_time
-                      ?.slice(0, 10)
-                      .split("-")
-                      .reverse()
-                      .join("/")}
-                  </p>
-                </div>
-              </div>
+              ></div>
               {order.detail_product?.length > 0 ? (
                 <Row className={`${styles.productWrapperHeader}`}>
                   <Col span={4}>
@@ -362,18 +263,30 @@ const Pending = () => {
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
+                  padding: "10px 10px",
+                }}
+              >
+                <p className={styles.totalBottom}>
+                  Note:
+                  <span
+                    style={{
+                      color: "#3cb815",
+                      fontWeight: "500",
+                      paddingLeft: "5px",
+                    }}
+                  >
+                    {order.note}
+                  </span>
+                </p>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
                   marginBottom: "40px",
                   padding: "10px 10px",
                 }}
               >
-                <Button
-                  key="approve"
-                  type="primary"
-                  onClick={() => handleCancelClick(order)}
-                  // disabled={isDisable}
-                >
-                  Reject Order
-                </Button>
                 <p className={styles.totalBottom}>
                   Order total:
                   <span
@@ -394,4 +307,4 @@ const Pending = () => {
     </div>
   );
 };
-export default Pending;
+export default Canceled;

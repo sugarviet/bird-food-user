@@ -61,7 +61,6 @@
 }
 
 .totalBottom {
-    margin-bottom: 40px;
     display: flex;
     justify-content: flex-end;
     padding: 7px 10px;

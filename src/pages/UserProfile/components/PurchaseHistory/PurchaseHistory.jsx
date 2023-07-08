@@ -1,9 +1,9 @@
 import styles from "./PurchaseHistory.module.css";
 import { Tabs } from "antd";
-import { useState } from "react";
 import Pending from "../Pending/Pending";
 import Shipping from "../Shipping/Shipping";
 import Completed from "../Completed/Completed";
+import Canceled from "../Canceled/Canceled";
 const tabs = [
   {
     label: "Pending",
@@ -20,11 +20,14 @@ const tabs = [
     key: 3,
     children: <Completed />,
   },
+  {
+    label: "Canceled",
+    key: 4,
+    children: <Canceled />,
+  },
 ];
 
 const PurchaseHistory = () => {
-
-
   return (
     <div className={`${styles.wrapper}`}>
       <Tabs
@@ -42,7 +45,7 @@ const PurchaseHistory = () => {
         ))}
       </Tabs>
       <style>
-  {`
+        {`
     .css-dev-only-do-not-override-lbcgob.ant-tabs-card.ant-tabs-small > .ant-tabs-nav {
       position: sticky;
       top: 64px; 
@@ -50,10 +53,10 @@ const PurchaseHistory = () => {
       background-color: #e5e5e5;
     }
     .css-dev-only-do-not-override-lbcgob.ant-tabs-card.ant-tabs-small > .ant-tabs-nav .ant-tabs-tab {
-      padding: 6px 102px;
+      padding: 6px 69px;
     }
   `}
-</style>
+      </style>
     </div>
   );
 };

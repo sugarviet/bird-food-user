@@ -1,7 +1,14 @@
 import axios from "axios";
 
-import { USER_API, USER_SELECTED_ITEM_API, USER_ORDER_DONE, USER_ORDER_SHIPPING, USER_ORDER_PENDING } from "./api_path";
-
+import {
+  USER_API,
+  USER_SELECTED_ITEM_API,
+  USER_ORDER_DONE,
+  USER_ORDER_SHIPPING,
+  USER_ORDER_PENDING,
+  CANCEL_ORDER,
+  USER_ORDER_CANCEL,
+} from "./api_path";
 
 export const getUserByUserName = async (username) => {
   const res = await axios.get(`${USER_API}/${username}`);
@@ -39,7 +46,6 @@ export const updateSelectedItems = async ({
   return res.data;
 };
 
-
 const instance = axios.create({
   withCredentials: true,
 });
@@ -55,4 +61,12 @@ export const getOrderShipping = async () => {
 export const getOrderDone = async () => {
   const res = await instance.get(USER_ORDER_DONE);
   return res.data;
+};
+export const getOrderCancel = async () => {
+  const res = await instance.get(USER_ORDER_CANCEL);
+  return res.data;
+};
+export const cancelOrder = async (data) => {
+  const res = await instance.put(CANCEL_ORDER, data);
+  return res;
 };
