@@ -35,10 +35,6 @@ function ProductCard({ bird, handleAddItem }) {
     });
   };
 
-  const values = [20000, 50000, 70000, 90000];
-  const randomValue = values[Math.floor(Math.random() * values.length)];
-  const totalAmount = bird?.price + randomValue;
-  const formattedAmount = totalAmount.toLocaleString();
 
   return (
       <Card
@@ -77,8 +73,7 @@ function ProductCard({ bird, handleAddItem }) {
           title={<p className={styles.titleProduct}>{bird?.productName}</p>}
           description={
             <div className={styles.titlePrice}>
-              <p className={styles.priceProduct}>{bird?.price.toLocaleString()} VND</p>
-              <p className={styles.priceSaleProduct}>{`${formattedAmount} VND`}</p>
+              <p className={styles.priceProduct}>{bird?.price.toLocaleString()} đ</p>
             </div>
           }
         />

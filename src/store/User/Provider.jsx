@@ -23,7 +23,6 @@ function Provider({ children }) {
   const decodedToken = useToken()
 
   useEffect(() => {
-    console.log('re-fetch')
     const fetchData = async () => {
       try {
         if (!decodedToken) {
