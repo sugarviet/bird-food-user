@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate  } from "react-router-dom";
 import Example from "../pages/Example/Example";
 import Home from "../pages/Home";
 import Product from "../pages/Products";
@@ -12,9 +12,19 @@ import Blogs from "../pages/Blogs";
 import CheckOut from "../pages/CheckOut/CheckOut";
 import BlogDetail from "../pages/Blogs/components/BlogDetail";
 import UserProfile from "../pages/UserProfile";
+import Search from "../pages/Search";
 import ComboDetails from "../pages/ComboDetails/ComboDetails";
 
 const Routers = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("q");
+
+  if (!searchQuery && location.pathname === "/search") {
+    navigate("/");
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -31,6 +41,7 @@ const Routers = () => {
       <Route path="/cart/checkout" element={<CheckOut />} />
       <Route path="/blogs/:blogId" element={<BlogDetail />} />
       <Route path="/profile" element={<UserProfile />} />
+      {searchQuery && <Route path="/search" element={<Search />} />}
       <Route path="/" element={<Home />} />
     </Routes>
   );

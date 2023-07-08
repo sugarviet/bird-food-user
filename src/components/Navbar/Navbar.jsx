@@ -1,5 +1,5 @@
 import { Layout, Button, Input, Tooltip, Dropdown, Badge } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo1.png";
 
@@ -20,18 +20,28 @@ import { UserContext } from "../../store/User";
 
 import { useLogOut } from "../../services/LogOut/services";
 
-
-
 const { Header } = Layout;
 const { Search } = Input;
 
 const Navbar = () => {
   const [user] = useContext(UserContext);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const decodedToken = useToken();
   const [loggedIn, setLoggedIn] = useState(false);
 
   const { mutate } = useLogOut();
+
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (searchQuery) {
+      navigate(`/search?q=${searchQuery}`);
+      setIsShowSearchBar(false),
+      setSearchQuery("");
+    }
+  };
 
   useEffect(() => {
     if (decodedToken) {
@@ -42,7 +52,7 @@ const Navbar = () => {
   const logout = () => {
     mutate();
     setLoggedIn(false);
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
     // window.location.reload()
   };
 
@@ -65,6 +75,7 @@ const Navbar = () => {
     isDrawerVisible,
     handleShowDrawable,
     hideDrawer,
+    setIsShowSearchBar,
     isShowSearchBar,
     handleShowSearchBar,
   } = useNavbar();
@@ -136,7 +147,11 @@ const Navbar = () => {
                 {loggedIn ? (
                   <Link to={"/cart"}>
                     <Tooltip placement="bottom" title={"Cart"}>
-                      <Badge count={user.selectedItems.length + user.selectedCombo.length}>
+                      <Badge
+                        count={
+                          user.selectedItems.length + user.selectedCombo.length
+                        }
+                      >
                         <Button
                           icon={<ShoppingCartOutlined />}
                           shape="circle"
@@ -185,11 +200,29 @@ const Navbar = () => {
       <div
         className={isShowSearchBar ? styles.navbarSearchBar : styles.invisible}
       >
-        <Search allowClear placeholder="Search something ..." />
-
+        {/* <Search allowClear placeholder="Search something ..." /> */}
+        <Search
+          allowClear
+          placeholder="Search something ..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onSearch={handleSearchSubmit}
+          onPressEnter={handleSearchSubmit}
+        />
+        {/* 
         <Tooltip placement="bottom" title={"Close search"}>
           <Button
             icon={<CloseOutlined />}
+            shape="circle"
+            onClick={handleShowSearchBar}
+          />
+        </Tooltip> */}
+        <Tooltip
+          placement="bottom"
+          title={isShowSearchBar ? "Close search" : "Search"}
+        >
+          <Button
+            icon={isShowSearchBar ? <CloseOutlined /> : <SearchOutlined />}
             shape="circle"
             onClick={handleShowSearchBar}
           />
