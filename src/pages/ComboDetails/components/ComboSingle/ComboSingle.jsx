@@ -23,9 +23,11 @@ function ComboSingle() {
   const comboInCart = combos.find(item => item._id === combo._id)
   const comboInCartQuantity = comboInCart ? comboInCart.quantity : 0
 
+  console.log(quantity + comboInCartQuantity)
+
   useEffect(() => {
     setIsOutOfStock(quantity + comboInCartQuantity > getMaxQuantity())
-  }, [quantity])
+  }, [quantity, combo])
 
   const handlePlusButtonClick = () => {
     setIsOutOfStock(quantity + 1 + comboInCartQuantity > getMaxQuantity())
