@@ -362,6 +362,26 @@ const Pending = () => {
                 style={{
                   display: "flex",
                   justifyContent: "flex-end",
+                  padding: "10px 10px",
+                }}
+              >
+                <p className={styles.totalBottom}>
+                  Note:
+                  <span
+                    style={{
+                      color: "#3cb815",
+                      fontWeight: "500",
+                      paddingLeft: "5px",
+                    }}
+                  >
+                    {order.note}
+                  </span>{" "}
+                </p>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
                   marginBottom: "40px",
                   padding: "10px 10px",
                 }}

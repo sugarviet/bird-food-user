@@ -1,5 +1,5 @@
 import styles from "./Shipping.module.css";
-import { Col, Row, Divider, Button } from "antd";
+import { Col, Row, Divider } from "antd";
 import useCanceledOrders from "../../hooks/useCanceledOrders";
 import Loading from "../../../../components/Loading/Loading";
 
