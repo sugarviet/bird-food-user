@@ -14,14 +14,15 @@ function useProductSingle(id) {
   const {items, handleAddItem} = useCart()
 
   const productInCart = items.find(item => item._id === product._id)
+  const productInCartQuantity = productInCart ? productInCart.quantity : 0
 
   useEffect(() => {
-    setIsOutOfStock(quantity + productInCart?.quantity > product?.quantity)
+    setIsOutOfStock(quantity + productInCartQuantity > product?.quantity)
   }, [quantity])
 
   const handlePlusButtonClick = () => {
-    setIsOutOfStock(quantity + 1 + productInCart?.quantity > product.quantity)
-    if(quantity + productInCart?.quantity >= product.quantity) return
+    setIsOutOfStock(quantity + 1 + productInCartQuantity > product.quantity)
+    if(quantity + productInCartQuantity >= product.quantity) return
     setQuantity(quantity + 1);
   };
 
@@ -32,7 +33,7 @@ function useProductSingle(id) {
 
   const handleUpdateQuantity = (quantity) => {
     const newQuantity = parseInt(quantity)
-    if(newQuantity + productInCart?.quantity > product.quantity || newQuantity <= 1) return;
+    if(newQuantity + productInCartQuantity > product.quantity || newQuantity <= 1) return;
     setQuantity(newQuantity)
   }
 

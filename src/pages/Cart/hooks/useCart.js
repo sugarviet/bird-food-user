@@ -18,7 +18,14 @@ function useCart() {
 
     if (!addedProduct) return false;
 
-    addedProduct.quantity += product.quantity;
+    const newQuantity = addedProduct.quantity + product.quantity
+
+    if(newQuantity > product.inStock) {
+      notification.warning({message: `has reached the maximum limit for this item`})
+      return true
+    };
+
+    addedProduct.quantity = newQuantity;
     notification.success({message: `Quantity has been updated`})
     return true;
   };
@@ -61,7 +68,10 @@ function useCart() {
   };
 
   const handleAddCombo = (combo, quantity = 1) => {
-    const newCombo = {...combo, inStock: combo.quantity, quantity: quantity}
+    const quantityArray = combo.listProduct.map(product => Math.floor(product.quantity/product.quantityProductInCombo))
+    const maxQuantity = quantityArray ? Math.min(...quantityArray) : 0;
+
+    const newCombo = {...combo, inStock: maxQuantity, quantity: quantity}
 
     if (isAdded(newCombo, combos)) return;
 
