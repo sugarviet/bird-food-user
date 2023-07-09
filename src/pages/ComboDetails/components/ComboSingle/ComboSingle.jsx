@@ -14,6 +14,25 @@ function ComboSingle() {
   const { data: combo, isLoading} = useGetComboById(comboId)
   const { handleAddCombo } = useCart()
 
+  console.log(combo)
+
+  const handlePlusButtonClick = () => {
+    setIsOutOfStock(quantity + 1 > combo.quantity)
+    if(quantity >= combo.quantity) return
+    setQuantity(quantity + 1);
+  };
+
+  const handleMinusButtonClick = () => {
+    if (quantity <= 1) return;
+    setQuantity(quantity - 1);
+  };
+
+  const handleUpdateQuantity = (quantity) => {
+    const newQuantity = parseInt(quantity)
+    if(newQuantity > combo.quantity || newQuantity <= 1) return;
+    setQuantity(newQuantity)
+  }
+
   const formattedPrice = useCurrency(combo?.priceAfterDiscount || 0)
 
   const formattedDiscount = useCurrency(combo?.priceAfterDiscount * 100/90 * 0.1 || 0)
