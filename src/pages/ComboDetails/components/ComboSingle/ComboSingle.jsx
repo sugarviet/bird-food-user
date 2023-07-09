@@ -1,8 +1,8 @@
 import { Col, Row } from "antd";
 import styles from "./ComboSingle.module.css";
-import { StarOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
+import { StarOutlined, PlusOutlined, MinusOutlined, WarningOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetComboById } from "../../../../services/Combo/services";
 import Loading from "../../../../components/Loading/Loading";
 import useCart from "../../../Cart/hooks/useCart";
@@ -11,8 +11,38 @@ import useCurrency from "../../../../hooks/useCurrency";
 function ComboSingle() {
   const { comboId } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const [isOutOfStock, setIsOutOfStock] = useState(false)
   const { data: combo, isLoading} = useGetComboById(comboId)
-  const { handleAddCombo } = useCart()
+  const { combos, handleAddCombo } = useCart()
+
+  const getMaxQuantity = () => {
+    const quantityArray = combo?.listProduct.map(product => Math.floor(product.quantity/product.quantityProductInCombo))
+    return quantityArray ? Math.min(...quantityArray) : 0;
+  }
+
+  const comboInCart = combos.find(item => item._id === combo._id)
+  const comboInCartQuantity = comboInCart ? comboInCart.quantity : 0
+
+  useEffect(() => {
+    setIsOutOfStock(quantity + comboInCartQuantity > getMaxQuantity())
+  }, [quantity])
+
+  const handlePlusButtonClick = () => {
+    setIsOutOfStock(quantity + 1 + comboInCartQuantity > getMaxQuantity())
+    if(quantity + comboInCartQuantity >= getMaxQuantity()) return
+    setQuantity(quantity + 1);
+  };
+
+  const handleMinusButtonClick = () => {
+    if (quantity <= 1) return;
+    setQuantity(quantity - 1);
+  };
+
+  const handleUpdateQuantity = (quantity) => {
+    const newQuantity = parseInt(quantity)
+    if(newQuantity + comboInCartQuantity > getMaxQuantity() || newQuantity <= 1) return;
+    setQuantity(newQuantity)
+  }
 
   const formattedPrice = useCurrency(combo?.priceAfterDiscount || 0)
 
@@ -61,17 +91,13 @@ function ComboSingle() {
                   <span>You save <span style={{color: "#82ae46", fontWeight: '700'}}>{formattedDiscount}</span> when buying combo</span>
                 </div>
               </p>
-              <div className={`${styles.fontSizeL}`}>
+              <div className={`${styles.fontSizeL} ${styles.flexRowCenter}`}>
                 <div
                   className={`${styles.marginTop4} ${styles.productInputQuantity}`}
                 >
                   <button
                     className={`${styles.inputBox} ${styles.clickable}`}
-                    onClick={() => {
-                      const newQuantity = quantity - 1;
-                      if(newQuantity <= 0) return;
-                      setQuantity(preState => preState - 1)
-                    }}
+                    onClick={handleMinusButtonClick}
                   >
                     <MinusOutlined />
                   </button>
@@ -81,16 +107,29 @@ function ComboSingle() {
                     style={{ margin: "0 .5rem" }}
                     type="number"
                     min={1}
+                    onChange={(e) => handleUpdateQuantity(e.target.value)}
                     className={`${styles.inputBox}`}
                   />
                   <button
                     className={`${styles.inputBox} ${styles.clickable}`}
-                    onClick={() => setQuantity(preState => preState + 1) }
+                    onClick={handlePlusButtonClick}
                   >
                     <PlusOutlined />
                   </button>
                 </div>
+                <p
+                  style={{ color: "#808080", fontWeight: "400", marginTop: '1rem', marginLeft: '1rem'}}
+                  className={`${styles.fontSizeL}`}
+                >
+                  {getMaxQuantity()} combos in selling
+                </p>
               </div>
+              {isOutOfStock && <p
+                style={{ color: "red", fontWeight: "400", marginTop: '1rem'}}
+                className={`${styles.fontSizeL}`}
+              >
+                <WarningOutlined/> The quantity you have selected has reached the maximum limit for this combo
+              </p>}
               <p>
                 <button
                   className={`${styles.addToCartButton} ${styles.clickable} ${styles.marginTop4}`}

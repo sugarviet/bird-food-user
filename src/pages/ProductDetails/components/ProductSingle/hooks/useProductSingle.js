@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetBirdFoodById } from "../../../../../services/Product/services";
 import useProductToCart from "./useProductToCart";
 import { notification } from "antd";
 import useCurrency from "../../../../../hooks/useCurrency";
+import useCart from "../../../../Cart/hooks/useCart";
 
 function useProductSingle(id) {
   const { data: product, isLoading } = useGetBirdFoodById(id);
 
+  const [isOutOfStock, setIsOutOfStock] = useState(false)
   const [quantity, setQuantity] = useState(1);
+  
+  const {items, handleAddItem} = useCart()
 
-  const addToCart = useProductToCart();
+  const productInCart = items.find(item => item._id === product._id)
+  const productInCartQuantity = productInCart ? productInCart.quantity : 0
+
+  useEffect(() => {
+    setIsOutOfStock(quantity + productInCartQuantity > product?.quantity)
+  }, [quantity])
 
   const handlePlusButtonClick = () => {
+    setIsOutOfStock(quantity + 1 + productInCartQuantity > product.quantity)
+    if(quantity + productInCartQuantity >= product.quantity) return
     setQuantity(quantity + 1);
   };
 
@@ -20,17 +31,13 @@ function useProductSingle(id) {
     setQuantity(quantity - 1);
   };
 
-  const handleSizeSelectionChange = () => {};
+  const handleUpdateQuantity = (quantity) => {
+    const newQuantity = parseInt(quantity)
+    if(newQuantity + productInCartQuantity > product.quantity || newQuantity <= 1) return;
+    setQuantity(newQuantity)
+  }
 
-  const handleAddToCart = () => {
-    try {
-      const updatedProduct = { ...product };
-      addToCart(updatedProduct, quantity);
-      openNotification(product.name);
-    } catch (error) {
-      openNotificationError(error.message);
-    }
-  };
+  const handleSizeSelectionChange = () => {};
 
   const openNotification = (productName) => {
     notification.success({
@@ -39,20 +46,16 @@ function useProductSingle(id) {
       duration: 2,
     });
   };
-  const openNotificationError = (productName) => {
-    notification.error({
-      message: "Error",
-      description: `You have reached the maximum quantity available for ${productName}.`,
-      duration: 2,
-    });
-  };
+
   return {
     product,
     quantity,
+    isOutOfStock,
     handlePlusButtonClick,
     handleMinusButtonClick,
+    handleUpdateQuantity,
     handleSizeSelectionChange,
-    handleAddToCart,
+    handleAddItem,
     isLoading,
   };
 }

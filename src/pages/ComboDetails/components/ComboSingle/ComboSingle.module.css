@@ -151,6 +151,12 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     margin-top: 1rem;
 }
 
+.flexRowCenter
+{
+    display: flex;
+    align-items: center;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

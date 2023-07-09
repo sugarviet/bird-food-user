@@ -18,7 +18,14 @@ function useCart() {
 
     if (!addedProduct) return false;
 
-    addedProduct.quantity += product.quantity;
+    const newQuantity = addedProduct.quantity + product.quantity
+
+    if(newQuantity > product.inStock) {
+      notification.warning({message: `has reached the maximum limit for this item`})
+      return true
+    };
+
+    addedProduct.quantity = newQuantity;
     notification.success({message: `Quantity has been updated`})
     return true;
   };
@@ -61,28 +68,28 @@ function useCart() {
   };
 
   const handleAddCombo = (combo, quantity = 1) => {
-    combo.inStock = combo.quantity
-    combo.quantity = quantity;
+    const quantityArray = combo.listProduct.map(product => Math.floor(product.quantity/product.quantityProductInCombo))
+    const maxQuantity = quantityArray ? Math.min(...quantityArray) : 0;
 
-    if (isAdded(combo, combos)) return;
+    const newCombo = {...combo, inStock: maxQuantity, quantity: quantity}
 
-    const newCombos = [...combos, combo];
+    if (isAdded(newCombo, combos)) return;
+
+    const newCombos = [...combos, newCombo];
 
     dispatch(setSelectedCombos(newCombos));
-    notification.success({message: `Add ${combo.comboName} successfully`})
-
+    notification.success({message: `Add ${newCombo.comboName} successfully`})
   };
 
   const handleAddItem = (item, quantity = 1) => {
-    item.inStock = item.quantity
-    item.quantity = quantity;
+    const newItem = {...item, inStock: item.quantity, quantity: quantity}
 
-    if (isAdded(item, items)) return;
+    if (isAdded(newItem, items)) return;
 
-    const newItems = [...items, item];
+    const newItems = [...items, newItem];
 
     dispatch(setSelectedProducts(newItems));
-    notification.success({message: `Add ${item.productName} successfully`})
+    notification.success({message: `Add ${newItem.productName} successfully`})
   };
 
   const handleRemoveItem = (id) => {

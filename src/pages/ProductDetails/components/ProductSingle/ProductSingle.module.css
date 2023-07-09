@@ -60,8 +60,8 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 .productInputQuantity
 {
     display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
+    /* flex-wrap: wrap; */
+    /* align-items: stretch; */
 }
 
 .addToCartButton
@@ -104,6 +104,12 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 /* shared style */
+.flexRowCenter
+{
+    display: flex;
+    align-items: center;
+}
+
 .inputBox
 {
     padding: 0.5rem;
