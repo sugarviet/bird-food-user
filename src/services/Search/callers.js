@@ -1,12 +1,8 @@
-import axios from "axios";
+import { request } from "../../utils/axios";
 import { API } from "./api_path";
 
-const instance = axios.create({
-  withCredentials: true,
-});
-
 export const searchAllProducts = async (search) => {
-  const res = await instance.get(API.SEARCH_BY_PRODUCTS, {
+  const res = await request.get(API.SEARCH_BY_PRODUCTS, {
     params: {
       search: search,
     },
@@ -16,7 +12,7 @@ export const searchAllProducts = async (search) => {
 };
 
 export const searchAllCombos = async (search) => {
-  const res = await instance.get(API.SEARCH_BY_COMBOS, {
+  const res = await request.get(API.SEARCH_BY_COMBOS, {
     params: {
       comboName: search,
     },

@@ -4,7 +4,6 @@ import { CITY_API, PROVINCE_API } from "./api_path";
 
 export const getProvinces = async () => {
   const res = await axios.get(PROVINCE_API);
-
   return res.data;
 };
 

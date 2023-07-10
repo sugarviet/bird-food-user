@@ -7,6 +7,7 @@ export const useLogOut = () => {
   const navigate = useNavigate();
   return useMutation(logout, {
     onSuccess: () => {
+      localStorage.removeItem("token");
       notification.success({
         message: "Logout successfully",
       });

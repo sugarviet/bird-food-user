@@ -1,9 +1,5 @@
-import axios from "axios";
+import { request } from "../../utils/axios";
 import { API } from "./api_path";
-
-const instance = axios.create({
-  withCredentials: true,
-});
 
 export const signup = async ({
   username,
@@ -13,15 +9,7 @@ export const signup = async ({
   password,
   confirmPassword,
 }) => {
-  console.log("dataSignup", {
-    username,
-    fullName,
-    email,
-    phone,
-    password,
-    confirmPassword,
-  });
-  const res = await instance.post(API.SIGNUP, {
+  const res = await request.post(API.SIGNUP, {
     username,
     fullName,
     email,

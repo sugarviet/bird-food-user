@@ -85,7 +85,7 @@ export const useCancelOrder = () => {
   return useMutation(cancelOrder, {
     onSuccess: () => {
       notification.success({
-        message: "Confirmed with shipper successfully",
+        message: "Request Reject Successfully",
       });
       queryClient.invalidateQueries("shippings");
     },

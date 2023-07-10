@@ -1,9 +1,5 @@
-import axios from "axios";
+import { request } from "../../utils/axios";
 import { API_CHECKOUT } from "./api_path";
-
-const instance = axios.create({
-  withCredentials: true,
-});
 
 export const checkout = async ({
   addresses,
@@ -11,13 +7,7 @@ export const checkout = async ({
   detail_combo,
   total_price,
 }) => {
-  console.log("dataReservation", {
-    addresses,
-    detail_product,
-    detail_combo,
-    total_price,
-  });
-  const res = await instance.post(API_CHECKOUT.CHECKOUT, {
+  const res = await request.post(API_CHECKOUT.CHECKOUT, {
     addresses,
     detail_product,
     detail_combo,

@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { PRODUCT_API, PRODUCT_SORT_API } from "./api_path";
 
 export const getAllBirdFood = async () => {

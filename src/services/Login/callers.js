@@ -1,12 +1,8 @@
-import axios from "axios";
+import { request } from "../../utils/axios";
 import { API } from "./api_path";
 
-const instance = axios.create({
-  withCredentials: true,
-});
-
 export const login = async ({ username, password }) => {
-  const res = await instance.post(API.LOGIN, { username, password });
-
+  const res = await request.post(API.LOGIN, { username, password });
+  console.log(res.data);
   return res.data;
 };

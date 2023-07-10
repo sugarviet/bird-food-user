@@ -1,12 +1,17 @@
 import { Col, Row } from "antd";
 import styles from "./ProductSingle.module.css";
-import { StarOutlined, PlusOutlined, MinusOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  MinusOutlined,
+  WarningOutlined,
+} from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import useProductSingle from "./hooks/useProductSingle";
 import Loading from "../../../../components/Loading";
-import useCart from "../../../Cart/hooks/useCart";
+import { useState } from "react";
 
-const description = 'Our Bird Food product is a nutritious blend of seeds, grains, and pellets designed to meet the dietary needs of various bird species. Packed with essential nutrients, it promotes optimal health and natural behavior. Trust our high-quality formulation for happy, healthy birds'
+const description =
+  "Our Bird Food product is a nutritious blend of seeds, grains, and pellets designed to meet the dietary needs of various bird species. Packed with essential nutrients, it promotes optimal health and natural behavior. Trust our high-quality formulation for happy, healthy birds";
 
 function ProductSingle() {
   const { productId } = useParams();
@@ -28,8 +33,8 @@ function ProductSingle() {
 
   const formattedPrice = product.price.toLocaleString("vi-VN", {
     style: "currency",
-    currency: "VND"
-  })
+    currency: "VND",
+  });
 
   return (
     <div className={styles.productSingleWrapper}>
@@ -49,7 +54,9 @@ function ProductSingle() {
               <p
                 className={`${styles.productSinglePrice} ${styles.fontSizeXL}`}
               >
-                <span style={{color: "#82ae46", fontWeight: '700'}}>{formattedPrice}</span>
+                <span style={{ color: "#82ae46", fontWeight: "700" }}>
+                  {formattedPrice}
+                </span>
               </p>
               <p
                 style={{ color: "#808080", fontWeight: "400" }}
@@ -83,22 +90,31 @@ function ProductSingle() {
                   </button>
                 </div>
                 <p
-                  style={{ color: "#808080", fontWeight: "400", marginTop: '1rem', marginLeft: '1rem'}}
+                  style={{
+                    color: "#808080",
+                    fontWeight: "400",
+                    marginTop: "1rem",
+                    marginLeft: "1rem",
+                  }}
                   className={`${styles.fontSizeL}`}
                 >
                   {product.quantity} products in selling
                 </p>
               </div>
-             {isOutOfStock && <p
-                style={{ color: "red", fontWeight: "400", marginTop: '1rem'}}
-                className={`${styles.fontSizeL}`}
-              >
-                <WarningOutlined/> The quantity you have selected has reached the maximum limit for this product
-              </p>}
+              {isOutOfStock && (
+                <p
+                  style={{ color: "red", fontWeight: "400", marginTop: "1rem" }}
+                  className={`${styles.fontSizeL}`}
+                >
+                  <WarningOutlined /> The quantity you have selected has reached
+                  the maximum limit for this product
+                </p>
+              )}
               <p>
                 <button
                   className={`${styles.addToCartButton} ${styles.clickable} ${styles.marginTop4}`}
                   onClick={() => handleAddItem(product, quantity)}
+                  disabled={product.quantity > 0 ? false : true}
                 >
                   <span>Add to cart</span>
                 </button>
