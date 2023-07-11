@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { EyeTwoTone, ShoppingTwoTone } from '@ant-design/icons';
-import { Card, notification } from 'antd'
+import { Card, Tag, notification } from 'antd'
 import styles from './ProductCard.module.css'
 import { Link } from 'react-router-dom';
 import { useToken } from "../../../../services/Login/services"
@@ -47,9 +47,10 @@ function ProductCard({ bird, handleAddItem }) {
             src={bird?.image}
           />
         }
-        actions={[
+        actions={
+          [
           <div className={styles.actionProduct} key={"keyId"}>
-            <Link to={`/products/${bird._id}`} className={styles.actionDetailProduct}>
+            {/* <Link to={`/products/${bird._id}`} className={styles.actionDetailProduct}>
               <EyeTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
               <p className={styles.actionTextProduct}>View detail</p>
             </Link>
@@ -64,10 +65,29 @@ function ProductCard({ bird, handleAddItem }) {
                 <ShoppingTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
                 <p className={styles.actionTextProduct}>Add to cart</p>
               </Link>
-            )}
+            )} */}
 
+            {bird.quantity <= 0 ? <Tag style={{fontSize: 'large', padding: '.5rem 1rem'}} /> : <> <Link to={`/products/${bird._id}`} className={styles.actionDetailProduct}>
+              <EyeTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
+              <p className={styles.actionTextProduct}>View detail</p>
+            </Link>
+            <hr />
+            {isLogged ? (
+              <a className={styles.actionDetailProduct} onClick={handleAddToCart}>
+                <ShoppingTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
+                <p className={styles.actionTextProduct}>Add to cart</p>
+              </a>
+            ) : (
+              <Link to="/login">
+                <ShoppingTwoTone className={styles.actionIconProduct} twoToneColor="#3cbb15" />
+                <p className={styles.actionTextProduct}>Add to cart</p>
+              </Link>
+            )}</>}
+            
+            {/* {bird.quantity <= 0 && <Tag style={{fontSize: 'large', padding: '.5rem 1rem'}} bordered={false} color='red'>Sold Out</Tag>} */}
           </div>
-        ]}
+        ]
+      }
       >
         <Meta
           title={<p className={styles.titleProduct}>{bird?.productName}</p>}

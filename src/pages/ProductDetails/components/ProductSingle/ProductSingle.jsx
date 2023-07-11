@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, Row, Tag } from "antd";
 import styles from "./ProductSingle.module.css";
 import {
   PlusOutlined,
@@ -8,7 +8,6 @@ import {
 import { useParams } from "react-router-dom";
 import useProductSingle from "./hooks/useProductSingle";
 import Loading from "../../../../components/Loading";
-import { useState } from "react";
 
 const description =
   "Our Bird Food product is a nutritious blend of seeds, grains, and pellets designed to meet the dietary needs of various bird species. Packed with essential nutrients, it promotes optimal health and natural behavior. Trust our high-quality formulation for happy, healthy birds";
@@ -111,13 +110,14 @@ function ProductSingle() {
                 </p>
               )}
               <p>
-                <button
+                {!isOutOfStock && <button
                   className={`${styles.addToCartButton} ${styles.clickable} ${styles.marginTop4}`}
                   onClick={() => handleAddItem(product, quantity)}
-                  disabled={product.quantity > 0 ? false : true}
                 >
                   <span>Add to cart</span>
-                </button>
+                </button>}
+
+                {isOutOfStock && <Tag style={{fontSize: 'large', padding: '.5rem 1rem', margin: '1rem 0'}} color="red" >Sold Out</Tag>}
               </p>
             </div>
           </Col>

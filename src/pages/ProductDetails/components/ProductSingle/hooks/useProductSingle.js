@@ -8,7 +8,7 @@ import useCart from "../../../../Cart/hooks/useCart";
 function useProductSingle(id) {
   const { data: product, isLoading } = useGetBirdFoodById(id);
 
-  const [isOutOfStock, setIsOutOfStock] = useState(false)
+  const [isOutOfStock, setIsOutOfStock] = useState(true)
   const [quantity, setQuantity] = useState(1);
   
   const {items, handleAddItem} = useCart()
