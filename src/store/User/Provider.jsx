@@ -4,6 +4,7 @@ import reducer, { setInitState } from "./Reducer";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { useToken } from "../../services/Login/services";
+import { useUpdateUserSelectedItems } from "../../services/User/services";
 
 const USER_API = "http://localhost:8080/user";
 
@@ -19,6 +20,7 @@ const defaultUser = {
 
 function Provider({ children }) {
   const [state, dispatch] = useReducer(reducer, defaultUser);
+  const {mutate: handleSaveCart} = useUpdateUserSelectedItems();
 
   const decodedToken = useToken()
 
@@ -41,6 +43,27 @@ function Provider({ children }) {
         console.error("Error when fetching: " + error);
       }
     };
+
+    // const saveCart = async () => {
+    //   const updatedSelectedProducts = items
+    //   ? items.map((product) => ({
+    //       productId: product._id,
+    //       quantity: product.quantity,
+    //     }))
+    //   : [];
+
+    //   const updatedSelectedCombos = combos
+    //     ? combos.map((combo) => ({
+    //         comboId: combo._id,
+    //         quantity: combo.quantity,
+    //       }))
+    //     : [];
+
+    //   updateUserSelectedItems({
+    //     selectedProducts: updatedSelectedProducts,
+    //     selectedCombos: updatedSelectedCombos,
+    //   });
+    // }
 
     fetchData();
   }, [decodedToken]);

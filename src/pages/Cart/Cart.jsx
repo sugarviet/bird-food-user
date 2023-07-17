@@ -25,14 +25,14 @@ const Cart = () => {
 
   const handleCheckout = () => {
     const availableItems = items.filter(item => item.status == 1)
-    const availableCombos = combos.filter(combo => combo.status == 1)
+    const availableCombos = formattedCombos.filter(combo => combo.status == 1)
 
     if (availableItems.length > 0 || availableCombos.length > 0) {
       navigate("/cart/checkout", {
         state: {
           data: {
-            detail_product: items,
-            detail_combo: formattedCombos,
+            detail_product: availableItems,
+            detail_combo: availableCombos,
           },
         },
       });
