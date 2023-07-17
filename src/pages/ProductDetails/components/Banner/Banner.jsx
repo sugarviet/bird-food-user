@@ -1,7 +1,7 @@
 import styles from "./Banner.module.css";
 
 const bannerImage =
-  "https://jimmybazaar.com/images/home5/panchee%20pick%20budgies%20and%20pride%20banner.jpg";
+  "https://www.datocms-assets.com/33130/1626287901-birdseedbanner.jpg";
 
 function Banner() {
   return (

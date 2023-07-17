@@ -4,7 +4,7 @@ import BreadcrumbBanner from "../../components/Breadcrumb/BreadcrumbBanner";
 import { useLocation } from "react-router";
 
 const bannerImage =
-  "https://jimmybazaar.com/images/home5/panchee%20pick%20budgies%20and%20pride%20banner.jpg";
+  "https://i0.wp.com/jbhostetter.com/wp-content/uploads/banner-2-scaled.jpg?ssl=1";
 
 function ComboDetails() {
   const location = useLocation();

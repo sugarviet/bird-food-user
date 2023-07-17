@@ -1,6 +1,7 @@
 import styles from "./AboutUsContent.module.css";
 import siuu from "../../../../assets/siuu.jpg";
 import check from "../../../../assets/check.png";
+import chim from "../../../../assets/chimAboutUs.jpg";
 import { Button } from "antd";
 
 const AboutUsContent = () => {
@@ -8,7 +9,7 @@ const AboutUsContent = () => {
     <div>
       <div className={styles.container}>
         <div>
-          <img className={styles.image} src={siuu}></img>
+          <img className={styles.image} src={chim}></img>
         </div>
         <div>
           <h1 className={styles.text}>Best Organic Fruits And Vegetables</h1>

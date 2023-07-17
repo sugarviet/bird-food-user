@@ -7,20 +7,20 @@ import useCategories from "../../hooks/useCategories";
 import { useState } from "react";
 import useCart from "../../../Cart/hooks/useCart";
 
-const PRICE_DES = "Price High to Low"
-const PRICE_INS = "Price Low to High"
+const PRICE_DES = "Price High to Low";
+const PRICE_INS = "Price Low to High";
 
-const sortingOptions=[
+const sortingOptions = [
   { value: PRICE_DES, label: PRICE_DES },
   { value: PRICE_INS, label: PRICE_INS },
-]
+];
 
 function ProductList() {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const { products, isProductsLoading, setType, setParam } = useProductList();
   const { categories, isCategoriesLoading } = useCategories();
   const [currentPageProduct, setCurrentPageProduct] = useState(1);
-  const [sortBy, setSortBy] = useState()
+  const [sortBy, setSortBy] = useState();
 
   const { handleAddItem } = useCart();
 
@@ -40,19 +40,18 @@ function ProductList() {
   };
 
   const handleSorting = (value) => {
-    switch(value)
-    {
+    switch (value) {
       case PRICE_DES:
-          products.sort((a, b) => b.price - a.price)
-          break;
+        products.sort((a, b) => b.price - a.price);
+        break;
       case PRICE_INS:
-          products.sort((a, b) => a.price - b.price)
-          break;
+        products.sort((a, b) => a.price - b.price);
+        break;
       default:
-          break;
+        break;
     }
-    setSortBy(value)
-  }
+    setSortBy(value);
+  };
 
   if (isProductsLoading || isCategoriesLoading) {
     return <Loading />;
@@ -65,14 +64,14 @@ function ProductList() {
         <hr className={styles.hrBot} />
       </div>
       <div className={styles.flexBetween}>
-        <h1 className={styles.textProducts}>Our Combos</h1>
+        <h1 className={styles.textProducts}>Our Products</h1>
         <Select
-      placeholder="Sort By"
-      value={sortBy}
-      options={sortingOptions}
-      style={{ width: 'max-content' }}
-      onChange={handleSorting}
-    />
+          placeholder="Sort By"
+          value={sortBy}
+          options={sortingOptions}
+          style={{ width: "max-content" }}
+          onChange={handleSorting}
+        />
       </div>
       <div className={styles.textDevide}>
         <div className={styles.categoryContent}>
@@ -99,7 +98,7 @@ function ProductList() {
             pageSize: 8,
             current: currentPageProduct,
             onChange: handlePageProductChange,
-            hideOnSinglePage: true
+            hideOnSinglePage: true,
           }}
           renderItem={(bird) => (
             <List.Item>

@@ -7,19 +7,18 @@ const carouselData = [
   {
     id: 1,
     image:
-      "https://www.allaboutbirds.org/news/wp-content/uploads/2023/02/YRWarbler-Seitz-143912041-1280x668.jpg",
+      "https://wp.valemount.co.za/wp-content/uploads/2019/04/banner-westermans1-1.png",
     caption: "Slide 1",
   },
   {
     id: 2,
     image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Eopsaltria_australis_-_Mogo_Campground.jpg/640px-Eopsaltria_australis_-_Mogo_Campground.jpg",
+      "https://i0.wp.com/jbhostetter.com/wp-content/uploads/banner-2-scaled.jpg?ssl=1",
     caption: "Slide 2",
   },
   {
     id: 3,
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Eopsaltria_australis_-_Mogo_Campground.jpg/640px-Eopsaltria_australis_-_Mogo_Campground.jpg",
+    image: "https://www.datocms-assets.com/33130/1626287901-birdseedbanner.jpg",
     caption: "Slide 3",
   },
 ];

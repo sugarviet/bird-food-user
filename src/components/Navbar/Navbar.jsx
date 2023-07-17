@@ -18,7 +18,7 @@ import Drawer from "./components/Drawer";
 import { useToken } from "../../services/Login/services";
 import { UserContext } from "../../store/User";
 
-import { useLogOut } from "../../services/LogOut/services";
+import { useLogOut } from "../../services/Logout/services";
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -33,13 +33,11 @@ const Navbar = () => {
 
   const { mutate } = useLogOut();
 
-
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     if (searchQuery) {
       navigate(`/search?q=${searchQuery}`);
-      setIsShowSearchBar(false),
-      setSearchQuery("");
+      setIsShowSearchBar(false), setSearchQuery("");
     }
   };
 
