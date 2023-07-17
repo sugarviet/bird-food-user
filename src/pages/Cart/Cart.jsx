@@ -24,9 +24,11 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    if (items.length > 0 || combos.length > 0) {
+    const availableItems = items.filter(item => item.status == 1)
+    const availableCombos = combos.filter(combo => combo.status == 1)
+
+    if (availableItems.length > 0 || availableCombos.length > 0) {
       navigate("/cart/checkout", {
-        // state: { data: [...items, ...formattedCombos] },
         state: {
           data: {
             detail_product: items,

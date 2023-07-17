@@ -1,4 +1,4 @@
-import { List, Button, Input, notification, InputNumber } from "antd";
+import { List, Button, notification, InputNumber, Tag } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 
@@ -50,12 +50,16 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
                   <div className={styles.itemName}>
                     <small>{item.productName}</small>
                   </div>
+                  <div>
+                    {item.status == 0 && <Tag bordered={false} color="red">NOT AVAILABLE</Tag>}
+                  </div>
                 </div>
               </div>
             </div>
 
             <div>
               <InputNumber
+                disabled={item.status == 0}
                 className={styles.quantityInput}
                 value={item.quantity}
                 onChange={(number) => {
@@ -79,7 +83,7 @@ const CartItem = ({ items, removeFromCart, updateQuantity }) => {
               />
             </div>
             <div className={styles.cartItemControls}>
-              <p className={styles.itemPrice}>{formattedPrice}</p>
+              <p className={`${styles.itemPrice} ${item.status == 0 ? styles.itemPriceDisable : ""}`}>{formattedPrice}</p>
             </div>
           </List.Item>
         )}}
